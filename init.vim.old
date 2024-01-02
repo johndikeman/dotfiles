@@ -7,8 +7,10 @@ set shiftwidth=2
 call plug#begin()
 
 Plug 'sainnhe/gruvbox-material'
+Plug 'numToStr/FTerm.nvim'
 
 call plug#end()
 
+nmap <Leader>i '<CMD>lua require("FTerm").toggle()<CR>'
 colorscheme gruvbox-material
 
