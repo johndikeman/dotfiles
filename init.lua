@@ -12,9 +12,15 @@ vim.fn["plug#begin"]()
 Plug 'sainnhe/gruvbox-material'
 Plug 'numToStr/FTerm.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-cmp' -- autocomplete
 Plug 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-
+Plug 'mrcjkb/rustaceanvim' -- configuring LSP for rust
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp' -- autocomplete
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 vim.fn["plug#end"]()
 
@@ -27,7 +33,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- Setup language servers.
 local lspconfig = require('lspconfig')
 
-local servers = { 'gdscript', 'rust_analyzer', 'pyright', 'tsserver' }
+local servers = { 'gdscript', 'pyright', 'tsserver' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -38,6 +44,11 @@ end
 -- setup cmp autocomplete
 local cmp = require 'cmp'
 cmp.setup {
+	snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      end,
+    },
   mapping = cmp.mapping.preset.insert({
     ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
     ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
@@ -64,6 +75,19 @@ cmp.setup {
   }),
   sources = {
     { name = 'nvim_lsp' },
+  },
+}
+
+-- treesitter stuff
+
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = true,
   },
 }
 
