@@ -5,6 +5,7 @@ vim.opt.shiftwidth = 2
 vim.opt.clipboard = 'unnamed' 
 
 vim.keymap.set('i', 'jk', '<Esc>')
+vim.keymap.set('t', 'jk', '<C-\\><C-n>')
 
 local Plug = vim.fn["plug#"]
 
