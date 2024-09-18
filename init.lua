@@ -2,6 +2,7 @@ vim.opt.relativenumber = true
 
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
+-- how  to make p, y, x, to copy-paste from system clipboard by default  
 vim.opt.clipboard = 'unnamed' 
 
 vim.keymap.set('i', 'jk', '<Esc>')
@@ -13,6 +14,8 @@ vim.fn["plug#begin"]()
 
 Plug 'sainnhe/gruvbox-material'
 Plug 'numToStr/FTerm.nvim'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
 Plug 'mrcjkb/rustaceanvim' -- configuring LSP for rust
@@ -26,15 +29,53 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'jose-elias-alvarez/null-ls.nvim' -- some lsp thing for prettier plugin to work
 Plug 'MunifTanjim/prettier.nvim'
 Plug 'nvim-lua/plenary.nvim'
-
+Plug 'folke/lsp-colors.nvim'
+Plug 'folke/trouble.nvim'
+Plug 'leafOfTree/vim-svelte-plugin'
 Plug('nvim-telescope/telescope.nvim',{['tag'] = '0.1.5'})
 
 vim.fn["plug#end"]()
 
+-- space leader pls
 vim.g.mapleader = " "
+-- gruvbox
 vim.cmd("colorscheme gruvbox-material")
 
+-- tell vim-svelte-plugin to enable typescript syntax in svelte files
+vim.g.vim_svelte_plugin_use_typescript = 1
 
+-- requiring mason first because he told me to https://github.com/williamboman/mason-lspconfig.nvim
+require("mason").setup()
+
+local servers = {
+  -- clangd = {},
+  -- gopls = {},
+  -- pyright = {},
+  -- rust_analyzer = {},
+  -- tsserver = {},
+	svelte = { 
+		svelte = {
+			enableTsPlugin = true
+		}
+	}
+
+}
+
+local mason_lspconfig = require("mason-lspconfig")
+
+mason_lspconfig.setup {
+  ensure_installed = vim.tbl_keys(servers),
+}
+
+mason_lspconfig.setup_handlers {
+  function(server_name)
+    require('lspconfig')[server_name].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = servers[server_name],
+    }
+  end,
+}
 -- telescope shit!!!
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -45,14 +86,13 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 -- cute fterm 
 vim.keymap.set({'n','t'}, '<Leader>i', '<CMD>lua require("FTerm").toggle()<CR>')
 
--- how  to make p, y, x, to copy-paste from system clipboard by default  
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Setup language servers.
 local lspconfig = require('lspconfig')
 
-local servers = { 'gdscript', 'pyright', 'tsserver' }
-for _, lsp in ipairs(servers) do
+local lspc_servers = { 'gdscript', 'pyright', 'tsserver'}
+for _, lsp in ipairs(lspc_servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
     capabilities = capabilities,
@@ -197,6 +237,7 @@ prettier.setup({
     "typescript",
     "typescriptreact",
     "yaml",
+		"svelte"
   },
   cli_options = {
     arrow_parens = "always",
@@ -219,3 +260,11 @@ prettier.setup({
     vue_indent_script_and_style = false,
   },
 })
+
+-- Trouble!!!!!! 
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
