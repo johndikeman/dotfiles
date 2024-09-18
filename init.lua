@@ -1,3 +1,42 @@
+-- Lazy.nvim setup
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+  { 'sainnhe/gruvbox-material' },
+  { 'numToStr/FTerm.nvim' },
+  { 'williamboman/mason.nvim' },
+  { 'williamboman/mason-lspconfig.nvim' },
+  { 'neovim/nvim-lspconfig' },
+  { 'hrsh7th/cmp-nvim-lsp' }, -- LSP source for nvim-cmp
+  { 'mrcjkb/rustaceanvim' }, -- configuring LSP for rust
+  { 'hrsh7th/cmp-buffer' },
+  { 'hrsh7th/cmp-path' },
+  { 'hrsh7th/cmp-cmdline' },
+  { 'hrsh7th/nvim-cmp' }, -- autocomplete
+  { 'hrsh7th/cmp-vsnip' },
+  { 'hrsh7th/vim-vsnip' },
+  { 'nvim-treesitter/nvim-treesitter' },
+  { 'jose-elias-alvarez/null-ls.nvim' }, -- some lsp thing for prettier plugin to work
+  { 'MunifTanjim/prettier.nvim' },
+  { 'nvim-lua/plenary.nvim' },
+  { 'folke/lsp-colors.nvim' },
+  { 'folke/trouble.nvim' },
+  { 'leafOfTree/vim-svelte-plugin' },
+  { 'nvim-telescope/telescope.nvim', tag = '0.1.5' },
+  { 'madox2/vim-ai' },
+})
+
 vim.opt.relativenumber = true
 
 vim.opt.tabstop = 2
@@ -7,34 +46,6 @@ vim.opt.clipboard = 'unnamed'
 
 vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('t', 'jk', '<C-\\><C-n>')
-
-local Plug = vim.fn["plug#"]
-
-vim.fn["plug#begin"]()
-
-Plug 'sainnhe/gruvbox-material'
-Plug 'numToStr/FTerm.nvim'
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-Plug 'mrcjkb/rustaceanvim' -- configuring LSP for rust
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp' -- autocomplete
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'jose-elias-alvarez/null-ls.nvim' -- some lsp thing for prettier plugin to work
-Plug 'MunifTanjim/prettier.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'folke/lsp-colors.nvim'
-Plug 'folke/trouble.nvim'
-Plug 'leafOfTree/vim-svelte-plugin'
-Plug('nvim-telescope/telescope.nvim',{['tag'] = '0.1.5'})
-
-vim.fn["plug#end"]()
 
 -- space leader pls
 vim.g.mapleader = " "
@@ -53,12 +64,11 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-	svelte = { 
-		svelte = {
-			enableTsPlugin = true
-		}
-	}
-
+  svelte = { 
+    svelte = {
+      enableTsPlugin = true
+    }
+  }
 }
 
 local mason_lspconfig = require("mason-lspconfig")
@@ -76,6 +86,7 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
 -- telescope shit!!!
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -102,11 +113,11 @@ end
 -- setup cmp autocomplete
 local cmp = require 'cmp'
 cmp.setup {
-	snippet = {
-      expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-      end,
-    },
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+    end,
+  },
   mapping = cmp.mapping.preset.insert({
     ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
     ['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
@@ -137,7 +148,6 @@ cmp.setup {
 }
 
 -- treesitter stuff
-
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
@@ -148,7 +158,6 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = true,
   },
 }
-
 
 -- Global mappings for vim LSP
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -162,7 +171,6 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
-
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
@@ -186,7 +194,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
- -- null-ls, the LSP thing for the prettier plugin
+-- null-ls, the LSP thing for the prettier plugin
 local null_ls = require("null-ls")
 
 local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
@@ -237,7 +245,7 @@ prettier.setup({
     "typescript",
     "typescriptreact",
     "yaml",
-		"svelte"
+    "svelte"
   },
   cli_options = {
     arrow_parens = "always",
