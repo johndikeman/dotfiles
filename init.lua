@@ -34,7 +34,6 @@ require("lazy").setup({
   { 'folke/trouble.nvim' },
   { 'leafOfTree/vim-svelte-plugin' },
   { 'nvim-telescope/telescope.nvim', tag = '0.1.5' },
-  { 'madox2/vim-ai' },
 })
 
 vim.opt.relativenumber = true
@@ -61,9 +60,9 @@ require("mason").setup()
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
+  pyright = {},
+  rust_analyzer = {},
+  ts_ls = {},
   svelte = { 
     svelte = {
       enableTsPlugin = true
@@ -79,9 +78,13 @@ mason_lspconfig.setup {
 
 mason_lspconfig.setup_handlers {
   function(server_name)
-    require('lspconfig')[server_name].setup {
+    local lspconfig = require('lspconfig')
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    lspconfig[server_name].setup {
       capabilities = capabilities,
-      on_attach = on_attach,
+      on_attach = function(client, bufnr)
+        -- Your on_attach function here
+      end,
       settings = servers[server_name],
     }
   end,
@@ -102,7 +105,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- Setup language servers.
 local lspconfig = require('lspconfig')
 
-local lspc_servers = { 'gdscript', 'pyright', 'tsserver'}
+local lspc_servers = { 'gdscript', 'pyright', 'ts_ls'}
 for _, lsp in ipairs(lspc_servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
