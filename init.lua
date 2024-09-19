@@ -56,18 +56,34 @@ require("lazy").setup({
 
 			-- To override defaults add a config field and call setup()
 
-			-- config = function()
-			--   require('model').setup({
-			--     prompts = {..},
-			--     chats = {..},
-			--     ..
-			--   })
-			--
-			--   require('model.providers.llamacpp').setup({
-			--     binary = '~/path/to/server/binary',
-			--     models = '~/path/to/models/directory'
-			--   })
-			--end
+			 config = function()
+				 local openai = require("model.providers.openai")
+				 local util = require("model.util")
+				 local deepseek_key = require("keys")
+			   require('model').setup({
+					 default_prompt = {
+						 provider = openai,
+						 options = {
+                      url = "https://api.deepseek.com/v1",
+                      authorization = deepseek_key
+						},
+						builder = function(input)
+								return {
+										model = "deepseek-coder",
+										temperature = 0,
+										max_tokens = 4000,
+										messages = {
+												{
+														role = "system",
+														content = "You are helpful assistant.",
+												},
+												{ role = "user", content = input },
+										},
+								}
+						end,
+					 }
+			   })
+			end
 		}
 })
 
@@ -316,3 +332,9 @@ vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document
 vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
 vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
 vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
+
+
+
+
+
+
