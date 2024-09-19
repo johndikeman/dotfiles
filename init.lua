@@ -57,21 +57,24 @@ require("lazy").setup({
 			-- To override defaults add a config field and call setup()
 
 			 config = function()
-				 local openai = require("model.providers.openai")
-				 local util = require("model.util")
 				 local deepseek_key = require("keys")
+				 require("model.providers.openai").initialize({
+						model = "deepseek-coder",
+						temperature = 0,
+						max_tokens = 4000,
+				 })
+				 local deepseek = require("model.providers.openai")
+
+				 local util = require("model.util")
 			   require('model').setup({
 					 default_prompt = {
-						 provider = openai,
+						 provider = deepseek,
 						 options = {
-                      url = "https://api.deepseek.com/v1",
-                      authorization = deepseek_key
-						},
-						builder = function(input)
+								url = "https://api.deepseek.com/v1",
+								authorization = deepseek_key
+						 },
+					builder = function(input)
 								return {
-										model = "deepseek-coder",
-										temperature = 0,
-										max_tokens = 4000,
 										messages = {
 												{
 														role = "system",
@@ -82,6 +85,7 @@ require("lazy").setup({
 								}
 						end,
 					 }
+
 			   })
 			end
 		}
@@ -332,9 +336,3 @@ vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document
 vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
 vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
 vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
-
-
-
-
-
-
