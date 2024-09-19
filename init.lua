@@ -34,6 +34,41 @@ require("lazy").setup({
   { 'folke/trouble.nvim' },
   { 'leafOfTree/vim-svelte-plugin' },
   { 'nvim-telescope/telescope.nvim', tag = '0.1.5' },
+	{
+			'gsuuon/model.nvim',
+
+			-- Don't need these if lazy = false
+			cmd = { 'M', 'Model', 'Mchat' },
+			init = function()
+				vim.filetype.add({
+					extension = {
+						mchat = 'mchat',
+					}
+				})
+			end,
+			ft = 'mchat',
+
+			keys = {
+				{'<C-m>d', ':Mdelete<cr>', mode = 'n'},
+				{'<C-m>s', ':Mselect<cr>', mode = 'n'},
+				{'<C-m><space>', ':Mchat<cr>', mode = 'n' }
+			},
+
+			-- To override defaults add a config field and call setup()
+
+			-- config = function()
+			--   require('model').setup({
+			--     prompts = {..},
+			--     chats = {..},
+			--     ..
+			--   })
+			--
+			--   require('model.providers.llamacpp').setup({
+			--     binary = '~/path/to/server/binary',
+			--     models = '~/path/to/models/directory'
+			--   })
+			--end
+		}
 })
 
 vim.opt.relativenumber = true
@@ -60,6 +95,7 @@ require("mason").setup()
 local servers = {
   -- clangd = {},
   -- gopls = {},
+	lua_ls = {},
   pyright = {},
   rust_analyzer = {},
   ts_ls = {},
@@ -105,7 +141,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- Setup language servers.
 local lspconfig = require('lspconfig')
 
-local lspc_servers = { 'gdscript', 'pyright', 'ts_ls'}
+local lspc_servers = vim.tbl_keys(servers)
 for _, lsp in ipairs(lspc_servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -152,6 +188,7 @@ cmp.setup {
 
 -- treesitter stuff
 require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "python", "rust", "gdscript" },
   highlight = {
     enable = true,
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
