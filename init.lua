@@ -19,7 +19,7 @@ require("lazy").setup({
 	{ 'williamboman/mason-lspconfig.nvim' },
 	{ 'neovim/nvim-lspconfig' },
 	{ 'hrsh7th/cmp-nvim-lsp' }, -- LSP source for nvim-cmp
-	{ 'mrcjkb/rustaceanvim' },  -- configuring LSP for rust
+	{ 'mrcjkb/rustaceanvim' }, -- configuring LSP for rust
 	{ 'hrsh7th/cmp-buffer' },
 	{ 'hrsh7th/cmp-path' },
 	{ 'hrsh7th/cmp-cmdline' },
@@ -55,10 +55,11 @@ require("lazy").setup({
 			{ '<C-m><space>', ':Mchat<cr>',   mode = 'n' }
 		},
 
-		-- To override defaults add a config field and call setup()
 
 		config = function()
 			local deepseek_key = require("keys")
+
+			-- overwriting the default openai config with our parameters
 			require("model.providers.openai").initialize({
 				model = "deepseek-coder",
 				temperature = 0,
@@ -66,7 +67,10 @@ require("lazy").setup({
 			})
 			local deepseek = require("model.providers.openai")
 
-			local util = require("model.util")
+			local prompts = require("prompts")
+			local extract = require('model.prompts.extract')
+			local mode = require('model').mode
+
 			require('model').setup({
 				default_prompt = {
 					provider = deepseek,
@@ -74,17 +78,11 @@ require("lazy").setup({
 						url = "https://api.deepseek.com/v1",
 						authorization = deepseek_key
 					},
-					builder = function(input)
-						return {
-							messages = {
-								{
-									role = "system",
-									content = "You are helpful assistant.",
-								},
-								{ role = "user", content = input },
-							},
-						}
+					mode = mode.INSERT_OR_REPLACE,
+					builder = function(input, context)
+						return deepseek.adapt(prompts.code_replace_fewshot(input, context))
 					end,
+					transform = extract.markdown_code
 				}
 
 			})
@@ -184,7 +182,7 @@ cmp.setup {
 	},
 	mapping = cmp.mapping.preset.insert({
 		['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
-		['<C-d>'] = cmp.mapping.scroll_docs(4),  -- Down
+		['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
 		-- C-b (back) C-f (forward) for snippet placeholder navigation.
 		['<C-Space>'] = cmp.mapping.complete(),
 		['<CR>'] = cmp.mapping.confirm {
