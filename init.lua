@@ -12,6 +12,19 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.opt.relativenumber = true
+
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+-- how  to make p, y, x, to copy-paste from system clipboard by default
+vim.opt.clipboard = 'unnamed'
+
+vim.keymap.set('i', 'jk', '<Esc>')
+vim.keymap.set('t', 'jk', '<C-\\><C-n>')
+
+-- space leader pls
+vim.g.mapleader = " "
+
 require("lazy").setup({
 	{ 'sainnhe/gruvbox-material' },
 	{ 'numToStr/FTerm.nvim' },
@@ -31,10 +44,47 @@ require("lazy").setup({
 	{ 'MunifTanjim/prettier.nvim' },
 	{ 'nvim-lua/plenary.nvim' },
 	{ 'folke/lsp-colors.nvim' },
-	{ 'folke/trouble.nvim' },
+	{
+		"folke/trouble.nvim",
+		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>xX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				"<leader>cs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				"<leader>cl",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references / ... (Trouble)",
+			},
+			{
+				"<leader>xL",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>xQ",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
+		},
+	},
 	{ 'leafOfTree/vim-svelte-plugin' },
-	{ 'nvim-telescope/telescope.nvim',    tag = '0.1.5' },
+	{ 'nvim-telescope/telescope.nvim', tag = '0.1.5' },
 	{ "ckipp01/stylua-nvim" },
+
 	{
 		'gsuuon/model.nvim',
 
@@ -90,18 +140,7 @@ require("lazy").setup({
 	}
 })
 
-vim.opt.relativenumber = true
 
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
--- how  to make p, y, x, to copy-paste from system clipboard by default
-vim.opt.clipboard = 'unnamed'
-
-vim.keymap.set('i', 'jk', '<Esc>')
-vim.keymap.set('t', 'jk', '<C-\\><C-n>')
-
--- space leader pls
-vim.g.mapleader = " "
 -- gruvbox
 vim.cmd("colorscheme gruvbox-material")
 
@@ -126,7 +165,7 @@ local servers = {
 		svelte = {
 			enableTsPlugin = true
 		}
-	}
+	},
 }
 
 local mason_lspconfig = require("mason-lspconfig")
@@ -268,7 +307,12 @@ null_ls.setup({
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then
 			vim.keymap.set("n", "<Leader>f", function()
-				vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+				vim.lsp.buf.format({
+					bufnr = vim.api.nvim_get_current_buf(),
+					filter = function(c)
+						return c.name == "null-ls"
+					end
+				})
 			end, { buffer = bufnr, desc = "[lsp] format" })
 
 			-- format on save
@@ -277,7 +321,12 @@ null_ls.setup({
 				buffer = bufnr,
 				group = group,
 				callback = function()
-					vim.lsp.buf.format({ bufnr = bufnr, async = async })
+					vim.lsp.buf.format({
+						bufnr = vim.api.nvim_get_current_buf(),
+						filter = function(c)
+							return c.name == "null-ls"
+						end
+					})
 				end,
 				desc = "[lsp] format on save",
 			})
@@ -285,10 +334,18 @@ null_ls.setup({
 
 		if client.supports_method("textDocument/rangeFormatting") then
 			vim.keymap.set("x", "<Leader>f", function()
-				vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+				vim.lsp.buf.format({
+					bufnr = vim.api.nvim_get_current_buf(),
+					filter = function(c)
+						return c.name == "null-ls"
+					end
+				})
 			end, { buffer = bufnr, desc = "[lsp] format" })
 		end
 	end,
+	sources = {
+		null_ls.builtins.formatting.black,
+	},
 })
 
 local prettier = require("prettier")
@@ -332,11 +389,3 @@ prettier.setup({
 		vue_indent_script_and_style = false,
 	},
 })
-
--- Trouble!!!!!!
-vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
-vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
-vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
-vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
-vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
-vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
