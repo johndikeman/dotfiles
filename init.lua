@@ -102,9 +102,9 @@ require("lazy").setup({
 		ft = "mchat",
 
 		keys = {
-			{ "<C-m>d", ":Mdelete<cr>", mode = "n" },
-			{ "<C-m>s", ":Mselect<cr>", mode = "n" },
-			{ "<C-m><space>", ":Mchat<cr>", mode = "n" },
+			{ "<C-m>d",       ":Mdelete<cr>", mode = "n" },
+			{ "<C-m>s",       ":Mselect<cr>", mode = "n" },
+			{ "<C-m><space>", ":Mchat<cr>",   mode = "n" },
 		},
 
 		config = function()
@@ -138,6 +138,12 @@ require("lazy").setup({
 			})
 		end,
 	},
+	{
+		'numToStr/Comment.nvim',
+		opts = {
+			-- add any options here
+		}
+	}
 })
 
 -- gruvbox
@@ -393,3 +399,4 @@ prettier.setup({
 
 
 require('gitsigns').setup()
+require('Comment').setup()
