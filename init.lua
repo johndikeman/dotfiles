@@ -143,7 +143,8 @@ require("lazy").setup({
 		opts = {
 			-- add any options here
 		}
-	}
+	},
+	{'JoosepAlviste/nvim-ts-context-commentstring'},
 })
 
 -- gruvbox
@@ -257,7 +258,7 @@ cmp.setup({
 
 -- treesitter stuff
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "python", "rust", "gdscript" },
+	ensure_installed = { "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "python", "rust", "gdscript", "svelte", "typescript", "javascript", "css" },
 	highlight = {
 		enable = true,
 		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -399,4 +400,11 @@ prettier.setup({
 
 
 require('gitsigns').setup()
-require('Comment').setup()
+
+require('ts_context_commentstring').setup {
+  enable_autocmd = false,
+}
+
+require('Comment').setup {
+  pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+}
