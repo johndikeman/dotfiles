@@ -84,7 +84,7 @@ require("lazy").setup({
 		},
 	},
 	{ "leafOfTree/vim-svelte-plugin" },
-	{ "nvim-telescope/telescope.nvim", tag = "0.1.5" },
+	{ "nvim-telescope/telescope.nvim", tag = "0.1.8" },
 	{ "ckipp01/stylua-nvim" },
 
 	{
@@ -193,15 +193,6 @@ mason_lspconfig.setup_handlers({
 	end,
 })
 
--- telescope shit!!!
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-vim.keymap.set("n", "<leader>fs", function()
-	builtin.lsp_document_symbols({ symbols = "function" })
-end, {})
 
 -- cute fterm
 vim.keymap.set({ "n", "t" }, "<Leader>i", '<CMD>lua require("FTerm").toggle()<CR>')
@@ -269,6 +260,13 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
+-- telescope shit!!!
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+vim.keymap.set("n", "<leader>fs", builtin.treesitter, {})
 -- Global mappings for vim LSP
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
