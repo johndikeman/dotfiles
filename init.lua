@@ -218,6 +218,12 @@ for _, lsp in ipairs(lspc_servers) do
 	})
 end
 
+-- special setup for the gdscript lsp https://www.reddit.com/r/neovim/comments/1c2bhcs/godotgdscript_in_neovim_with_lsp_and_debugging_in/
+require("lspconfig")["gdscript"].setup({
+	name = "godot",
+	cmd = vim.lsp.rpc.connect("127.0.0.1", "6005"),
+})
+
 -- setup cmp autocomplete
 local cmp = require("cmp")
 cmp.setup({
