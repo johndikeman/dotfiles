@@ -180,6 +180,7 @@ local servers = {
 			enableTsPlugin = true,
 		},
 	},
+	nil_ls = {}
 }
 
 local mason_lspconfig = require("mason-lspconfig")
