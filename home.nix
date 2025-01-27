@@ -24,7 +24,7 @@
     pkgs.neovim
     pkgs.gh
 		pkgs.nodejs_23
-
+		pkgs.git
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -48,8 +48,8 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
     "${config.xdg.configHome}/nvim" = {
-	source = dotfiles/nvim;
-	recursive = true;
+			source = dotfiles/nvim;
+			recursive = true;
     };
     
     # # You can also set the file content immediately.
@@ -81,4 +81,8 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+	programs.git.enable = true;
+	programs.git.userEmail = "jrobdikeman@gmail.com";
+	programs.git.userName = "john";
 }
