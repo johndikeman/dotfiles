@@ -14,7 +14,6 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
-
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
@@ -29,6 +28,12 @@
 		pkgs.rustc
 		pkgs.prettierd
 		pkgs.xkeysnail
+		pkgs.fish
+		pkgs.python312
+		pkgs.python312Packages.pip
+		pkgs.glibc
+		pkgs.gcc
+		pkgs.gcc.cc.lib
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -70,7 +75,42 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
+	programs.fish = {
+		enable = true;
+		plugins = [
+		 {
+		 		name = "fish-ai";
+        src = pkgs.fetchFromGitHub {
+          owner = "Realiserad";
+          repo = "fish-ai";
+          rev = "6d489f57704340fd43351dd85b941e8c5c49229f";
+					sha256 = "adT8kQKiO7zD5EFHTjxofpj4sUvpu+nO+Atw/hZs0Gw=";
+        };}
+			{
+				name = "fisher";
+				src = pkgs.fetchFromGitHub {
+					owner = "jorgebucaran";
+					repo = "fisher";
+					rev = "a6bf0e5b9e356d57d666bc6def114f16f1e5e209";
+					sha256 = "VC8LMjwIvF6oG8ZVtFQvo2mGdyAzQyluAGBoK8N2/QM=";
+				};
+			}
+			{
+				name = "nix-env.fish";
+				src = pkgs.fetchFromGitHub {
+					owner = "lilyball";
+					repo = "nix-env.fish";
+					rev = "7b65bd228429e852c8fdfa07601159130a818cfa";
+					sha256 = "RG/0rfhgq6aEKNZ0XwIqOaZ6K5S4+/Y5EEMnIdtfPhk=";
+				};
+			}
+		];
+		shellInit = ''
+      # Fish requires explicit handling of colon-separated vars
+      set -gx LD_LIBRARY_PATH "${pkgs.gcc.cc.lib}/lib" $LD_LIBRARY_PATH
+    '';
 
+	};
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
@@ -89,6 +129,8 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+		SHELL = "fish";
+		LD_LIBRARY_PATH = "${pkgs.gcc.cc.lib}/lib:{$LD_LIBRARY_PATH}";
   };
 
   # Let Home Manager install and manage itself.
