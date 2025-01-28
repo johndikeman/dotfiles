@@ -34,9 +34,6 @@ in
 		pkgs.fish
 		pkgs.python312
 		pkgs.python312Packages.pip
-		pkgs.glibc
-		pkgs.gcc
-		pkgs.gcc.cc.lib
 		pkgs.xclip
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -109,11 +106,6 @@ in
 				};
 			}
 		];
-		shellInit = ''
-      # Fish requires explicit handling of colon-separated vars
-      set -gx LD_LIBRARY_PATH "${pkgs.gcc.cc.lib}/lib" $LD_LIBRARY_PATH
-    '';
-
 	};
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -134,7 +126,6 @@ in
   home.sessionVariables = {
     # EDITOR = "emacs";
 		SHELL = "fish";
-		LD_LIBRARY_PATH = "${pkgs.gcc.cc.lib}/lib:{$LD_LIBRARY_PATH}";
   };
 
   # Let Home Manager install and manage itself.
