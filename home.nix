@@ -2,6 +2,113 @@
 let  
   sources = import ./nix/sources.nix;
   poetry2nix = import sources.poetry2nix { inherit pkgs; };
+
+	# what i'm doing to try to get this stupid fish-ai thing to work is insane
+	src = pkgs.fetchFromGitHub {
+		owner = "Realiserad";
+		repo = "fish-ai";
+		rev = "6d489f57704340fd43351dd85b941e8c5c49229f";
+		sha256 = "adT8kQKiO7zD5EFHTjxofpj4sUvpu+nO+Atw/hZs0Gw=";
+	};
+	python = pkgs.python311;
+  pythonPackages = python.pkgs;
+
+	mistralai = pythonPackages.buildPythonPackage rec {
+    pname = "mistralai";
+    version = "1.0.2";
+    format = "pyproject";
+
+    src = pythonPackages.fetchPypi {
+      inherit pname version;
+      sha256 = "sha256-0000000000000000000000000000000000000000000="; # Use lib.fakeSha256 first
+    };
+	propagatedBuildInputs = [
+      pythonPackages.httpx
+      pythonPackages.pydantic
+    ];
+
+    nativeBuildInputs = [
+      pythonPackages.setuptools
+      pythonPackages.wheel
+    ];
+  };
+  # Create explicit dependency list with versions
+  dependencies = [
+    pythonPackages.openai
+    (pythonPackages.simple-term-menu.overridePythonAttrs (old: rec {
+      version = "1.6.6";
+      src = pythonPackages.fetchPypi {
+        pname = "simple-term-menu";
+        inherit version;
+        sha256 = "";
+      };
+    }))
+    (pythonPackages.buildPythonPackage rec {
+      pname = "iterfzf";
+      version = "1.4.0.54.3";
+      format = "pyproject";
+      src = pythonPackages.fetchPypi {
+        inherit pname version;
+        sha256 = "";
+      };
+      propagatedBuildInputs = [ pythonPackages.setuptools ];
+    })
+    (pythonPackages.buildPythonPackage rec {
+      pname = "hugchat";
+      version = "0.4.18";
+      src = pythonPackages.fetchPypi {
+        inherit pname version;
+        sha256 = "";
+      };
+      propagatedBuildInputs = [ pythonPackages.requests ];
+    })
+
+		mistralai
+
+    pythonPackages.binaryornot
+    (pythonPackages.anthropic.overridePythonAttrs (old: rec {
+      version = "0.45.2";
+      src = pythonPackages.fetchPypi {
+        pname = "anthropic";
+        inherit version;
+        sha256 = "";
+      };
+    }))
+    (pythonPackages.cohere.overridePythonAttrs (old: rec {
+      version = "5.13.11";
+      src = pythonPackages.fetchPypi {
+        pname = "cohere";
+        inherit version;
+        sha256 = "";
+      };
+    }))
+  ];
+
+  fish-ai = pythonPackages.buildPythonApplication {
+    pname = "fish_ai";
+    version = "1.0.3";
+    inherit src;
+
+    format = "pyproject";
+    disabled = pythonPackages.pythonOlder "3.9";
+
+    propagatedBuildInputs = dependencies;
+
+    nativeBuildInputs = [
+      pythonPackages.setuptools
+    ];
+
+    # Add required system dependencies
+    buildInputs = [
+      pkgs.libffi
+      pkgs.openssl
+    ];
+
+    # Verify the scripts are properly installed
+    checkPhase = ''
+      ${python.interpreter} -m pytest src/fish_ai/tests
+    '';
+  };
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -70,6 +177,10 @@ in
 			source = dotfiles/xkeysnail;
 			recursive = true;
     };
+		".fish-ai" = {
+			source = fish-ai;
+			recursive = true;
+		};
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
