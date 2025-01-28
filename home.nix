@@ -20,7 +20,7 @@ let
 
     src = pythonPackages.fetchPypi {
       inherit pname version;
-      sha256 = "sha256-0000000000000000000000000000000000000000000="; # Use lib.fakeSha256 first
+      sha256 = "RvtEB9GkFhsj4bLExzVHhDP7ekGrsF+s0jJy+wXRcbU="; 
     };
 	propagatedBuildInputs = [
       pythonPackages.httpx
@@ -49,7 +49,7 @@ let
       format = "pyproject";
       src = pythonPackages.fetchPypi {
         inherit pname version;
-        sha256 = "";
+        sha256 = "igudxPGhJtqVndYBZDvzHef6af67fDP0tuL6jtxL4uE=";
       };
       propagatedBuildInputs = [ pythonPackages.setuptools ];
     })
@@ -58,7 +58,7 @@ let
       version = "0.4.18";
       src = pythonPackages.fetchPypi {
         inherit pname version;
-        sha256 = "";
+        sha256 = "OlAo0rSfBfU+UYXvkLErBzCQzdMGDiMjewxfzqYJbDE=";
       };
       propagatedBuildInputs = [ pythonPackages.requests ];
     })
@@ -68,10 +68,12 @@ let
     pythonPackages.binaryornot
     (pythonPackages.anthropic.overridePythonAttrs (old: rec {
       version = "0.45.2";
+			doCheck = false;
+			doInstallCheck = false;
       src = pythonPackages.fetchPypi {
         pname = "anthropic";
         inherit version;
-        sha256 = "";
+        sha256 = "MqGLns0SyRsr5Mrmyiq0agaTe1qgGyEwjZem0peU+14=";
       };
     }))
     (pythonPackages.cohere.overridePythonAttrs (old: rec {
@@ -79,7 +81,7 @@ let
       src = pythonPackages.fetchPypi {
         pname = "cohere";
         inherit version;
-        sha256 = "";
+        sha256 = "hdLBoorIPTR5pcHKbN+Xu1J5RxTH/eBU65Ns/q+vV/Y=";
       };
     }))
   ];
