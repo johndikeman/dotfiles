@@ -71,6 +71,9 @@ define_keymap(
     ],
     {
         # Allow native terminal shortcuts (Ctrl+C for SIGINT, etc.)
+        # copy/paste
+        K("Super-C"): K("Ctrl-Shift-C"),    
+        K("Super-V"): K("Ctrl-Shift-V"),   
     },
     "Terminals"
 )
