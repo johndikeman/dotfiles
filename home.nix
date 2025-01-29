@@ -13,6 +13,18 @@ let
 	python = pkgs.python311;
   pythonPackages = python.pkgs;
 
+	sslFix = pkg: pkg.overridePythonAttrs (old: {
+    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [
+      pkgs.cacert  # Add CA certificates
+    ];
+    
+    # Set certificate paths
+    preConfigure = (old.preConfigure or "") + ''
+      export SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+      export REQUESTS_CA_BUNDLE="$SSL_CERT_FILE"
+    '';
+  });
+
 	mistralai = pythonPackages.buildPythonPackage rec {
     pname = "mistralai";
     version = "1.0.2";
@@ -62,7 +74,7 @@ let
         sha256 = "";
       };
     }))
-    (pythonPackages.buildPythonPackage rec {
+    (sslFix (pythonPackages.buildPythonPackage rec {
     pname = "iterfzf";
     version = "1.4.0.54.3";
     format = "pyproject";
@@ -98,7 +110,7 @@ let
       homepage = "https://github.com/ajalt/iterfzf";
       license = licenses.mit;
     };
-  })
+  }))
     (pythonPackages.buildPythonPackage rec {
       pname = "hugchat";
       version = "0.4.18";
