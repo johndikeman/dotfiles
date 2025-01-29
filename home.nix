@@ -21,32 +21,65 @@ let
       export REQUESTS_CA_BUNDLE="$SSL_CERT_FILE"
     '';
   });
-# First create a pinned pydantic-core derivation
-  pydantic-core = pythonPackages.buildPythonPackage rec {
+
+# create a pinned pydantic-core derivation
+pydantic-core = pythonPackages.buildPythonPackage rec {
     pname = "pydantic_core";
     version = "2.20.1";
-    format = "pyproject";
+    pyproject = true;
 
     src = pythonPackages.fetchPypi {
       inherit pname version;
       sha256 = "JsppXu7l+fGu6yEf/BLxC8tvceKYmYj9ph2r1l24eNQ=";
     };
 
+    # patches = [ ./01-remove-benchmark-flags.patch ];
+
+    cargoDeps = pkgs.rustPlatform.fetchCargoTarball {
+      inherit src;
+      name = "${pname}-${version}";
+      hash = "sha256-j9VAWV/AG+u52ji+erNUrdGX8kHlsOuYiBYbHzD0y8k=";
+    };
+
     nativeBuildInputs = [
-      pkgs.maturin
-      pythonPackages.setuptools
+      pkgs.cargo
+      pkgs.rustPlatform.cargoSetupHook
+      pkgs.rustc
     ];
 
-    propagatedBuildInputs = [
+    build-system = [
+      pkgs.rustPlatform.maturinBuildHook
       pythonPackages.typing-extensions
     ];
 
+    buildInputs = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ pkgs.libiconv ];
 
-    buildInputs = [
-      pkgs.rustc
-      pkgs.cargo
+    dependencies = [ pythonPackages.typing-extensions ];
+
+    pythonImportsCheck = [ "pydantic_core" ];
+
+    # escape infinite recursion with pydantic via dirty-equals
+    doCheck = false;
+    # passthru.tests.pytest = pydantic-core.overrideAttrs { doCheck = true; };
+
+    nativeCheckInputs = [
+      pkgs.pytestCheckHook
+      pkgs.hypothesis
+      pkgs.pytest-timeout
+      pkgs.dirty-equals
+      pkgs.pytest-mock
     ];
-  };
+
+    disabledTests = [
+      # RecursionError: maximum recursion depth exceeded while calling a Python object
+      "test_recursive"
+    ];
+
+    disabledTestPaths = [
+      # no point in benchmarking in nixpkgs build farm
+      "tests/benchmarks"
+    ];
+	};
 
 	mistralai = pythonPackages.buildPythonPackage rec {
     pname = "mistralai";
