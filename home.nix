@@ -30,6 +30,7 @@ let
     nativeBuildInputs = [
       pythonPackages.setuptools
       pythonPackages.wheel
+			pythonPackages.poetry-core
     ];
   };
   # Create explicit dependency list with versions
@@ -44,15 +45,41 @@ let
       };
     }))
     (pythonPackages.buildPythonPackage rec {
-      pname = "iterfzf";
-      version = "1.4.0.54.3";
-      format = "pyproject";
-      src = pythonPackages.fetchPypi {
-        inherit pname version;
-        sha256 = "igudxPGhJtqVndYBZDvzHef6af67fDP0tuL6jtxL4uE=";
-      };
-      propagatedBuildInputs = [ pythonPackages.setuptools ];
-    })
+    pname = "iterfzf";
+    version = "1.4.0.54.3";
+    format = "pyproject";
+
+    src = pythonPackages.fetchPypi {
+      inherit pname version;
+      sha256 = "sha256-0000000000000000000000000000000000000000000="; # Replace with actual hash
+    };
+
+    nativeBuildInputs = [
+      pythonPackages.flit-core
+      pythonPackages.packaging
+      pythonPackages.pyproject-hooks
+      pkgs.fzf
+    ];
+
+    propagatedBuildInputs = [
+      pythonPackages.typing-extensions
+    ];
+
+    # Needed for the custom build backend
+    # preBuild = ''
+    #  cp ${./build_dist.py} build_dist.py
+    #  export FZF_PATH=${pkgs.fzf}/bin/fzf
+    #'';
+
+    # Disable tests that require network or external resources
+    doCheck = false;
+
+    meta = with lib; {
+      description = "FZF-based interactive list UI for Python iterables";
+      homepage = "https://github.com/ajalt/iterfzf";
+      license = licenses.mit;
+    };
+  })
     (pythonPackages.buildPythonPackage rec {
       pname = "hugchat";
       version = "0.4.18";
