@@ -24,6 +24,32 @@ let
       export REQUESTS_CA_BUNDLE="$SSL_CERT_FILE"
     '';
   });
+# First create a pinned pydantic-core derivation
+  pydantic-core = pythonPackages.buildPythonPackage rec {
+    pname = "pydantic_core";
+    version = "2.20.1";
+    format = "pyproject";
+
+    src = pythonPackages.fetchPypi {
+      inherit pname version;
+      sha256 = "JsppXu7l+fGu6yEf/BLxC8tvceKYmYj9ph2r1l24eNQ=";
+    };
+
+    nativeBuildInputs = [
+      pkgs.maturin
+      pythonPackages.setuptools
+    ];
+
+    propagatedBuildInputs = [
+      pythonPackages.typing-extensions
+    ];
+
+
+    buildInputs = [
+      pkgs.rustc
+      pkgs.cargo
+    ];
+  };
 
 	mistralai = pythonPackages.buildPythonPackage rec {
     pname = "mistralai";
@@ -36,12 +62,13 @@ let
     };
 		propagatedBuildInputs = [
       (pythonPackages.pydantic.overridePythonAttrs (old: rec {
-        version = "2.8.3";
+        version = "2.8.2";
         src = pythonPackages.fetchPypi {
           pname = "pydantic";
           inherit version;
-          sha256 = "";
+          sha256 = "b2LBPQZ7B1WtHCGjS90GwMEmJaIrD8CcaxSYFmBPfCo=";
         };
+				propagatedBuildInputs = [ pydantic-core ];
       }))
       (pythonPackages.buildPythonPackage rec {
         pname = "jsonpath-python";
@@ -49,7 +76,7 @@ let
         format = "setuptools";
         src = pythonPackages.fetchPypi {
           inherit pname version;
-          sha256 = "";
+          sha256 = "3Vvkpy2KKZXD9YPPgr880alUTP2r8tIllbZ6/wc0lmY=";
         };
       })
       pythonPackages.python-dateutil
@@ -69,9 +96,9 @@ let
     (pythonPackages.simple-term-menu.overridePythonAttrs (old: rec {
       version = "1.6.6";
       src = pythonPackages.fetchPypi {
-        pname = "simple-term-menu";
+        pname = "simple_term_menu";
         inherit version;
-        sha256 = "";
+        sha256 = "mBPTb1dJ1i0gClWZseyIRpxxN4MSrcCEwAwAv7s4OJM=";
       };
     }))
     (sslFix (pythonPackages.buildPythonPackage rec {
@@ -202,6 +229,7 @@ in
 		pkgs.python312
 		pkgs.python312Packages.pip
 		pkgs.xclip
+		pkgs.maturin
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
