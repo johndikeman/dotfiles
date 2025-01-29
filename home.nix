@@ -22,8 +22,8 @@ let
     '';
   });
 
-# create a pinned pydantic-core derivation
-pydantic-core = pythonPackages.buildPythonPackage rec {
+	# create a pinned pydantic-core derivation
+	pydantic-core = pythonPackages.buildPythonPackage rec {
     pname = "pydantic_core";
     version = "2.20.1";
     pyproject = true;
@@ -99,6 +99,7 @@ pydantic-core = pythonPackages.buildPythonPackage rec {
           sha256 = "b2LBPQZ7B1WtHCGjS90GwMEmJaIrD8CcaxSYFmBPfCo=";
         };
 				propagatedBuildInputs = [ pydantic-core ];
+				dependencies = [pydantic-core pythonPackages.annotated-types pythonPackages.typing-extensions];
       }))
       (pythonPackages.buildPythonPackage rec {
         pname = "jsonpath-python";
