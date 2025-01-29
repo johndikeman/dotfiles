@@ -80,6 +80,16 @@ let
       "tests/benchmarks"
     ];
 	};
+	pydantic = pythonPackages.pydantic.overridePythonAttrs (old: rec {
+        version = "2.8.2";
+        src = pythonPackages.fetchPypi {
+          pname = "pydantic";
+          inherit version;
+          sha256 = "b2LBPQZ7B1WtHCGjS90GwMEmJaIrD8CcaxSYFmBPfCo=";
+        };
+				propagatedBuildInputs = [ pydantic-core ];
+				dependencies = [pydantic-core pythonPackages.annotated-types pythonPackages.typing-extensions];
+      });
 
 	mistralai = pythonPackages.buildPythonPackage rec {
     pname = "mistralai";
@@ -91,16 +101,7 @@ let
       sha256 = "RvtEB9GkFhsj4bLExzVHhDP7ekGrsF+s0jJy+wXRcbU="; 
     };
 		propagatedBuildInputs = [
-      (pythonPackages.pydantic.overridePythonAttrs (old: rec {
-        version = "2.8.2";
-        src = pythonPackages.fetchPypi {
-          pname = "pydantic";
-          inherit version;
-          sha256 = "b2LBPQZ7B1WtHCGjS90GwMEmJaIrD8CcaxSYFmBPfCo=";
-        };
-				propagatedBuildInputs = [ pydantic-core ];
-				dependencies = [pydantic-core pythonPackages.annotated-types pythonPackages.typing-extensions];
-      }))
+     	pydantic 
       (pythonPackages.buildPythonPackage rec {
         pname = "jsonpath-python";
         version = "1.0.6";
@@ -131,6 +132,13 @@ let
         sha256 = "sha256-f6U2zUtkRxhkW4dNJwbjbbvvOLMn5CygYjJ12jR+4ak=";
       };
 			doCheck = false;
+			dependencies = [ pydantic pythonPackages.anyio
+    pythonPackages.distro
+    pythonPackages.httpx
+    pythonPackages.jiter
+    pythonPackages.sniffio
+    pythonPackages.tqdm
+    pythonPackages.typing-extensions];
 		}))
     (pythonPackages.simple-term-menu.overridePythonAttrs (old: rec {
       version = "1.6.6";
@@ -199,6 +207,16 @@ let
         inherit version;
         sha256 = "sha256-ToVB3DVTMgkL/FG4RUnBm2SaE6I9vWvWjh0BLghVECU=";
       };
+		dependencies = [
+				pythonPackages.anyio
+				pythonPackages.distro
+				pythonPackages.httpx
+				pythonPackages.jiter
+				pythonPackages.sniffio
+				pydantic
+				pythonPackages.tokenizers
+				pythonPackages.typing-extensions
+			];
     }))
     (pythonPackages.cohere.overridePythonAttrs (old: rec {
       version = "5.13.11";
@@ -207,6 +225,18 @@ let
         inherit version;
         sha256 = "hdLBoorIPTR5pcHKbN+Xu1J5RxTH/eBU65Ns/q+vV/Y=";
       };
+		dependencies = [
+				pythonPackages.fastavro
+				pythonPackages.httpx
+				pythonPackages.httpx-sse
+				pythonPackages.parameterized
+				pydantic
+				pydantic-core
+				pythonPackages.requests
+				pythonPackages.tokenizers
+				pythonPackages.types-requests
+				pythonPackages.typing-extensions
+			];
     }))
   ];
 
