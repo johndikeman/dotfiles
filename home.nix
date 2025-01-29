@@ -1,8 +1,5 @@
 { config, lib, pkgs, ... }:
 let  
-  sources = import ./nix/sources.nix;
-  poetry2nix = import sources.poetry2nix { inherit pkgs; };
-
 	# what i'm doing to try to get this stupid fish-ai thing to work is insane
 	src = pkgs.fetchFromGitHub {
 		owner = "Realiserad";
