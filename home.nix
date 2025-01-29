@@ -22,9 +22,27 @@ let
       inherit pname version;
       sha256 = "RvtEB9GkFhsj4bLExzVHhDP7ekGrsF+s0jJy+wXRcbU="; 
     };
-	propagatedBuildInputs = [
+		propagatedBuildInputs = [
+      (pythonPackages.pydantic.overridePythonAttrs (old: rec {
+        version = "2.8.3";
+        src = pythonPackages.fetchPypi {
+          pname = "pydantic";
+          inherit version;
+          sha256 = "";
+        };
+      }))
+      (pythonPackages.buildPythonPackage rec {
+        pname = "jsonpath-python";
+        version = "1.0.6";
+        format = "setuptools";
+        src = pythonPackages.fetchPypi {
+          inherit pname version;
+          sha256 = "";
+        };
+      })
+      pythonPackages.python-dateutil
+      pythonPackages.typing-inspect
       pythonPackages.httpx
-      pythonPackages.pydantic
     ];
 
     nativeBuildInputs = [
@@ -48,10 +66,11 @@ let
     pname = "iterfzf";
     version = "1.4.0.54.3";
     format = "pyproject";
+		__noChroot = true;
 
     src = pythonPackages.fetchPypi {
       inherit pname version;
-      sha256 = "sha256-0000000000000000000000000000000000000000000="; # Replace with actual hash
+      sha256 = "igudxPGhJtqVndYBZDvzHef6af67fDP0tuL6jtxL4uE="; # Replace with actual hash
     };
 
     nativeBuildInputs = [
