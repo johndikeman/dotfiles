@@ -2,7 +2,6 @@
 let  
   sources = import ./nix/sources.nix;
   poetry2nix = import sources.poetry2nix { inherit pkgs; };
-	nixpkgs_old = import sources.nixpkgs-old { inherit python; };
 
 	# what i'm doing to try to get this stupid fish-ai thing to work is insane
 	src = pkgs.fetchFromGitHub {
@@ -25,6 +24,32 @@ let
       export REQUESTS_CA_BUNDLE="$SSL_CERT_FILE"
     '';
   });
+# First create a pinned pydantic-core derivation
+  pydantic-core = pythonPackages.buildPythonPackage rec {
+    pname = "pydantic_core";
+    version = "2.20.1";
+    format = "pyproject";
+
+    src = pythonPackages.fetchPypi {
+      inherit pname version;
+      sha256 = "JsppXu7l+fGu6yEf/BLxC8tvceKYmYj9ph2r1l24eNQ=";
+    };
+
+    nativeBuildInputs = [
+      pkgs.maturin
+      pythonPackages.setuptools
+    ];
+
+    propagatedBuildInputs = [
+      pythonPackages.typing-extensions
+    ];
+
+
+    buildInputs = [
+      pkgs.rustc
+      pkgs.cargo
+    ];
+  };
 
 	mistralai = pythonPackages.buildPythonPackage rec {
     pname = "mistralai";
@@ -36,7 +61,15 @@ let
       sha256 = "RvtEB9GkFhsj4bLExzVHhDP7ekGrsF+s0jJy+wXRcbU="; 
     };
 		propagatedBuildInputs = [
-      nixpkgs_old.python311Packages.pydantic
+      (pythonPackages.pydantic.overridePythonAttrs (old: rec {
+        version = "2.8.2";
+        src = pythonPackages.fetchPypi {
+          pname = "pydantic";
+          inherit version;
+          sha256 = "b2LBPQZ7B1WtHCGjS90GwMEmJaIrD8CcaxSYFmBPfCo=";
+        };
+				propagatedBuildInputs = [ pydantic-core ];
+      }))
       (pythonPackages.buildPythonPackage rec {
         pname = "jsonpath-python";
         version = "1.0.6";
