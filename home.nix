@@ -123,7 +123,15 @@ let
   };
   # Create explicit dependency list with versions
   dependencies = [
-    pythonPackages.openai
+    (pythonPackages.openai.overridePythonAttrs (old: rec {
+			version = "1.60.0";
+      src = pythonPackages.fetchPypi {
+        pname = "openai";
+        inherit version;
+        sha256 = "sha256-f6U2zUtkRxhkW4dNJwbjbbvvOLMn5CygYjJ12jR+4ak=";
+      };
+			doCheck = false;
+		}))
     (pythonPackages.simple-term-menu.overridePythonAttrs (old: rec {
       version = "1.6.6";
       src = pythonPackages.fetchPypi {
@@ -183,13 +191,13 @@ let
 
     pythonPackages.binaryornot
     (pythonPackages.anthropic.overridePythonAttrs (old: rec {
-      version = "0.45.2";
+      version = "0.45.0";
 			doCheck = false;
 			doInstallCheck = false;
       src = pythonPackages.fetchPypi {
         pname = "anthropic";
         inherit version;
-        sha256 = "MqGLns0SyRsr5Mrmyiq0agaTe1qgGyEwjZem0peU+14=";
+        sha256 = "sha256-ToVB3DVTMgkL/FG4RUnBm2SaE6I9vWvWjh0BLghVECU=";
       };
     }))
     (pythonPackages.cohere.overridePythonAttrs (old: rec {
@@ -214,6 +222,8 @@ let
 
     nativeBuildInputs = [
       pythonPackages.setuptools
+			pythonPackages.pytest
+			pythonPackages.pyfakefs
     ];
 
     # Add required system dependencies
