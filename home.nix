@@ -301,6 +301,7 @@ in
 		pkgs.python312Packages.pip
 		pkgs.xclip
 		pkgs.maturin
+		pkgs.niv
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -340,6 +341,11 @@ in
 			source = fish-ai;
 			recursive = true;
 		};
+    "${config.xdg.configHome}/containers" = {
+			source = dotfiles/containers;
+			recursive = true;
+    };
+
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
