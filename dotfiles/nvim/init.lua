@@ -108,33 +108,34 @@ require("lazy").setup({
 		},
 
 		config = function()
-			local deepseek_key = require("keys")
-
-			-- overwriting the default openai config with our parameters
-			require("model.providers.openai").initialize({
-				model = "deepseek-coder",
-				temperature = 0,
-				max_tokens = 4000,
-			})
-			local deepseek = require("model.providers.openai")
-
+			local deepseek = require("model.providers.deepseek")
 			local prompts = require("prompts")
 			local extract = require("model.prompts.extract")
+			local chat_prompts = require("model.prompts.chats")
 			local mode = require("model").mode
 
 			require("model").setup({
 				default_prompt = {
 					provider = deepseek,
 					options = {
-						url = "https://api.deepseek.com/v1",
-						authorization = deepseek_key,
+						show_reasoning = true
+					},
+					params = {
+						model = "deepseek-reasoner"
 					},
 					mode = mode.INSERT_OR_REPLACE,
 					builder = function(input, context)
-						return deepseek.adapt(prompts.code_replace_fewshot(input, context))
+						return prompts.code_replace_fewshot(input, context)
+
 					end,
 					transform = extract.markdown_code,
 				},
+				chats = chat_prompts,
+				secrets = {
+					DEEPSEEK_API_KEY = function()
+						return require("keys")
+					end
+				}
 			})
 		end,
 	},
