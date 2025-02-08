@@ -126,7 +126,6 @@ require("lazy").setup({
 					mode = mode.INSERT_OR_REPLACE,
 					builder = function(input, context)
 						return prompts.code_replace_fewshot(input, context)
-
 					end,
 					transform = extract.markdown_code,
 				},
@@ -181,7 +180,7 @@ local servers = {
 			enableTsPlugin = true,
 		},
 	},
-	nil_ls = {}
+	nil_ls = { [ 'nil' ] = { formatting = { command = { "nixfmt" } } } }
 }
 
 local mason_lspconfig = require("mason-lspconfig")
@@ -209,16 +208,16 @@ vim.keymap.set({ "n", "t" }, "<Leader>i", '<CMD>lua require("FTerm").toggle()<CR
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- Setup language servers.
-local lspconfig = require("lspconfig")
-
-local lspc_servers = vim.tbl_keys(servers)
-for _, lsp in ipairs(lspc_servers) do
-	lspconfig[lsp].setup({
-		-- on_attach = my_custom_on_attach,
-		capabilities = capabilities,
-	})
-end
+-- -- Setup language servers.
+-- local lspconfig = require("lspconfig")
+--
+-- local lspc_servers = vim.tbl_keys(servers)
+-- for _, lsp in ipairs(lspc_servers) do
+-- 	lspconfig[lsp].setup({
+-- 		-- on_attach = my_custom_on_attach,
+-- 		capabilities = capabilities,
+-- 	})
+-- end
 
 -- special setup for the gdscript lsp https://www.reddit.com/r/neovim/comments/1c2bhcs/godotgdscript_in_neovim_with_lsp_and_debugging_in/
 require("lspconfig")["gdscript"].setup({
