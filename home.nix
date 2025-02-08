@@ -1,29 +1,38 @@
-{ config, lib, pkgs, ... }:
-let  
-	# what i'm doing to try to get this stupid fish-ai thing to work is insane
-	src = pkgs.fetchFromGitHub {
-		owner = "Realiserad";
-		repo = "fish-ai";
-		rev = "6d489f57704340fd43351dd85b941e8c5c49229f";
-		sha256 = "adT8kQKiO7zD5EFHTjxofpj4sUvpu+nO+Atw/hZs0Gw=";
-	};
-	python = pkgs.python311;
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  # what i'm doing to try to get this stupid fish-ai thing to work is insane
+  src = pkgs.fetchFromGitHub {
+    owner = "Realiserad";
+    repo = "fish-ai";
+    rev = "6d489f57704340fd43351dd85b941e8c5c49229f";
+    sha256 = "adT8kQKiO7zD5EFHTjxofpj4sUvpu+nO+Atw/hZs0Gw=";
+  };
+  python = pkgs.python311;
   pythonPackages = python.pkgs;
 
-	sslFix = pkg: pkg.overridePythonAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [
-      pkgs.cacert  # Add CA certificates
-    ];
-    
-    # Set certificate paths
-    preConfigure = (old.preConfigure or "") + ''
-      export SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-      export REQUESTS_CA_BUNDLE="$SSL_CERT_FILE"
-    '';
-  });
+  sslFix =
+    pkg:
+    pkg.overridePythonAttrs (old: {
+      nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
+        pkgs.cacert # Add CA certificates
+      ];
 
-	# create a pinned pydantic-core derivation
-	pydantic-core = pythonPackages.buildPythonPackage rec {
+      # Set certificate paths
+      preConfigure =
+        (old.preConfigure or "")
+        + ''
+          export SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+          export REQUESTS_CA_BUNDLE="$SSL_CERT_FILE"
+        '';
+    });
+
+  # create a pinned pydantic-core derivation
+  pydantic-core = pythonPackages.buildPythonPackage rec {
     pname = "pydantic_core";
     version = "2.20.1";
     pyproject = true;
@@ -79,29 +88,33 @@ let
       # no point in benchmarking in nixpkgs build farm
       "tests/benchmarks"
     ];
-	};
-	pydantic = pythonPackages.pydantic.overridePythonAttrs (old: rec {
-        version = "2.8.2";
-        src = pythonPackages.fetchPypi {
-          pname = "pydantic";
-          inherit version;
-          sha256 = "b2LBPQZ7B1WtHCGjS90GwMEmJaIrD8CcaxSYFmBPfCo=";
-        };
-				propagatedBuildInputs = [ pydantic-core ];
-				dependencies = [pydantic-core pythonPackages.annotated-types pythonPackages.typing-extensions];
-      });
+  };
+  pydantic = pythonPackages.pydantic.overridePythonAttrs (old: rec {
+    version = "2.8.2";
+    src = pythonPackages.fetchPypi {
+      pname = "pydantic";
+      inherit version;
+      sha256 = "b2LBPQZ7B1WtHCGjS90GwMEmJaIrD8CcaxSYFmBPfCo=";
+    };
+    propagatedBuildInputs = [ pydantic-core ];
+    dependencies = [
+      pydantic-core
+      pythonPackages.annotated-types
+      pythonPackages.typing-extensions
+    ];
+  });
 
-	mistralai = pythonPackages.buildPythonPackage rec {
+  mistralai = pythonPackages.buildPythonPackage rec {
     pname = "mistralai";
     version = "1.0.2";
     format = "pyproject";
 
     src = pythonPackages.fetchPypi {
       inherit pname version;
-      sha256 = "RvtEB9GkFhsj4bLExzVHhDP7ekGrsF+s0jJy+wXRcbU="; 
+      sha256 = "RvtEB9GkFhsj4bLExzVHhDP7ekGrsF+s0jJy+wXRcbU=";
     };
-		propagatedBuildInputs = [
-     	pydantic 
+    propagatedBuildInputs = [
+      pydantic
       (pythonPackages.buildPythonPackage rec {
         pname = "jsonpath-python";
         version = "1.0.6";
@@ -119,27 +132,30 @@ let
     nativeBuildInputs = [
       pythonPackages.setuptools
       pythonPackages.wheel
-			pythonPackages.poetry-core
+      pythonPackages.poetry-core
     ];
   };
   # Create explicit dependency list with versions
   dependencies = [
     (pythonPackages.openai.overridePythonAttrs (old: rec {
-			version = "1.60.0";
+      version = "1.60.0";
       src = pythonPackages.fetchPypi {
         pname = "openai";
         inherit version;
         sha256 = "sha256-f6U2zUtkRxhkW4dNJwbjbbvvOLMn5CygYjJ12jR+4ak=";
       };
-			doCheck = false;
-			dependencies = [ pydantic pythonPackages.anyio
-    pythonPackages.distro
-    pythonPackages.httpx
-    pythonPackages.jiter
-    pythonPackages.sniffio
-    pythonPackages.tqdm
-    pythonPackages.typing-extensions];
-		}))
+      doCheck = false;
+      dependencies = [
+        pydantic
+        pythonPackages.anyio
+        pythonPackages.distro
+        pythonPackages.httpx
+        pythonPackages.jiter
+        pythonPackages.sniffio
+        pythonPackages.tqdm
+        pythonPackages.typing-extensions
+      ];
+    }))
     (pythonPackages.simple-term-menu.overridePythonAttrs (old: rec {
       version = "1.6.6";
       src = pythonPackages.fetchPypi {
@@ -148,43 +164,45 @@ let
         sha256 = "mBPTb1dJ1i0gClWZseyIRpxxN4MSrcCEwAwAv7s4OJM=";
       };
     }))
-    (sslFix (pythonPackages.buildPythonPackage rec {
-    pname = "iterfzf";
-    version = "1.4.0.54.3";
-    format = "pyproject";
-		__noChroot = true;
+    (sslFix (
+      pythonPackages.buildPythonPackage rec {
+        pname = "iterfzf";
+        version = "1.4.0.54.3";
+        format = "pyproject";
+        __noChroot = true;
 
-    src = pythonPackages.fetchPypi {
-      inherit pname version;
-      sha256 = "igudxPGhJtqVndYBZDvzHef6af67fDP0tuL6jtxL4uE="; # Replace with actual hash
-    };
+        src = pythonPackages.fetchPypi {
+          inherit pname version;
+          sha256 = "igudxPGhJtqVndYBZDvzHef6af67fDP0tuL6jtxL4uE="; # Replace with actual hash
+        };
 
-    nativeBuildInputs = [
-      pythonPackages.flit-core
-      pythonPackages.packaging
-      pythonPackages.pyproject-hooks
-      pkgs.fzf
-    ];
+        nativeBuildInputs = [
+          pythonPackages.flit-core
+          pythonPackages.packaging
+          pythonPackages.pyproject-hooks
+          pkgs.fzf
+        ];
 
-    propagatedBuildInputs = [
-      pythonPackages.typing-extensions
-    ];
+        propagatedBuildInputs = [
+          pythonPackages.typing-extensions
+        ];
 
-    # Needed for the custom build backend
-    # preBuild = ''
-    #  cp ${./build_dist.py} build_dist.py
-    #  export FZF_PATH=${pkgs.fzf}/bin/fzf
-    #'';
+        # Needed for the custom build backend
+        # preBuild = ''
+        #  cp ${./build_dist.py} build_dist.py
+        #  export FZF_PATH=${pkgs.fzf}/bin/fzf
+        #'';
 
-    # Disable tests that require network or external resources
-    doCheck = false;
+        # Disable tests that require network or external resources
+        doCheck = false;
 
-    meta = with lib; {
-      description = "FZF-based interactive list UI for Python iterables";
-      homepage = "https://github.com/ajalt/iterfzf";
-      license = licenses.mit;
-    };
-  }))
+        meta = with lib; {
+          description = "FZF-based interactive list UI for Python iterables";
+          homepage = "https://github.com/ajalt/iterfzf";
+          license = licenses.mit;
+        };
+      }
+    ))
     (pythonPackages.buildPythonPackage rec {
       pname = "hugchat";
       version = "0.4.18";
@@ -195,28 +213,28 @@ let
       propagatedBuildInputs = [ pythonPackages.requests ];
     })
 
-		mistralai
+    mistralai
 
     pythonPackages.binaryornot
     (pythonPackages.anthropic.overridePythonAttrs (old: rec {
       version = "0.45.0";
-			doCheck = false;
-			doInstallCheck = false;
+      doCheck = false;
+      doInstallCheck = false;
       src = pythonPackages.fetchPypi {
         pname = "anthropic";
         inherit version;
         sha256 = "sha256-ToVB3DVTMgkL/FG4RUnBm2SaE6I9vWvWjh0BLghVECU=";
       };
-		dependencies = [
-				pythonPackages.anyio
-				pythonPackages.distro
-				pythonPackages.httpx
-				pythonPackages.jiter
-				pythonPackages.sniffio
-				pydantic
-				pythonPackages.tokenizers
-				pythonPackages.typing-extensions
-			];
+      dependencies = [
+        pythonPackages.anyio
+        pythonPackages.distro
+        pythonPackages.httpx
+        pythonPackages.jiter
+        pythonPackages.sniffio
+        pydantic
+        pythonPackages.tokenizers
+        pythonPackages.typing-extensions
+      ];
     }))
     (pythonPackages.cohere.overridePythonAttrs (old: rec {
       version = "5.13.11";
@@ -225,18 +243,18 @@ let
         inherit version;
         sha256 = "hdLBoorIPTR5pcHKbN+Xu1J5RxTH/eBU65Ns/q+vV/Y=";
       };
-		dependencies = [
-				pythonPackages.fastavro
-				pythonPackages.httpx
-				pythonPackages.httpx-sse
-				pythonPackages.parameterized
-				pydantic
-				pydantic-core
-				pythonPackages.requests
-				pythonPackages.tokenizers
-				pythonPackages.types-requests
-				pythonPackages.typing-extensions
-			];
+      dependencies = [
+        pythonPackages.fastavro
+        pythonPackages.httpx
+        pythonPackages.httpx-sse
+        pythonPackages.parameterized
+        pydantic
+        pydantic-core
+        pythonPackages.requests
+        pythonPackages.tokenizers
+        pythonPackages.types-requests
+        pythonPackages.typing-extensions
+      ];
     }))
   ];
 
@@ -252,8 +270,8 @@ let
 
     nativeBuildInputs = [
       pythonPackages.setuptools
-			pythonPackages.pytest
-			pythonPackages.pyfakefs
+      pythonPackages.pytest
+      pythonPackages.pyfakefs
     ];
 
     # Add required system dependencies
@@ -290,20 +308,20 @@ in
     # pkgs.hello
     pkgs.neovim
     pkgs.gh
-		pkgs.nodejs_23
-		pkgs.git
-		pkgs.cargo
-		pkgs.rustc
-		pkgs.prettierd
-		pkgs.xkeysnail
-		pkgs.fish
-		pkgs.python312
-		pkgs.python312Packages.pip
-		pkgs.xclip
-		pkgs.maturin
-		pkgs.niv
-		pkgs.ncdu
-		pkgs.nixfmt-rfc-style
+    pkgs.nodejs_23
+    pkgs.git
+    pkgs.cargo
+    pkgs.rustc
+    pkgs.prettierd
+    pkgs.xkeysnail
+    pkgs.fish
+    pkgs.python312
+    pkgs.python312Packages.pip
+    pkgs.xclip
+    pkgs.maturin
+    pkgs.niv
+    pkgs.ncdu
+    pkgs.nixfmt-rfc-style
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -326,26 +344,26 @@ in
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
     "${config.xdg.configHome}/nvim" = {
-			source = dotfiles/nvim;
-			recursive = true;
+      source = dotfiles/nvim;
+      recursive = true;
     };
-    
+
     "${config.xdg.configHome}/touchegg" = {
-			source = dotfiles/touchegg;
-			recursive = true;
+      source = dotfiles/touchegg;
+      recursive = true;
     };
 
     "${config.xdg.configHome}/xkeysnail" = {
-			source = dotfiles/xkeysnail;
-			recursive = true;
+      source = dotfiles/xkeysnail;
+      recursive = true;
     };
-		".fish-ai" = {
-			source = fish-ai;
-			recursive = true;
-		};
+    ".fish-ai" = {
+      source = fish-ai;
+      recursive = true;
+    };
     "${config.xdg.configHome}/containers" = {
-			source = dotfiles/containers;
-			recursive = true;
+      source = dotfiles/containers;
+      recursive = true;
     };
 
     # # You can also set the file content immediately.
@@ -354,37 +372,38 @@ in
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
-	programs.fish = {
-		enable = true;
-		plugins = [
-		 {
-		 		name = "fish-ai";
+  programs.fish = {
+    enable = true;
+    plugins = [
+      {
+        name = "fish-ai";
         src = pkgs.fetchFromGitHub {
           owner = "Realiserad";
           repo = "fish-ai";
           rev = "6d489f57704340fd43351dd85b941e8c5c49229f";
-					sha256 = "adT8kQKiO7zD5EFHTjxofpj4sUvpu+nO+Atw/hZs0Gw=";
-        };}
-			{
-				name = "fisher";
-				src = pkgs.fetchFromGitHub {
-					owner = "jorgebucaran";
-					repo = "fisher";
-					rev = "a6bf0e5b9e356d57d666bc6def114f16f1e5e209";
-					sha256 = "VC8LMjwIvF6oG8ZVtFQvo2mGdyAzQyluAGBoK8N2/QM=";
-				};
-			}
-			{
-				name = "nix-env.fish";
-				src = pkgs.fetchFromGitHub {
-					owner = "lilyball";
-					repo = "nix-env.fish";
-					rev = "7b65bd228429e852c8fdfa07601159130a818cfa";
-					sha256 = "RG/0rfhgq6aEKNZ0XwIqOaZ6K5S4+/Y5EEMnIdtfPhk=";
-				};
-			}
-		];
-	};
+          sha256 = "adT8kQKiO7zD5EFHTjxofpj4sUvpu+nO+Atw/hZs0Gw=";
+        };
+      }
+      {
+        name = "fisher";
+        src = pkgs.fetchFromGitHub {
+          owner = "jorgebucaran";
+          repo = "fisher";
+          rev = "a6bf0e5b9e356d57d666bc6def114f16f1e5e209";
+          sha256 = "VC8LMjwIvF6oG8ZVtFQvo2mGdyAzQyluAGBoK8N2/QM=";
+        };
+      }
+      {
+        name = "nix-env.fish";
+        src = pkgs.fetchFromGitHub {
+          owner = "lilyball";
+          repo = "nix-env.fish";
+          rev = "7b65bd228429e852c8fdfa07601159130a818cfa";
+          sha256 = "RG/0rfhgq6aEKNZ0XwIqOaZ6K5S4+/Y5EEMnIdtfPhk=";
+        };
+      }
+    ];
+  };
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
@@ -403,16 +422,15 @@ in
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
-		SHELL = "fish";
+    SHELL = "fish";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-	programs.git.enable = true;
-	programs.git.userEmail = "jrobdikeman@gmail.com";
-	programs.git.userName = "john";
-
+  programs.git.enable = true;
+  programs.git.userEmail = "jrobdikeman@gmail.com";
+  programs.git.userName = "john";
 
   # Systemd service to auto-start xkeysnail
   systemd.user.services.xkeysnail = {
@@ -423,8 +441,8 @@ in
 
     Service = {
       Type = "simple";
-			# needed to edit sudoers to remove the need for a password for this program
-			# https://stackoverflow.com/questions/21659637/how-to-fix-sudo-no-tty-present-and-no-askpass-program-specified-error
+      # needed to edit sudoers to remove the need for a password for this program
+      # https://stackoverflow.com/questions/21659637/how-to-fix-sudo-no-tty-present-and-no-askpass-program-specified-error
       ExecStart = "sudo ${pkgs.xkeysnail}/bin/xkeysnail --quiet ${~/.config/xkeysnail/config.py}";
       Restart = "on-failure";
       # Run with sudo (required for key grabbing)
@@ -436,8 +454,8 @@ in
     };
   };
 
-	# Disable GNOME's Super key overlay (to avoid conflicts)
-	home.activation.ensureXkeysnail = lib.hm.dag.entryAfter ["writeBoundary"] ''
-		${pkgs.glib}/bin/gsettings set org.gnome.mutter overlay-key "" 
-	'';
+  # Disable GNOME's Super key overlay (to avoid conflicts)
+  home.activation.ensureXkeysnail = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    		${pkgs.glib}/bin/gsettings set org.gnome.mutter overlay-key "" 
+    	'';
 }
