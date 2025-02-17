@@ -322,7 +322,8 @@ in
     pkgs.niv
     pkgs.ncdu
     pkgs.nixfmt-rfc-style
-		pkgs.obsidian
+    pkgs.obsidian
+    pkgs.kitty
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -370,6 +371,19 @@ in
       source = dotfiles/nixpkgs;
       recursive = true;
     };
+    ".local/share/fonts/CartographMonoCFNerdFont-Regular.ttf" = {
+      source =
+        let
+          repo = pkgs.fetchFromGitHub {
+            owner = "johndikeman";
+            repo = "rando-stuff";
+            rev = "CartographMonoCFNerdFont"; # Replace with actual commit hash
+            sha256 = "hdLBoorIPTR5pcHKbN+Xu1J5RxTH/eBU65Ns/q+vV/Y="; # Replace with actual hash
+          };
+        in
+        "${repo}/CartographMonoCFNerdFont-Regular.ttf";
+    };
+
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
