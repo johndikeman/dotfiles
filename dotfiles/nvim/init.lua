@@ -27,7 +27,7 @@ vim.g.mapleader = " "
 
 require("lazy").setup({
 	{ "lewis6991/gitsigns.nvim" },
-	{ "sainnhe/gruvbox-material" },
+	{ "ellisonleao/gruvbox.nvim",         priority = 1000,  config = true },
 	{ "numToStr/FTerm.nvim" },
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
@@ -157,7 +157,12 @@ require("lazy").setup({
 })
 
 -- gruvbox
-vim.cmd("colorscheme gruvbox-material")
+require("gruvbox").setup({
+	contrast = "hard"
+})
+
+vim.o.background = "dark"
+vim.cmd("colorscheme gruvbox")
 
 -- tell vim-svelte-plugin to enable typescript syntax in svelte files
 vim.g.vim_svelte_plugin_use_typescript = 1
@@ -180,7 +185,7 @@ local servers = {
 			enableTsPlugin = true,
 		},
 	},
-	nil_ls = { [ 'nil' ] = { formatting = { command = { "nixfmt" } } } }
+	nil_ls = { ['nil'] = { formatting = { command = { "nixfmt" } } } }
 }
 
 local mason_lspconfig = require("mason-lspconfig")
