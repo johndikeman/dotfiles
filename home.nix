@@ -322,7 +322,7 @@ in
     pkgs.niv
     pkgs.ncdu
     pkgs.nixfmt-rfc-style
-		pkgs.obsidian
+    pkgs.obsidian
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -378,6 +378,8 @@ in
   };
   programs.fish = {
     enable = true;
+    generateCompletions = true;
+    interactiveShellInit = "theme_gruvbox dark hard";
     plugins = [
       {
         name = "fish-ai";
@@ -403,6 +405,15 @@ in
           owner = "lilyball";
           repo = "nix-env.fish";
           rev = "7b65bd228429e852c8fdfa07601159130a818cfa";
+          sha256 = "RG/0rfhgq6aEKNZ0XwIqOaZ6K5S4+/Y5EEMnIdtfPhk=";
+        };
+      }
+      {
+        name = "fish-gruvbox";
+        src = pkgs.fetchFromGitHub {
+          owner = "Jomik";
+          repo = "fish-gruvbox";
+          rev = "master";
           sha256 = "RG/0rfhgq6aEKNZ0XwIqOaZ6K5S4+/Y5EEMnIdtfPhk=";
         };
       }
