@@ -323,6 +323,7 @@ in
     pkgs.ncdu
     pkgs.nixfmt-rfc-style
     pkgs.obsidian
+		pkgs.tmux
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -376,6 +377,46 @@ in
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
+
+  programs.tmux = {
+    enable = true;
+		shell = "/home/dikeman/.nix-profile/bin/fish";
+    prefix = "C-a";
+    keyMode = "vi";  # Optional: Use vi-style key bindings
+    baseIndex = 1;   # Start window numbering at 1
+    escapeTime = 0;  # Faster escape sequence detection
+
+    plugins = with pkgs.tmuxPlugins; [
+      sensible       # Common sensbile defaults
+      {
+        plugin = catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavour 'mocha'  # Closest to Gruvbox dark
+        '';
+      }
+    ];
+
+    extraConfig = ''
+      # Improve colors
+      set -g default-terminal "screen-256color"
+      set -ag terminal-overrides ",xterm-256color:RGB"
+
+      # Gruvbox-inspired color scheme (fallback if Catppuccin isn't preferred)
+      set -g pane-border-style "fg=#665c54"
+      set -g pane-active-border-style "fg=#a89984"
+      set -g status-style "bg=#1d2021,fg=#a89984"
+      set -g window-status-current-style "bg=#3c3836,fg=#a89984"
+      set -g message-style "bg=#3c3836,fg=#a89984"
+      set -g status-right "#[bg=#1d2021,fg=#a89984] %H:%M | %d-%b-%y "
+
+      # Mouse support
+      set -g mouse on
+
+      # Reload config with r
+      bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
+    '';
+  };
+
   programs.fish = {
     enable = true;
     generateCompletions = true;
