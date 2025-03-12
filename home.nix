@@ -330,6 +330,7 @@ in
 		pkgs.mullvad-vpn
 		pkgs.uv
 		pkgs.terraform
+		pkgs.black
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
