@@ -2,9 +2,11 @@
   config,
   lib,
   pkgs,
+  # nixGL,
   ...
 }:
 let
+  sources = import ./nix/sources.nix;
   # what i'm doing to try to get this stupid fish-ai thing to work is insane
   src = pkgs.fetchFromGitHub {
     owner = "Realiserad";
@@ -323,16 +325,30 @@ in
     pkgs.ncdu
     pkgs.nixfmt-rfc-style
     pkgs.obsidian
-		pkgs.tmux
-		pkgs.google-cloud-sdk
-		pkgs.libevent # dependencies for playwright for some reason
-		pkgs.flite
-		pkgs.mullvad-vpn
-		pkgs.uv
-		pkgs.terraform
-		pkgs.black
-		pkgs.qbittorrent
-    # # It is sometimes useful to fine-tune packages, for example, by applying
+    pkgs.tmux
+    pkgs.google-cloud-sdk
+    pkgs.libevent # dependencies for playwright for some reason
+    pkgs.flite
+    pkgs.mullvad-vpn
+    pkgs.uv
+    pkgs.terraform
+    pkgs.black
+    pkgs.qbittorrent
+    pkgs.vlc
+    pkgs.godot_4
+    (import sources.nixGL { inherit pkgs; }).nixVulkanIntel
+    # nixGL.nixVulkanIntel
+    # (pkgs.godot_4.overrideAttrs (old: rec {
+    #   version = "4.5-dev1";
+    #   commitHash = "97241ffea6df579347653a8ce0c75db44e28f0c8"; # Replace with the actual commit hash
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "godotengine";
+    #     repo = "godot";
+    #     rev = commitHash;
+    #     sha256 = "adT8kQKiO7zD5EFHTjxofpj4sUvpu+nO+Atw/hZs0Gw="; # Replace with the actual source hash
+    #   };
+    # }))
+    # # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
@@ -388,14 +404,14 @@ in
 
   programs.tmux = {
     enable = true;
-		shell = "/home/dikeman/.nix-profile/bin/fish";
+    shell = "/home/dikeman/.nix-profile/bin/fish";
     prefix = "C-a";
-    keyMode = "vi";  # Optional: Use vi-style key bindings
-    baseIndex = 1;   # Start window numbering at 1
-    escapeTime = 0;  # Faster escape sequence detection
+    keyMode = "vi"; # Optional: Use vi-style key bindings
+    baseIndex = 1; # Start window numbering at 1
+    escapeTime = 0; # Faster escape sequence detection
 
     plugins = with pkgs.tmuxPlugins; [
-      sensible       # Common sensbile defaults
+      sensible # Common sensbile defaults
       {
         plugin = catppuccin;
         extraConfig = ''

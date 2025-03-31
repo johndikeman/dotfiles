@@ -46,5 +46,17 @@
         "type": "tarball",
         "url": "https://github.com/nix-community/poetry2nix/archive/75d0515332b7ca269f6d7abfd2c44c47a7cbca7b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+		"nixGL": {
+        "branch": "main",
+        "description": "A wrapper tool for nix OpenGL application [maintainer=@guibou]",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "nixGL",
+        "rev": "310f8e49a149e4c9ea52f1adf70cdc768ec53f8a",
+        "sha256": "1crnbv3mdx83xjwl2j63rwwl9qfgi2f1lr53zzjlby5lh50xjz4n",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/nixGL/archive/310f8e49a149e4c9ea52f1adf70cdc768ec53f8a.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
