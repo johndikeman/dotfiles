@@ -337,6 +337,8 @@ in
     pkgs.vlc
     pkgs.godot_4
     (import sources.nixGL { inherit pkgs; }).nixVulkanIntel
+		pkgs.blender
+		pkgs.anki
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";
