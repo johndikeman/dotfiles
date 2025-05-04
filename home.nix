@@ -337,6 +337,7 @@ in
     pkgs.vlc
     pkgs.godot_4
     (import sources.nixGL { inherit pkgs; }).nixVulkanIntel
+    (import sources.nixGL { inherit pkgs; }).nixGLIntel
 		pkgs.blender
 		pkgs.anki
     # nixGL.nixVulkanIntel
