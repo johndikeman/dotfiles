@@ -27,7 +27,7 @@ vim.g.mapleader = " "
 
 require("lazy").setup({
 	{ "lewis6991/gitsigns.nvim" },
-	{ "ellisonleao/gruvbox.nvim",         priority = 1000, config = true },
+	{ "ellisonleao/gruvbox.nvim",         priority = 1000,  config = true },
 	{ "numToStr/FTerm.nvim" },
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
@@ -154,10 +154,6 @@ require("lazy").setup({
 		"natecraddock/workspaces.nvim",
 		tag = "1.0",
 	},
-	{
-		'echasnovski/mini.animate',
-		version = false
-	},
 })
 
 -- gruvbox
@@ -174,8 +170,6 @@ vim.g.vim_svelte_plugin_use_typescript = 1
 -- format lua files
 vim.keymap.set("n", "<leader>f", [[<cmd>lua require("stylua-nvim").format_file()<CR>]], opts)
 
--- animations
-require('mini.animate').setup()
 -- requiring mason first because he told me to https://github.com/williamboman/mason-lspconfig.nvim
 require("mason").setup()
 
@@ -496,7 +490,7 @@ require("marks").setup({
 
 require("workspaces").setup({
 
-	auto_open = true,
+	auto_open = false,
 	hooks = {
 		add = {},
 		remove = {},

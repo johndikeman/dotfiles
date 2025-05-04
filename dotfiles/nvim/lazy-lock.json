@@ -27,6 +27,5 @@
   "trouble.nvim": { "branch": "main", "commit": "40c5317a6e90fe3393f07b0fee580d9e93a216b4" },
   "vim-svelte-plugin": { "branch": "master", "commit": "fcc81292340c0969e83131021c5a6c9aa0c741dc" },
   "vim-vsnip": { "branch": "master", "commit": "02a8e79295c9733434aab4e0e2b8c4b7cea9f3a9" },
-  "workspaces.nvim": { "branch": "master", "commit": "88a477c8bc751dcb8fb2767b24484c5b244424eb" },
-	"mini.animate": {"branch": "main", "commit": "9b518c39c0e25b7b5e4e61db3f1407f7b4889f4e"}
+  "workspaces.nvim": { "branch": "master", "commit": "88a477c8bc751dcb8fb2767b24484c5b244424eb" }
 }
