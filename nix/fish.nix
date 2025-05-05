@@ -48,7 +48,7 @@ let
 
     # patches = [ ./01-remove-benchmark-flags.patch ];
 
-    cargoDeps = pkgs.rustPlatform.fetchCargoTarball {
+    cargoDeps = pkgs.rustPlatform.fetchCargoVendor{
       inherit src;
       name = "${pname}-${version}";
       hash = "sha256-j9VAWV/AG+u52ji+erNUrdGX8kHlsOuYiBYbHzD0y8k=";
