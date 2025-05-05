@@ -47,7 +47,6 @@ vim.keymap.set({ "n", "t" }, "<Leader>i", '<CMD>lua require("FTerm").toggle()<CR
 local parser_install_dir = vim.fn.stdpath("cache") .. "/treesitters"
 vim.fn.mkdir(parser_install_dir, "p")
 vim.opt.runtimepath:append(parser_install_dir)
-require("nvim-treesitter.configs").setup()
 
 -- telescope shit!!!
 local builtin = require("telescope.builtin")
