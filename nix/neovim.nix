@@ -119,6 +119,8 @@ in
                       missing = false,
                     },
                   })
+
+                require("config")
     '';
     enable = true;
     vimAlias = true;
