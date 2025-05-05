@@ -73,6 +73,11 @@ in
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+
+	home.packages = [
+		pkgs.nil
+	];
+
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
       lazy-nvim
