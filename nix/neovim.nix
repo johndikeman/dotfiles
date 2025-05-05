@@ -13,9 +13,9 @@ let
     version = "2025-04-08";
     src = pkgs.fetchFromGitHub {
       owner = "MunifTanjim";
-      repo = "prettier.mvim";
+      repo = "prettier.nvim";
       rev = "ca6452de1accc68a1062e72f58679caa488b501a";
-      sha256 = "1rvlx21kw8865dg6q97hx9i2s1n8mn1nyhn0m7dkx625pghsx3js";
+      hash = "sha256-pRGvsH9erN2rS3SkEGpz9F53W4HYYc4fqu/8CxE45SA=";
     };
     meta.hydraPlatforms = [ ];
   };
@@ -27,7 +27,7 @@ let
       owner = "leafOfTree";
       repo = "vim-svelte-plugin";
       rev = "f80ff67a94e3ac279fe55ecdf55ad7342f4a5228";
-      sha256 = "1rvlx21kw8865dg6q97hx9i2s1n8mn1nyhn0m7dkx625pghsx3js";
+      hash = "sha256-iOingO5LYAtcqXJliOvNtQPe1xDsHlCwmLTvdkkOlhU=";
     };
     meta.hydraPlatforms = [ ];
   };
@@ -39,7 +39,7 @@ let
       owner = "ckipp01";
       repo = "stylua-nvim";
       rev = "ce59a353f02938cba3e0285e662fcd3901cd270f";
-      sha256 = "1rvlx21kw8865dg6q97hx9i2s1n8mn1nyhn0m7dkx625pghsx3js";
+      hash = "sha256-GfqzyJTpwrh1NZqA7rVQ8TW6CYQL7F0/lUjZL5wZyeI=";
     };
     meta.hydraPlatforms = [ ];
     dependencies = [ pkgs.stylua ];
@@ -52,7 +52,7 @@ let
       owner = "gsuuon";
       repo = "model.nvim";
       rev = "aac9525e0ce9fa074807f43f2537ad73b88010a5";
-      sha256 = "1rvlx21kw8865dg6q97hx9i2s1n8mn1nyhn0m7dkx625pghsx3js";
+      hash = "sha256-fsXn/MGP9NAXBXmTlW9y/QUNqKkKSKOJhIfNGg/PZNg=";
     };
     meta.hydraPlatforms = [ ];
   };
@@ -64,7 +64,7 @@ let
       owner = "natecraddock";
       repo = "workspaces.nvim";
       rev = "55a1eb6f5b72e07ee8333898254e113e927180ca";
-      sha256 = "1rvlx21kw8865dg6q97hx9i2s1n8mn1nyhn0m7dkx625pghsx3js";
+      hash = "sha256-a3f0NUYooMxrZEqLer+Duv6/ktq5MH2qUoFHD8z7fZA=";
     };
     meta.hydraPlatforms = [ ];
   };
