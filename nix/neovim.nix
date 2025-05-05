@@ -8,7 +8,7 @@
 let
 
   sources = import ./sources.nix;
-  prettier-nvim = pkgs.buildVimPlugin {
+  prettier-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "prettier.nvim";
     version = "2025-04-08";
     src = pkgs.fetchFromGitHub {
@@ -20,7 +20,7 @@ let
     meta.hydraPlatforms = [ ];
   };
 
-  vim-svelte-plugin = pkgs.buildVimPlugin {
+  vim-svelte-plugin = pkgs.vimUtils.buildVimPlugin {
     pname = "vim-svelte-plugin";
     version = "2025-04-07";
     src = pkgs.fetchFromGitHub {
@@ -32,7 +32,7 @@ let
     meta.hydraPlatforms = [ ];
   };
 
-  stylua-nvim = pkgs.buildVimPlugin {
+  stylua-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "stylua-nvim";
     version = "2022-05-05";
     src = pkgs.fetchFromGitHub {
@@ -45,7 +45,7 @@ let
     dependencies = [ pkgs.stylua ];
   };
 
-  model-nvim = pkgs.buildVimPlugin {
+  model-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "model.nvim";
     version = "2025-01-25";
     src = pkgs.fetchFromGitHub {
@@ -57,7 +57,7 @@ let
     meta.hydraPlatforms = [ ];
   };
 
-  workspaces-nvim = pkgs.buildVimPlugin {
+  workspaces-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "workspaces.nvim";
     version = "2024-10-08";
     src = pkgs.fetchFromGitHub {
@@ -70,7 +70,6 @@ let
   };
 in
 {
-  home.packages = [ pkgs.neovim ];
   home.sessionVariables = {
     EDITOR = "nvim";
   };
@@ -112,7 +111,7 @@ in
                         }
                       },
                     dev = {
-                      path = "${pkgs.vimUtils.packDir config.home-manager.users.USERNAME.programs.neovim.finalPackage.passthru.packpathDirs}/pack/myNeovimPackages/start",
+                      path = "${pkgs.vimUtils.packDir config.programs.neovim.finalPackage.passthru.packpathDirs}/pack/myNeovimPackages/start",
       								patterns = {""},
                     },
                     install = {
@@ -122,7 +121,6 @@ in
                   })
     '';
     enable = true;
-    package = pkgs.neovim-nightly;
     vimAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;

@@ -9,7 +9,7 @@ let
   sources = import ./nix/sources.nix;
 in
 {
-  imports = [ ./nix/fish.nix ];
+  imports = [ ./nix/fish.nix ./nix/neovim.nix];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "dikeman";
