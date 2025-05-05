@@ -30,7 +30,7 @@ in
     # # "Hello, world!" when run.
     # pkgs.hello
     pkgs.gh
-    pkgs.nodejs_23
+    pkgs.nodejs_24
     pkgs.git
     pkgs.cargo
     pkgs.rustc
