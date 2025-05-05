@@ -120,7 +120,7 @@ in
                     },
                   })
 
-                require("config")
+                require "config"
     '';
     enable = true;
     vimAlias = true;
