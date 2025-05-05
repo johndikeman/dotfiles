@@ -1,21 +1,165 @@
 return {
-	{ "lewis6991/gitsigns.nvim" },
-	{ "ellisonleao/gruvbox.nvim",         priority = 1000,  config = true, opts = {contrast = "hard"}},
+	{ "lewis6991/gitsigns.nvim",          opts = {} },
+	{ "ellisonleao/gruvbox.nvim",         priority = 1000, config = true, opts = { contrast = "hard" } },
 	{ "numToStr/FTerm.nvim" },
-	{ "williamboman/mason.nvim" },
-	{ "williamboman/mason-lspconfig.nvim" },
-	{ "neovim/nvim-lspconfig" },
-	{ "hrsh7th/cmp-nvim-lsp" }, -- LSP source for nvim-cmp
+	{
+		'neovim/nvim-lspconfig',
+		dependencies = { 'saghen/blink.cmp' },
+
+		-- example using `opts` for defining servers
+		opts = {
+			servers = {
+				lua_ls = {},
+				pyright = {},
+				rust_analyzer = {},
+				ts_ls = {},
+				svelte = {
+					svelte = {
+						enableTsPlugin = true,
+					},
+				},
+				nil_ls = { ['nil'] = { formatting = { command = { "nixfmt" } } } },
+				godot = {
+					name = "godot",
+					cmd = vim.lsp.rpc.connect("127.0.0.1", "6005"),
+				}
+			}
+		},
+		config = function(_, opts)
+			local lspconfig = require('lspconfig')
+			for server, config in pairs(opts.servers) do
+				-- passing config.capabilities to blink.cmp merges with the capabilities in your
+				-- `opts[server].capabilities, if you've defined it
+				config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+				lspconfig[server].setup(config)
+			end
+		end
+	},
 	{ "mrcjkb/rustaceanvim" }, -- configuring LSP for rust
-	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-path" },
-	{ "hrsh7th/cmp-cmdline" },
-	{ "hrsh7th/nvim-cmp" }, -- autocomplete
-	{ "hrsh7th/cmp-vsnip" },
-	{ "hrsh7th/vim-vsnip" },
-	{ "nvim-treesitter/nvim-treesitter" },
+	{
+		'saghen/blink.cmp',
+		-- optional: provides snippets for the snippet source
+		dependencies = { 'rafamadriz/friendly-snippets' },
+
+		-- use a release tag to download pre-built binaries
+		version = '1.*',
+		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+		-- build = 'cargo build --release',
+		-- If you use nix, you can build from source using latest nightly rust with:
+		-- build = 'nix run .#build-plugin',
+
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+			-- 'super-tab' for mappings similar to vscode (tab to accept)
+			-- 'enter' for enter to accept
+			-- 'none' for no mappings
+			--
+			-- All presets have the following mappings:
+			-- C-space: Open menu or open docs if already open
+			-- C-n/C-p or Up/Down: Select next/previous item
+			-- C-e: Hide menu
+			-- C-k: Toggle signature help (if signature.enabled = true)
+			--
+			-- See :h blink-cmp-config-keymap for defining your own keymap
+			keymap = { preset = 'enter' },
+
+			appearance = {
+				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+				-- Adjusts spacing to ensure icons are aligned
+				nerd_font_variant = 'mono'
+			},
+
+			-- (Default) Only show the documentation popup when manually triggered
+			completion = { documentation = { auto_show = false } },
+
+			-- Default list of enabled providers defined so that you can extend it
+			-- elsewhere in your config, without redefining it, due to `opts_extend`
+			sources = {
+				default = { 'lsp', 'path', 'snippets', 'buffer' },
+			},
+
+			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+			-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+			-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+			--
+			-- See the fuzzy documentation for more information
+			fuzzy = { implementation = "prefer_rust_with_warning" }
+		},
+		opts_extend = { "sources.default" }
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		opts = {
+			ensure_installed = {
+				"lua",
+				"vim",
+				"vimdoc",
+				"query",
+				"markdown",
+				"markdown_inline",
+				"python",
+				"rust",
+				"gdscript",
+				"svelte",
+				"typescript",
+				"javascript",
+				"css",
+			},
+			highlight = {
+				enable = true,
+				-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+				-- Using this option may slow down your editor, and you may see some duplicate highlights.
+				-- Instead of true it can also be a list of languages
+				additional_vim_regex_highlighting = true,
+			},
+		}
+	},
 	{ "jose-elias-alvarez/null-ls.nvim" }, -- some lsp thing for prettier plugin to work
-	{ "MunifTanjim/prettier.nvim" },
+	{
+		"MunifTanjim/prettier.nvim",
+		opts = {
+			bin = "prettierd", -- or `'prettierd'` (v0.23.3+)
+			filetypes = {
+				"css",
+				"graphql",
+				"html",
+				"javascript",
+				"javascriptreact",
+				"json",
+				"less",
+				"markdown",
+				"scss",
+				"typescript",
+				"typescriptreact",
+				"yaml",
+				"svelte",
+				"lua",
+			},
+			cli_options = {
+				arrow_parens = "always",
+				bracket_spacing = true,
+				bracket_same_line = false,
+				embedded_language_formatting = "auto",
+				end_of_line = "lf",
+				html_whitespace_sensitivity = "css",
+				-- jsx_bracket_same_line = false,
+				jsx_single_quote = false,
+				print_width = 80,
+				prose_wrap = "preserve",
+				quote_props = "as-needed",
+				semi = true,
+				single_attribute_per_line = false,
+				single_quote = false,
+				tab_width = 2,
+				trailing_comma = "es5",
+				use_tabs = false,
+				vue_indent_script_and_style = false,
+			},
+		}
+	},
 	{ "nvim-lua/plenary.nvim" },
 	{ "folke/lsp-colors.nvim" },
 	{
@@ -57,7 +201,19 @@ return {
 		},
 	},
 	{ "leafOfTree/vim-svelte-plugin" },
-	{ "nvim-telescope/telescope.nvim", tag = "0.1.8" },
+	{
+		"nvim-telescope/telescope.nvim",
+		opts = {
+			extensions = {
+				workspaces = {
+					-- keep insert mode after selection in the picker, default is false
+					keep_insert = true,
+					-- Highlight group used for the path in the picker, default is "String"
+					path_hl = "String",
+				},
+			},
+		}
+	},
 	{ "ckipp01/stylua-nvim" },
 
 	{
@@ -114,17 +270,74 @@ return {
 	{
 		"numToStr/Comment.nvim",
 		opts = {
-			-- add any options here
+			pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 		},
 	},
-	{ "JoosepAlviste/nvim-ts-context-commentstring" },
+	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		opts = {
+			enable_autocmd = false,
+		}
+	},
 	{
 		"chentoast/marks.nvim",
 		event = "VeryLazy",
-		opts = {},
+		opts = {
+			-- whether to map keybinds or not. default true
+			default_mappings = false,
+			-- which builtin marks to show. default {}
+			builtin_marks = { ".", "<", ">", "^" },
+			-- whether movements cycle back to the beginning/end of buffer. default true
+			cyclic = true,
+			-- whether the shada file is updated after modifying uppercase marks. default false
+			force_write_shada = false,
+			-- how often (in ms) to redraw signs/recompute mark positions.
+			-- higher values will have better performance but may cause visual lag,
+			-- while lower values may cause performance penalties. default 150.
+			refresh_interval = 250,
+			-- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
+			-- marks, and bookmarks.
+			-- can be either a table with all/none of the keys, or a single number, in which case
+			-- the priority applies to all marks.
+			-- default 10.
+			sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
+			-- disables mark tracking for specific filetypes. default {}
+			excluded_filetypes = {},
+			-- disables mark tracking for specific buftypes. default {}
+			excluded_buftypes = {},
+			-- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
+			-- sign/virttext. Bookmarks can be used to group together positions and quickly move
+			-- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
+			-- default virt_text is "".
+			bookmark_0 = {
+				sign = "☭",
+				virt_text = "yo",
+				-- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+				-- defaults to false.
+				annotate = true,
+			},
+			mappings = {
+				next_bookmark0 = "mn",
+				prev_bookmark0 = "mN",
+				set_bookmark0 = "mm",
+				delete_bookmark = "dm",
+				delete_bookmark0 = "dma",
+			},
+		},
 	},
 	{
 		"natecraddock/workspaces.nvim",
 		tag = "1.0",
+		opts = {
+
+			auto_open = false,
+			hooks = {
+				add = {},
+				remove = {},
+				rename = {},
+				open_pre = {},
+				open = { "Telescope find_files" },
+			},
+		}
 	},
 }

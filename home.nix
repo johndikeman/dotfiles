@@ -29,7 +29,6 @@ in
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
-    pkgs.neovim
     pkgs.gh
     pkgs.nodejs_23
     pkgs.git
@@ -92,10 +91,6 @@ in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
-    "${config.xdg.configHome}/nvim" = {
-      source = dotfiles/nvim;
-      recursive = true;
-    };
 
     "${config.xdg.configHome}/touchegg" = {
       source = dotfiles/touchegg;
