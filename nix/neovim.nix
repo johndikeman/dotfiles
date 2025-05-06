@@ -18,6 +18,7 @@ let
       hash = "sha256-pRGvsH9erN2rS3SkEGpz9F53W4HYYc4fqu/8CxE45SA=";
     };
     meta.hydraPlatforms = [ ];
+		dependencies = [ pkgs.vimPlugins.nvim-lspconfig ];
   };
 
   vim-svelte-plugin = pkgs.vimUtils.buildVimPlugin {

@@ -51,7 +51,7 @@ let
     cargoDeps = pkgs.rustPlatform.fetchCargoVendor{
       inherit src;
       name = "${pname}-${version}";
-      hash = "";
+      hash = "sha256-4mwhe+e2xgFMYZAv+Nblj3AAnDinLvuGGYs8KAHT2Sw=";
     };
 
     nativeBuildInputs = [
@@ -126,6 +126,25 @@ let
         src = pythonPackages.fetchPypi {
           inherit pname version;
           sha256 = "3Vvkpy2KKZXD9YPPgr880alUTP2r8tIllbZ6/wc0lmY=";
+        };
+      })
+      (pythonPackages.buildPythonPackage rec {
+        pname = "eval_type_backport";
+        version = "0.2.2";
+        format = "setuptools";
+        src = pythonPackages.fetchPypi {
+          inherit pname version;
+          sha256 = "sha256-8FdrTPAeu1vTWNAjFNMYRq9eB2eDh0huLHmK8OfYScE=";
+        };
+				dependencies = [ pythonPackages.pip ];
+      })
+      (pythonPackages.buildPythonPackage rec {
+        pname = "typing-inspect";
+        version = "0.9.0";
+        format = "setuptools";
+        src = pythonPackages.fetchPypi {
+          inherit pname version;
+          sha256 = "";
         };
       })
       pythonPackages.python-dateutil
