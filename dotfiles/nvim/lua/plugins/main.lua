@@ -1,10 +1,10 @@
 return {
-	{ "lewis6991/gitsigns.nvim",  opts = {} },
+	{ "lewis6991/gitsigns.nvim", opts = {} },
 	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = { contrast = "hard" } },
 	{ "numToStr/FTerm.nvim" },
 	{
-		'neovim/nvim-lspconfig',
-		dependencies = { 'saghen/blink.cmp' },
+		"neovim/nvim-lspconfig",
+		dependencies = { "saghen/blink.cmp" },
 
 		-- example using `opts` for defining servers
 		opts = {
@@ -18,26 +18,26 @@ return {
 						enableTsPlugin = true,
 					},
 				},
-				nil_ls = { ['nil'] = { formatting = { command = { "nixfmt" } } } },
-				gdscript = {}
-			}
+				nil_ls = { ["nil"] = { formatting = { command = { "nixfmt" } } } },
+				gdscript = {},
+			},
 		},
 		config = function(_, opts)
-			local lspconfig = require('lspconfig')
+			local lspconfig = require("lspconfig")
 			for server, config in pairs(opts.servers) do
 				-- passing config.capabilities to blink.cmp merges with the capabilities in your
 				-- `opts[server].capabilities, if you've defined it
-				config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+				config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
 				lspconfig[server].setup(config)
 			end
-		end
+		end,
 	},
 	{ "mrcjkb/rustaceanvim" }, -- configuring LSP for rust
 	{
-		'saghen/blink.cmp',
+		"saghen/blink.cmp",
 
 		-- use a release tag to download pre-built binaries
-		version = '1.*',
+		version = "1.*",
 		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
 		-- build = 'cargo build --release',
 		-- If you use nix, you can build from source using latest nightly rust with:
@@ -58,12 +58,12 @@ return {
 			-- C-k: Toggle signature help (if signature.enabled = true)
 			--
 			-- See :h blink-cmp-config-keymap for defining your own keymap
-			keymap = { preset = 'enter' },
+			keymap = { preset = "enter" },
 
 			appearance = {
 				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 				-- Adjusts spacing to ensure icons are aligned
-				nerd_font_variant = 'mono'
+				nerd_font_variant = "mono",
 			},
 
 			-- (Default) Only show the documentation popup when manually triggered
@@ -72,7 +72,7 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { 'lsp', 'path', 'snippets', 'buffer' },
+				default = { "lsp", "path", "snippets", "buffer" },
 			},
 
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -80,9 +80,9 @@ return {
 			-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
 			--
 			-- See the fuzzy documentation for more information
-			fuzzy = { implementation = "prefer_rust_with_warning" }
+			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},
-		opts_extend = { "sources.default" }
+		opts_extend = { "sources.default" },
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -110,7 +110,7 @@ return {
 				-- Instead of true it can also be a list of languages
 				additional_vim_regex_highlighting = true,
 			},
-		}
+		},
 	},
 	{ "nvim-lua/plenary.nvim" },
 	{ "folke/lsp-colors.nvim" },
@@ -164,7 +164,7 @@ return {
 					path_hl = "String",
 				},
 			},
-		}
+		},
 	},
 	{ "ckipp01/stylua-nvim" },
 
@@ -183,9 +183,9 @@ return {
 		ft = "mchat",
 
 		keys = {
-			{ "<C-m>d",       ":Mdelete<cr>", mode = "n" },
-			{ "<C-m>s",       ":Mselect<cr>", mode = "n" },
-			{ "<C-m><space>", ":Mchat<cr>",   mode = "n" },
+			{ "<C-m>d", ":Mdelete<cr>", mode = "n" },
+			{ "<C-m>s", ":Mselect<cr>", mode = "n" },
+			{ "<C-m><space>", ":Mchat<cr>", mode = "n" },
 		},
 
 		config = function()
@@ -199,10 +199,10 @@ return {
 				default_prompt = {
 					provider = deepseek,
 					options = {
-						show_reasoning = true
+						show_reasoning = true,
 					},
 					params = {
-						model = "deepseek-reasoner"
+						model = "deepseek-reasoner",
 					},
 					mode = mode.INSERT_OR_REPLACE,
 					builder = function(input, context)
@@ -214,8 +214,8 @@ return {
 				secrets = {
 					DEEPSEEK_API_KEY = function()
 						return require("keys")
-					end
-				}
+					end,
+				},
 			})
 		end,
 	},
@@ -224,13 +224,13 @@ return {
 		opts = {
 			pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 		},
-		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" }
+		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
 	},
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		opts = {
 			enable_autocmd = false,
-		}
+		},
 	},
 	{
 		"chentoast/marks.nvim",
@@ -291,7 +291,7 @@ return {
 				open_pre = {},
 				open = { "Telescope find_files" },
 			},
-		}
+		},
 	},
 	{
 		"stevearc/conform.nvim",
@@ -319,11 +319,10 @@ return {
 				python = { "black" },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				svelte = { "prettierd", "prettier", stop_after_first = true },
-				nix = { "nixfmt" }
+				nix = { "nixfmt" },
 			},
 			-- Set default options
-			default_format_opts = {
-			},
+			default_format_opts = {},
 			-- Set up format-on-save
 			format_on_save = { timeout_ms = 500 },
 			-- Customize formatters
@@ -338,5 +337,5 @@ return {
 			-- If you want the formatexpr, here is the place to set it
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
-	}
+	},
 }

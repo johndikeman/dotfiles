@@ -96,6 +96,7 @@ in
     pkgs.typescript-language-server
     pkgs.svelte-language-server
     pkgs.ripgrep # dependency for the telescope live-grep finder
+    pkgs.stylua
   ];
 
   programs.neovim = {
