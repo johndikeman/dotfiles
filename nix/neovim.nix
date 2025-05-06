@@ -8,19 +8,18 @@
 let
 
   sources = import ./sources.nix;
-  prettier-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "prettier.nvim";
-    version = "2025-04-08";
+
+  conform-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "conform.nvim";
+    version = "2025-04-20";
     src = pkgs.fetchFromGitHub {
-      owner = "MunifTanjim";
-      repo = "prettier.nvim";
-      rev = "ca6452de1accc68a1062e72f58679caa488b501a";
-      hash = "sha256-pRGvsH9erN2rS3SkEGpz9F53W4HYYc4fqu/8CxE45SA=";
+      owner = "stevearc";
+      repo = "conform.nvim";
+      rev = "372fc521f8421b7830ea6db4d6ea3bae1c77548c";
+      hash = "sha256-J/GKqn2VHv/ydaFXWCFduV2B7iwZzHtUvFArszxf2Cw=";
     };
     meta.hydraPlatforms = [ ];
-		dependencies = [ pkgs.vimPlugins.nvim-lspconfig ];
   };
-
   vim-svelte-plugin = pkgs.vimUtils.buildVimPlugin {
     pname = "vim-svelte-plugin";
     version = "2025-04-07";
@@ -109,8 +108,6 @@ in
       blink-cmp
       rustaceanvim
       nvim-treesitter
-      null-ls-nvim
-      prettier-nvim
       plenary-nvim
       lsp-colors-nvim
       trouble-nvim
@@ -122,6 +119,7 @@ in
       nvim-ts-context-commentstring
       marks-nvim
 			workspaces-nvim
+			conform-nvim
     ];
     extraLuaConfig = ''
                   vim.g.mapleader = " " -- Need to set leader before lazy for correct keybindings

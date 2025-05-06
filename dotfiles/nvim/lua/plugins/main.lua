@@ -1,6 +1,6 @@
 return {
-	{ "lewis6991/gitsigns.nvim",          opts = {} },
-	{ "ellisonleao/gruvbox.nvim",         priority = 1000, config = true, opts = { contrast = "hard" } },
+	{ "lewis6991/gitsigns.nvim",  opts = {} },
+	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = { contrast = "hard" } },
 	{ "numToStr/FTerm.nvim" },
 	{
 		'neovim/nvim-lspconfig',
@@ -112,49 +112,6 @@ return {
 			},
 		}
 	},
-	{ "jose-elias-alvarez/null-ls.nvim" }, -- some lsp thing for prettier plugin to work
-	{
-		"MunifTanjim/prettier.nvim",
-		opts = {
-			bin = "prettierd", -- or `'prettierd'` (v0.23.3+)
-			filetypes = {
-				"css",
-				"graphql",
-				"html",
-				"javascript",
-				"javascriptreact",
-				"json",
-				"less",
-				"markdown",
-				"scss",
-				"typescript",
-				"typescriptreact",
-				"yaml",
-				"svelte",
-				"lua",
-			},
-			cli_options = {
-				arrow_parens = "always",
-				bracket_spacing = true,
-				bracket_same_line = false,
-				embedded_language_formatting = "auto",
-				end_of_line = "lf",
-				html_whitespace_sensitivity = "css",
-				-- jsx_bracket_same_line = false,
-				jsx_single_quote = false,
-				print_width = 80,
-				prose_wrap = "preserve",
-				quote_props = "as-needed",
-				semi = true,
-				single_attribute_per_line = false,
-				single_quote = false,
-				tab_width = 2,
-				trailing_comma = "es5",
-				use_tabs = false,
-				vue_indent_script_and_style = false,
-			},
-		}
-	},
 	{ "nvim-lua/plenary.nvim" },
 	{ "folke/lsp-colors.nvim" },
 	{
@@ -263,11 +220,11 @@ return {
 		end,
 	},
 	{
-		"numToStr/comment.nvim",
+		"numToStr/Comment.nvim",
 		opts = {
 			pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 		},
-		dependencies = {"JoosepAlviste/nvim-ts-context-commentstring"}
+		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" }
 	},
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
@@ -336,4 +293,49 @@ return {
 			},
 		}
 	},
+	{
+		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		keys = {
+			{
+				-- Customize or remove this keymap to your liking
+				"<leader>f",
+				function()
+					require("conform").format({ async = true })
+				end,
+				mode = "",
+				desc = "Format buffer",
+			},
+		},
+		-- This will provide type hinting with LuaLS
+		---@module "conform"
+		---@type conform.setupOpts
+		opts = {
+			-- Define your formatters
+			formatters_by_ft = {
+				lua = { "stylua" },
+				python = { "black" },
+				javascript = { "prettierd", "prettier", stop_after_first = true },
+				svelte = { "prettierd", "prettier", stop_after_first = true },
+				nix = { "nixfmt" }
+			},
+			-- Set default options
+			default_format_opts = {
+				lsp_format = "fallback",
+			},
+			-- Set up format-on-save
+			format_on_save = { timeout_ms = 500 },
+			-- Customize formatters
+			formatters = {
+				shfmt = {
+					prepend_args = { "-i", "2" },
+				},
+			},
+		},
+		init = function()
+			-- If you want the formatexpr, here is the place to set it
+			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+		end,
+	}
 }
