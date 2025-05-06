@@ -38,12 +38,12 @@ let
   # create a pinned pydantic-core derivation
   pydantic-core = pythonPackages.buildPythonPackage rec {
     pname = "pydantic_core";
-    version = "2.27.1";
+    version = "2.20.1";
     pyproject = true;
 
     src = pythonPackages.fetchPypi {
       inherit pname version;
-      sha256 = "sha256-YqdjNSh5uEqjEFj8kxiEBV/XUInMy9nVi7av0BFBsjU=";
+      sha256 = "JsppXu7l+fGu6yEf/BLxC8tvceKYmYj9ph2r1l24eNQ=";
     };
 
     # patches = [ ./01-remove-benchmark-flags.patch ];
@@ -51,7 +51,7 @@ let
     cargoDeps = pkgs.rustPlatform.fetchCargoVendor{
       inherit src;
       name = "${pname}-${version}";
-      hash = "";
+      hash = "sha256-j9VAWV/AG+u52ji+erNUrdGX8kHlsOuYiBYbHzD0y8k=";
     };
 
     nativeBuildInputs = [
@@ -94,11 +94,11 @@ let
     ];
   };
   pydantic = pythonPackages.pydantic.overridePythonAttrs (old: rec {
-    version = "2.10.3";
+    version = "2.8.2";
     src = pythonPackages.fetchPypi {
       pname = "pydantic";
       inherit version;
-      sha256 = "sha256-y1rDYM6JTOrNacQDGHkAoCxLILaTqd0dZD4e/6uerfk=";
+      sha256 = "b2LBPQZ7B1WtHCGjS90GwMEmJaIrD8CcaxSYFmBPfCo=";
     };
     propagatedBuildInputs = [ pydantic-core ];
     dependencies = [
@@ -110,12 +110,12 @@ let
 
   mistralai = pythonPackages.buildPythonPackage rec {
     pname = "mistralai";
-    version = "1.7.0";
+    version = "1.0.2";
     format = "pyproject";
 
     src = pythonPackages.fetchPypi {
       inherit pname version;
-      sha256 = "sha256-lOPrI8HT7TmKlTUgYv2Mkpk8w3VO0Y6aNbYKo9sL0QM=";
+      sha256 = "RvtEB9GkFhsj4bLExzVHhDP7ekGrsF+s0jJy+wXRcbU=";
     };
     propagatedBuildInputs = [
       pydantic
