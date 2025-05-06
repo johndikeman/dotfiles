@@ -19,10 +19,7 @@ return {
 					},
 				},
 				nil_ls = { ['nil'] = { formatting = { command = { "nixfmt" } } } },
-				godot = {
-					name = "godot",
-					cmd = vim.lsp.rpc.connect("127.0.0.1", "6005"),
-				}
+				gdscript = {}
 			}
 		},
 		config = function(_, opts)
@@ -38,8 +35,6 @@ return {
 	{ "mrcjkb/rustaceanvim" }, -- configuring LSP for rust
 	{
 		'saghen/blink.cmp',
-		-- optional: provides snippets for the snippet source
-		dependencies = { 'rafamadriz/friendly-snippets' },
 
 		-- use a release tag to download pre-built binaries
 		version = '1.*',
@@ -268,10 +263,11 @@ return {
 		end,
 	},
 	{
-		"numToStr/Comment.nvim",
+		"numToStr/comment.nvim",
 		opts = {
 			pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 		},
+		dependencies = {"JoosepAlviste/nvim-ts-context-commentstring"}
 	},
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",

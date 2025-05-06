@@ -69,14 +69,34 @@ let
     };
     meta.hydraPlatforms = [ ];
   };
+
+	comment-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "Comment.nvim";
+    version = "2024-06-09";
+    src = pkgs.fetchFromGitHub {
+      owner = "numtostr";
+      repo = "Comment.nvim";
+      rev = "e30b7f2008e52442154b66f7c519bfd2f1e32acb";
+      sha256 = "0dyz78j0kj3j99y5g8wncl7794g6z2qs05gfg9ddxaa4xswhyjc7";
+    };
+    meta.homepage = "https://github.com/numtostr/comment.nvim/";
+    meta.hydraPlatforms = [ ];
+  };
+
 in
 {
   home.sessionVariables = {
     EDITOR = "nvim";
   };
 
+	# install language servers
 	home.packages = [
 		pkgs.nil
+		pkgs.lua-language-server
+		pkgs.pyright
+		pkgs.typescript-language-server
+		pkgs.svelte-language-server
+		pkgs.ripgrep # dependency for the telescope live-grep finder
 	];
 
   programs.neovim = {
