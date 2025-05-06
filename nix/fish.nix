@@ -132,6 +132,11 @@ let
       pythonPackages.typing-inspect
       (pythonPackages.httpx.overridePythonAttrs (old: rec {
 				version = "0.27.0";
+				src = pythonPackages.fetchPypi {
+					pname = "httpx";
+					inherit version;
+					sha256 = "sha256-oMuIpG8y3IdOBO6VbkwnZKuiqiKPZQsGeIumvaKWKrU=";
+				};
 			}))
     ];
 
@@ -151,15 +156,18 @@ let
         sha256 = "sha256-f6U2zUtkRxhkW4dNJwbjbbvvOLMn5CygYjJ12jR+4ak=";
       };
       doCheck = false;
+			postPatch = "";
       dependencies = [
         pydantic
         pythonPackages.anyio
         pythonPackages.distro
+				# TODO: override the httpx version higher up
         pythonPackages.httpx
         pythonPackages.jiter
         pythonPackages.sniffio
         pythonPackages.tqdm
         pythonPackages.typing-extensions
+				pythonPackages.hatchling
       ];
     }))
     (pythonPackages.simple-term-menu.overridePythonAttrs (old: rec {
