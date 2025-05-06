@@ -1,0 +1,3 @@
+- fix formatting (remove null-ls/prettier-nvim if possible)
+- configure blinkcmp (tab to cycle completions)
+

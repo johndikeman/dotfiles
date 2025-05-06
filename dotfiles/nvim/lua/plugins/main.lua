@@ -295,6 +295,7 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
+		log_level = vim.log.levels.DEBUG,
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		keys = {
@@ -322,12 +323,12 @@ return {
 			},
 			-- Set default options
 			default_format_opts = {
-				lsp_format = "fallback",
 			},
 			-- Set up format-on-save
 			format_on_save = { timeout_ms = 500 },
 			-- Customize formatters
 			formatters = {
+				nixfmt = { command = "nixfmt" },
 				shfmt = {
 					prepend_args = { "-i", "2" },
 				},

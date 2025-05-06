@@ -69,7 +69,7 @@ let
     meta.hydraPlatforms = [ ];
   };
 
-	comment-nvim = pkgs.vimUtils.buildVimPlugin {
+  comment-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "Comment.nvim";
     version = "2024-06-09";
     src = pkgs.fetchFromGitHub {
@@ -88,15 +88,15 @@ in
     EDITOR = "nvim";
   };
 
-	# install language servers
-	home.packages = [
-		pkgs.nil
-		pkgs.lua-language-server
-		pkgs.pyright
-		pkgs.typescript-language-server
-		pkgs.svelte-language-server
-		pkgs.ripgrep # dependency for the telescope live-grep finder
-	];
+  # install language servers
+  home.packages = [
+    pkgs.nil
+    pkgs.lua-language-server
+    pkgs.pyright
+    pkgs.typescript-language-server
+    pkgs.svelte-language-server
+    pkgs.ripgrep # dependency for the telescope live-grep finder
+  ];
 
   programs.neovim = {
     plugins = with pkgs.vimPlugins; [
@@ -118,8 +118,8 @@ in
       comment-nvim
       nvim-ts-context-commentstring
       marks-nvim
-			workspaces-nvim
-			conform-nvim
+      workspaces-nvim
+      conform-nvim
     ];
     extraLuaConfig = ''
                   vim.g.mapleader = " " -- Need to set leader before lazy for correct keybindings
