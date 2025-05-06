@@ -19,6 +19,24 @@ let
   python = pkgs.python311;
   pythonPackages = python.pkgs;
 
+	httpx = pythonPackages.httpx.overridePythonAttrs (old: rec {
+				version = "0.27.0";
+				src = pythonPackages.fetchPypi {
+					pname = "httpx";
+					inherit version;
+					sha256 = "sha256-oMuIpG8y3IdOBO6VbkwnZKuiqiKPZQsGeIumvaKWKrU=";
+				};
+			});
+
+	httpx-sse = pythonPackages.httpx-sse.overridePythonAttrs (old: rec {
+				version = "0.4.0";
+				src = pythonPackages.fetchPypi {
+					pname = "httpx-sse";
+					inherit version;
+					sha256 = "sha256-HoGjowcM4yKt0dNSntQutfcIF/Re1uyRWrdT+WETlyE=";
+				};
+				dependencies = [httpx];
+			});
   sslFix =
     pkg:
     pkg.overridePythonAttrs (old: {
@@ -130,14 +148,7 @@ let
       })
       pythonPackages.python-dateutil
       pythonPackages.typing-inspect
-      (pythonPackages.httpx.overridePythonAttrs (old: rec {
-				version = "0.27.0";
-				src = pythonPackages.fetchPypi {
-					pname = "httpx";
-					inherit version;
-					sha256 = "sha256-oMuIpG8y3IdOBO6VbkwnZKuiqiKPZQsGeIumvaKWKrU=";
-				};
-			}))
+     	httpx 
     ];
 
     nativeBuildInputs = [
@@ -162,7 +173,7 @@ let
         pythonPackages.anyio
         pythonPackages.distro
 				# TODO: override the httpx version higher up
-        pythonPackages.httpx
+        httpx
         pythonPackages.jiter
         pythonPackages.sniffio
         pythonPackages.tqdm
@@ -242,7 +253,7 @@ let
       dependencies = [
         pythonPackages.anyio
         pythonPackages.distro
-        pythonPackages.httpx
+        httpx
         pythonPackages.jiter
         pythonPackages.sniffio
         pydantic
@@ -259,8 +270,8 @@ let
       };
       dependencies = [
         pythonPackages.fastavro
-        pythonPackages.httpx
-        pythonPackages.httpx-sse
+        httpx
+        httpx-sse
         pythonPackages.parameterized
         pydantic
         pydantic-core
