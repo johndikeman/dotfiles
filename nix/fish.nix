@@ -51,7 +51,7 @@ let
     cargoDeps = pkgs.rustPlatform.fetchCargoVendor{
       inherit src;
       name = "${pname}-${version}";
-      hash = "sha256-j9VAWV/AG+u52ji+erNUrdGX8kHlsOuYiBYbHzD0y8k=";
+      hash = "sha256-faPM2hlJ2/UnXG+saFvk31lxyIYGIMY4QKTenWwIhS0=";
     };
 
     nativeBuildInputs = [
@@ -130,7 +130,9 @@ let
       })
       pythonPackages.python-dateutil
       pythonPackages.typing-inspect
-      pythonPackages.httpx
+      (pythonPackages.httpx.overridePythonAttrs (old: rec {
+				version = "0.27.0";
+			}))
     ];
 
     nativeBuildInputs = [
