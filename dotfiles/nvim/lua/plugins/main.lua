@@ -166,6 +166,11 @@ return {
 					path_hl = "String",
 				},
 			},
+			pickers = {
+				buffers = {
+					sort_lastused = true,
+				},
+			},
 		},
 	},
 	{ "ckipp01/stylua-nvim" },
