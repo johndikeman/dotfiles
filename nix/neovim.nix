@@ -123,6 +123,7 @@ in
       conform-nvim
       nvim-treesitter-parsers.svelte
       nvim-treesitter-parsers.markdown
+      nvim-treesitter-parsers.markdown_inline
       codecompanion-nvim
     ];
     extraLuaConfig = ''

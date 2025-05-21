@@ -3,10 +3,25 @@ return {
 	opts = {
 		adapters = {
 			deepseek = function()
-				return require("codecompanion.adapters").extend("anthropic", {
-					env = { api_key = require("keys") },
+				return require("codecompanion.adapters").extend("deepseek", {
+					env = {
+						api_key = function(adapter)
+							return require("keys")
+						end,
+					},
 				})
 			end,
+		},
+		strategies = {
+			chat = {
+				adapter = "deepseek",
+			},
+			inline = {
+				adapter = "deepseek",
+			},
+			cmd = {
+				adapter = "deepseek",
+			},
 		},
 	},
 	dependencies = {
