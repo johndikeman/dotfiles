@@ -122,6 +122,7 @@ in
       workspaces-nvim
       conform-nvim
       nvim-treesitter-parsers.svelte
+      nvim-treesitter-parsers.markdown
     ];
     extraLuaConfig = ''
                   vim.g.mapleader = " " -- Need to set leader before lazy for correct keybindings
