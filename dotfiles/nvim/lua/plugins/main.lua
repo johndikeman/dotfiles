@@ -174,58 +174,6 @@ return {
 		},
 	},
 	{ "ckipp01/stylua-nvim" },
-
-	{
-		"gsuuon/model.nvim",
-
-		-- Don't need these if lazy = false
-		cmd = { "M", "Model", "Mchat" },
-		init = function()
-			vim.filetype.add({
-				extension = {
-					mchat = "mchat",
-				},
-			})
-		end,
-		ft = "mchat",
-
-		keys = {
-			{ "<C-m>d", ":Mdelete<cr>", mode = "n" },
-			{ "<C-m>s", ":Mselect<cr>", mode = "n" },
-			{ "<C-m><space>", ":Mchat<cr>", mode = "n" },
-		},
-
-		config = function()
-			local deepseek = require("model.providers.deepseek")
-			local prompts = require("prompts")
-			local extract = require("model.prompts.extract")
-			local chat_prompts = require("model.prompts.chats")
-			local mode = require("model").mode
-
-			require("model").setup({
-				default_prompt = {
-					provider = deepseek,
-					options = {
-						show_reasoning = true,
-					},
-					params = {
-						model = "deepseek-reasoner",
-					},
-					mode = mode.INSERT_OR_REPLACE,
-					builder = function(input, context)
-						return prompts.code_replace_fewshot(input, context)
-					end,
-					transform = extract.markdown_code,
-				},
-				chats = chat_prompts,
-				secrets = {
-					DEEPSEEK_API_KEY = function()
-						return require("keys")
-					end,
-				},
-			})
-		end,
-	},
 	{
 		"numToStr/Comment.nvim",
 		opts = {
