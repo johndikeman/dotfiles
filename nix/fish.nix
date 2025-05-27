@@ -357,6 +357,284 @@ in
         };
       }
     ];
+    functions = {
+      # Chat aliases
+      chatdev = {
+        description = "Run chatdev agent";
+        body = ''
+          python test.py --modality=chat --agent=chat-dev --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+      chatstable = {
+        description = "Run chatstable agent";
+        body = ''
+          python test.py --modality=chat --agent=chat-stable --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+      chathotfix = {
+        description = "Run chathotfix agent";
+        body = ''
+          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/257be919-ecaa-4d4e-be63-0febfd51a740 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+      chatdikeman1 = {
+        description = "Run chatdikeman1 agent";
+        body = ''
+          python test.py --modality=chat --agent=dikeman1 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+      chatdikeman2 = {
+        description = "Run chatdikeman2 agent";
+        body = ''
+          python test.py --modality=chat --agent=dikeman2 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+      chatdikeman5 = {
+        description = "Run chatdikeman5 agent";
+        body = ''
+          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/d0230494-0a64-40df-9b21-d72d0c3da384 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+      chatprod = {
+        description = "Run chatprod agent";
+        body = ''
+          python test.py --modality=chat --agent=chat-prod --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+
+      # Chat aliases without tests
+      ntchatdev = {
+        description = "Run chatdev agent without tests";
+        body = ''
+          python test.py --modality=chat --agent=chat-dev --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+      ntchatstable = {
+        description = "Run chatstable agent without tests";
+        body = ''
+          python test.py --modality=chat --agent=chat-stable --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+      ntchathotfix = {
+        description = "Run chathotfix agent without tests";
+        body = ''
+          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/257be919-ecaa-4d4e-be63-0febfd51a740 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+      ntchatdikeman1 = {
+        description = "Run chatdikeman1 agent without tests";
+        body = ''
+          python test.py --modality=chat --agent=dikeman1 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+      ntchatdikeman2 = {
+        description = "Run chatdikeman2 agent without tests";
+        body = ''
+          python test.py --modality=chat --agent=dikeman2 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+      ntchatdikeman5 = {
+        description = "Run chatdikeman5 agent without tests";
+        body = ''
+          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/d0230494-0a64-40df-9b21-d72d0c3da384 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+      ntchatprod = {
+        description = "Run chatprod agent without tests";
+        body = ''
+          python test.py --modality=chat --agent=chat-prod --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+
+      # Voice aliases
+      voicedikeman1 = {
+        description = "Run voicedikeman1 agent";
+        body = ''
+          python test.py --modality=voice --agent=dikeman1 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+      voicedikeman2 = {
+        description = "Run voicedikeman2 agent";
+        body = ''
+          python test.py --modality=voice --agent=dikeman2 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+      voicedikeman5 = {
+        description = "Run voicedikeman5 agent";
+        body = ''
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/d0230494-0a64-40df-9b21-d72d0c3da384 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+      voicestable = {
+        description = "Run voicestable agent";
+        body = ''
+          python test.py --modality=voice --agent=voice-stable --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+      voicehotfix = {
+        description = "Run voicehotfix agent";
+        body = ''
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b207eb43-87ae-4db9-bad6-92873b0e2705 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+      voicemonthly = {
+        description = "Run voicemonthly agent";
+        body = ''
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b3b626fe-ea56-4985-b418-20aefff87acd --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+      voicehotfixbackup = {
+        description = "Run voice-hotfix-backup agent";
+        body = ''
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/929d9559-b4b7-4654-9f89-3d5565310ca0 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+        '';
+      };
+
+      # Voice aliases without tests
+      ntvoicedikeman1 = {
+        description = "Run voicedikeman1 agent without tests";
+        body = ''
+          python test.py --modality=voice --agent=dikeman1 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+      ntvoicedikeman2 = {
+        description = "Run voicedikeman2 agent without tests";
+        body = ''
+          python test.py --modality=voice --agent=dikeman2 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+      ntvoicedikeman5 = {
+        description = "Run voicedikeman5 agent without tests";
+        body = ''
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/d0230494-0a64-40df-9b21-d72d0c3da384 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+      ntvoicestable = {
+        description = "Run voicestable agent without tests";
+        body = ''
+          python test.py --modality=voice --agent=voice-stable --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+      ntvoicehotfix = {
+        description = "Run voicehotfix agent without tests";
+        body = ''
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b207eb43-87ae-4db9-bad6-92873b0e2705 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+      ntvoicemonthly = {
+        description = "Run voicemonthly agent without tests";
+        body = ''
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b3b626fe-ea56-4985-b418-20aefff87acd --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+        '';
+      };
+
+      # Utility alias
+      scr = {
+        description = "Change directory to df-rm-scripts and activate venv";
+        body = ''
+          cd ~/df-rm-scripts && source venv/bin/activate.fish "$@"
+        '';
+      };
+      chat = {
+        description = "Setup tmux session for att-golden-chat";
+        body = ''
+          tmux-setup ~/att-golden-chat/ $argv
+        '';
+      };
+
+      # Promote tickets by cherry-picking commits
+      promote_tickets = {
+        description = "Cherry-pick commits associated with given ticket codes to stable branch";
+        body = ''
+          set -l codes $argv[1]
+          set -l regex (string join '\|' (string split ' ' $codes))
+          set -l hashes (string split '\n' (git log --grep="$regex" --pretty=format:%H dev))
+          set -l reversed_hashes
+
+          for i in (seq (count $hashes) -1 1)
+              set reversed_hashes $reversed_hashes $hashes[$i]
+          end
+
+          echo "Regex: $regex"
+          echo "Hashes: $hashes"
+          echo "Reversed Hashes: $reversed_hashes"
+
+          git checkout stable
+          git cherry-pick $reversed_hashes
+        '';
+      };
+
+      # Revert tickets by reverting commits
+      revert_tickets = {
+        description = "Revert commits associated with given ticket codes on stable branch";
+        body = ''
+          set -l codes $argv[1]
+          set -l regex (string join '\|' (string split ' ' $codes))
+          set -l hashes (string split '\n' (git log --grep="$regex" --pretty=format:%H dev))
+
+          git checkout stable
+          git revert $hashes
+        '';
+      };
+
+      # Core tmux setup function
+      tmux-setup = {
+        description = "Sets up a standard tmux development environment for a given path.";
+        body = ''
+          set -l path $argv[1]
+          if test -z "$path"
+              echo "Error: Path not provided to tmux-setup function."
+              return 1
+          end
+
+          if not test -d "$path"
+              echo "Error: '$path' is not a valid directory."
+              return 1
+          end
+
+          # Check if a 'dev' session exists. If not, create it.
+          if not tmux has-session -t dev > /dev/null 2>&1
+              tmux new-session -s dev -d
+          end
+
+          # Create a new window within the 'dev' session
+          tmux new-window -t dev -n "$path" # Name the window after the path
+
+          # Split the new window vertically
+          tmux split-window -v
+
+          # Select the upper pane (index 0)
+          tmux select-pane -t 0
+
+          # Send the command to run lazygit
+          tmux send-keys -t 0 "cd $path && lazygit" C-m
+
+          # Select the lower pane (index 1)
+          tmux select-pane -t 1
+
+          # Split the lower pane horizontally
+          tmux split-window -h
+
+          # Select the bottom right pane (index 2 after splits)
+          tmux select-pane -t 2
+          tmux send-keys -t 2 "scr" C-m
+
+          # Select the bottom left pane (index 1, then 0 after splitting, so it's pane 1 now)
+          tmux select-pane -t 1
+
+          # Send the command to run nvim
+          tmux send-keys -t 1 "cd $path && nvim" C-m
+
+          # Select the first window of the session
+          tmux select-window -t dev:1
+
+          # Attach to the session if not already attached
+          if not tmux ls | grep -q 'dev:'
+              tmux attach-session -t dev
+          end
+        '';
+      };
+    };
   };
   home.file = {
     ".fish-ai" = {
