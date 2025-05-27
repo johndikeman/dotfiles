@@ -529,6 +529,14 @@ in
       };
 
       # Utility alias
+      gr = {
+        description = "quickly reset your git repo";
+        body = "git reset --hard && git clean -fdxq";
+      };
+      r = {
+        description = "a handy way to accidentally nuke a directory and ruin your life";
+        body = "rm -rf ./*";
+      };
       scr = {
         description = "Change directory to df-rm-scripts and activate venv";
         body = ''
