@@ -79,10 +79,10 @@ in
 
   programs.tmux = {
     enable = true;
-    shell = "/home/dikeman/.nix-profile/bin/fish";
+    shell = "${pkgs.fish}/bin/fish";
     prefix = "C-a";
     keyMode = "vi"; # Optional: Use vi-style key bindings
-    baseIndex = 1; # Start window numbering at 1
+    baseIndex = 0; # Start window numbering at 1
     escapeTime = 0; # Faster escape sequence detection
 
     plugins = with pkgs.tmuxPlugins; [

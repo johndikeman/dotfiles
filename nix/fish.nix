@@ -532,7 +532,7 @@ in
       scr = {
         description = "Change directory to df-rm-scripts and activate venv";
         body = ''
-          cd ~/df-rm-scripts && source venv/bin/activate.fish "$@"
+          cd ~/df-rm-scripts && source venv/bin/activate.fish
         '';
       };
       chat = {
