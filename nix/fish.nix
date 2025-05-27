@@ -362,43 +362,43 @@ in
       chatdev = {
         description = "Run chatdev agent";
         body = ''
-          python test.py --modality=chat --agent=chat-dev --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=chat --agent=chat-dev --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       chatstable = {
         description = "Run chatstable agent";
         body = ''
-          python test.py --modality=chat --agent=chat-stable --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=chat --agent=chat-stable --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       chathotfix = {
         description = "Run chathotfix agent";
         body = ''
-          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/257be919-ecaa-4d4e-be63-0febfd51a740 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/257be919-ecaa-4d4e-be63-0febfd51a740 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       chatdikeman1 = {
         description = "Run chatdikeman1 agent";
         body = ''
-          python test.py --modality=chat --agent=dikeman1 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=chat --agent=dikeman1 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       chatdikeman2 = {
         description = "Run chatdikeman2 agent";
         body = ''
-          python test.py --modality=chat --agent=dikeman2 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=chat --agent=dikeman2 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       chatdikeman5 = {
         description = "Run chatdikeman5 agent";
         body = ''
-          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/d0230494-0a64-40df-9b21-d72d0c3da384 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/d0230494-0a64-40df-9b21-d72d0c3da384 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       chatprod = {
         description = "Run chatprod agent";
         body = ''
-          python test.py --modality=chat --agent=chat-prod --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=chat --agent=chat-prod --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
 
@@ -406,43 +406,43 @@ in
       ntchatdev = {
         description = "Run chatdev agent without tests";
         body = ''
-          python test.py --modality=chat --agent=chat-dev --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=chat --agent=chat-dev --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntchatstable = {
         description = "Run chatstable agent without tests";
         body = ''
-          python test.py --modality=chat --agent=chat-stable --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=chat --agent=chat-stable --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntchathotfix = {
         description = "Run chathotfix agent without tests";
         body = ''
-          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/257be919-ecaa-4d4e-be63-0febfd51a740 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/257be919-ecaa-4d4e-be63-0febfd51a740 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntchatdikeman1 = {
         description = "Run chatdikeman1 agent without tests";
         body = ''
-          python test.py --modality=chat --agent=dikeman1 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=chat --agent=dikeman1 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntchatdikeman2 = {
         description = "Run chatdikeman2 agent without tests";
         body = ''
-          python test.py --modality=chat --agent=dikeman2 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=chat --agent=dikeman2 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntchatdikeman5 = {
         description = "Run chatdikeman5 agent without tests";
         body = ''
-          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/d0230494-0a64-40df-9b21-d72d0c3da384 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/d0230494-0a64-40df-9b21-d72d0c3da384 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntchatprod = {
         description = "Run chatprod agent without tests";
         body = ''
-          python test.py --modality=chat --agent=chat-prod --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=chat --agent=chat-prod --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
 
@@ -450,43 +450,43 @@ in
       voicedikeman1 = {
         description = "Run voicedikeman1 agent";
         body = ''
-          python test.py --modality=voice --agent=dikeman1 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=voice --agent=dikeman1 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       voicedikeman2 = {
         description = "Run voicedikeman2 agent";
         body = ''
-          python test.py --modality=voice --agent=dikeman2 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=voice --agent=dikeman2 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       voicedikeman5 = {
         description = "Run voicedikeman5 agent";
         body = ''
-          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/d0230494-0a64-40df-9b21-d72d0c3da384 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/d0230494-0a64-40df-9b21-d72d0c3da384 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       voicestable = {
         description = "Run voicestable agent";
         body = ''
-          python test.py --modality=voice --agent=voice-stable --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=voice --agent=voice-stable --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       voicehotfix = {
         description = "Run voicehotfix agent";
         body = ''
-          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b207eb43-87ae-4db9-bad6-92873b0e2705 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b207eb43-87ae-4db9-bad6-92873b0e2705 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       voicemonthly = {
         description = "Run voicemonthly agent";
         body = ''
-          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b3b626fe-ea56-4985-b418-20aefff87acd --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b3b626fe-ea56-4985-b418-20aefff87acd --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       voicehotfixbackup = {
         description = "Run voice-hotfix-backup agent";
         body = ''
-          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/929d9559-b4b7-4654-9f89-3d5565310ca0 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$@"
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/929d9559-b4b7-4654-9f89-3d5565310ca0 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
 
@@ -494,37 +494,37 @@ in
       ntvoicedikeman1 = {
         description = "Run voicedikeman1 agent without tests";
         body = ''
-          python test.py --modality=voice --agent=dikeman1 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=voice --agent=dikeman1 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntvoicedikeman2 = {
         description = "Run voicedikeman2 agent without tests";
         body = ''
-          python test.py --modality=voice --agent=dikeman2 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=voice --agent=dikeman2 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntvoicedikeman5 = {
         description = "Run voicedikeman5 agent without tests";
         body = ''
-          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/d0230494-0a64-40df-9b21-d72d0c3da384 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/d0230494-0a64-40df-9b21-d72d0c3da384 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntvoicestable = {
         description = "Run voicestable agent without tests";
         body = ''
-          python test.py --modality=voice --agent=voice-stable --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=voice --agent=voice-stable --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntvoicehotfix = {
         description = "Run voicehotfix agent without tests";
         body = ''
-          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b207eb43-87ae-4db9-bad6-92873b0e2705 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b207eb43-87ae-4db9-bad6-92873b0e2705 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntvoicemonthly = {
         description = "Run voicemonthly agent without tests";
         body = ''
-          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b3b626fe-ea56-4985-b418-20aefff87acd --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$@"
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b3b626fe-ea56-4985-b418-20aefff87acd --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
 
