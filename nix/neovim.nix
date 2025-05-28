@@ -9,24 +9,6 @@ let
 
   sources = import ./sources.nix;
 
-  codecompanion-fork = pkgs.vimUtils.buildVimPlugin {
-    pname = "codecompanion.nvim";
-    version = "2025-05-28";
-    src = pkgs.fetchFromGitHub {
-      owner = "johndikeman";
-      repo = "codecompanion.nvim";
-      rev = "e6ce75222073f8d01cf1a1f71a2ad8b180a56c41";
-      hash = "sha256-DzaGqYEQT53rHNW3GfW+U9sHAd1r7aSxiSGMSOF9b3U=";
-    };
-    meta.hydraPlatforms = [ ];
-    dependencies = [
-      pkgs.vimPlugins.plenary-nvim
-      pkgs.vimPlugins.nvim-treesitter
-      pkgs.vimPlugins.telescope-nvim
-    ];
-    doCheck = false;
-  };
-
   conform-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "conform.nvim";
     version = "2025-04-20";
@@ -142,7 +124,7 @@ in
       nvim-treesitter-parsers.svelte
       nvim-treesitter-parsers.markdown
       nvim-treesitter-parsers.markdown_inline
-      codecompanion-fork
+      codecompanion-nvim
     ];
     extraLuaConfig = ''
                   vim.g.mapleader = " " -- Need to set leader before lazy for correct keybindings

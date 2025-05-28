@@ -12,7 +12,7 @@ return {
 				})
 			end,
 			gemini = function()
-				return require("codecompanion.adapters").extend("gemini-vai", {
+				return require("codecompanion.adapters").extend("gemini", {
 					env = {
 						api_key = function(adapter)
 							return require("keys").GEMINI
