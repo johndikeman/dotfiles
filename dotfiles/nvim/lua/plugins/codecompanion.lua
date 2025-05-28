@@ -6,7 +6,16 @@ return {
 				return require("codecompanion.adapters").extend("deepseek", {
 					env = {
 						api_key = function(adapter)
-							return require("keys")
+							return require("keys").DEEPSEEK
+						end,
+					},
+				})
+			end,
+			gemini = function()
+				return require("codecompanion.adapters").extend("gemini", {
+					env = {
+						api_key = function(adapter)
+							return require("keys").GEMINI
 						end,
 					},
 				})
@@ -14,13 +23,13 @@ return {
 		},
 		strategies = {
 			chat = {
-				adapter = "deepseek",
+				adapter = "gemini",
 			},
 			inline = {
-				adapter = "deepseek",
+				adapter = "gemini",
 			},
 			cmd = {
-				adapter = "deepseek",
+				adapter = "gemini",
 			},
 		},
 	},
