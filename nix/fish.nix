@@ -648,6 +648,31 @@ in
           end
         '';
       };
+      gdp = {
+        description = "outputs a patch file for mergetwin to use";
+        body = ''
+          	function gdp --description "Generates a git diff patch for a specific voice file"
+              # $argv[1] is the git hash
+              # $argv[2] is the nine-digit code
+              if test (count $argv) -ne 2
+                  echo "Usage: gdp <hash> <nine_digit_code>"
+                  return 1
+              end
+
+              set -l hash $argv[1]
+              set -l code $argv[2]
+              set -l output_dir ~/mergetwin/test/data/voice/
+              set -l output_file "$output_dir"voice."$code"."$hash".test.patch
+
+              # Create the directory if it doesn't exist
+              mkdir -p -- "$output_dir"
+
+              # Run the git diff command
+              git diff "$hash" > "$output_file"
+              echo "Patch file created: $output_file"
+          end
+        '';
+      };
     };
   };
   home.file = {
