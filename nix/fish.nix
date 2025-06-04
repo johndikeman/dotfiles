@@ -668,7 +668,7 @@ in
               mkdir -p -- "$output_dir"
 
               # Run the git diff command
-              git diff "$hash" > "$output_file"
+              git diff "$hash"^.."$hash" > "$output_file"
               echo "Patch file created: $output_file"
           end
         '';
