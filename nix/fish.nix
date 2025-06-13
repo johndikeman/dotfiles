@@ -418,7 +418,7 @@ in
       ntchathotfix = {
         description = "Run chathotfix agent without tests";
         body = ''
-          python test.py --modality=chat --agent=projects/att-aam-external/locations/global/agents/257be919-ecaa-4d4e-be63-0febfd51a740 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
+          python test.py --modality=chat --agent=projects/att-aam-external/locations/us-central1/agents/1a43ac5c-9789-4b56-b130-3a0cb10301c9 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntchatdikeman1 = {
