@@ -480,7 +480,7 @@ in
       voicemonthly = {
         description = "Run voicemonthly agent";
         body = ''
-          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b3b626fe-ea56-4985-b418-20aefff87acd --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/us-central1/agents/67ee16e5-9abd-4ff6-b319-6acde9b19bbe --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs "$argv"
         '';
       };
       voicehotfixbackup = {
@@ -518,13 +518,13 @@ in
       ntvoicehotfix = {
         description = "Run voicehotfix agent without tests";
         body = ''
-          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b207eb43-87ae-4db9-bad6-92873b0e2705 --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/us-central1/agents/865b5709-1e3d-4cf0-8399-4d301f3e9a1f --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
       ntvoicemonthly = {
         description = "Run voicemonthly agent without tests";
         body = ''
-          python test.py --modality=voice --agent=projects/att-aam-external/locations/global/agents/b3b626fe-ea56-4985-b418-20aefff87acd --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/us-central1/agents/67ee16e5-9abd-4ff6-b319-6acde9b19bbe --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
         '';
       };
 
