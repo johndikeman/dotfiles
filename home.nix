@@ -57,7 +57,6 @@ in
     pkgs.black
     pkgs.qbittorrent
     pkgs.vlc
-    pkgs.godot_4
     (import sources.nixGL { inherit pkgs; }).nixVulkanIntel
     (import sources.nixGL { inherit pkgs; }).nixGLIntel
     pkgs.blender
