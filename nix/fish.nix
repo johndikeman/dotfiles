@@ -19,24 +19,24 @@ let
   python = pkgs.python311;
   pythonPackages = python.pkgs;
 
-	httpx = pythonPackages.httpx.overridePythonAttrs (old: rec {
-				version = "0.27.0";
-				src = pythonPackages.fetchPypi {
-					pname = "httpx";
-					inherit version;
-					sha256 = "sha256-oMuIpG8y3IdOBO6VbkwnZKuiqiKPZQsGeIumvaKWKrU=";
-				};
-			});
+  httpx = pythonPackages.httpx.overridePythonAttrs (old: rec {
+    version = "0.27.0";
+    src = pythonPackages.fetchPypi {
+      pname = "httpx";
+      inherit version;
+      sha256 = "sha256-oMuIpG8y3IdOBO6VbkwnZKuiqiKPZQsGeIumvaKWKrU=";
+    };
+  });
 
-	httpx-sse = pythonPackages.httpx-sse.overridePythonAttrs (old: rec {
-				version = "0.4.0";
-				src = pythonPackages.fetchPypi {
-					pname = "httpx-sse";
-					inherit version;
-					sha256 = "sha256-HoGjowcM4yKt0dNSntQutfcIF/Re1uyRWrdT+WETlyE=";
-				};
-				dependencies = [httpx];
-			});
+  httpx-sse = pythonPackages.httpx-sse.overridePythonAttrs (old: rec {
+    version = "0.4.0";
+    src = pythonPackages.fetchPypi {
+      pname = "httpx-sse";
+      inherit version;
+      sha256 = "sha256-HoGjowcM4yKt0dNSntQutfcIF/Re1uyRWrdT+WETlyE=";
+    };
+    dependencies = [ httpx ];
+  });
   sslFix =
     pkg:
     pkg.overridePythonAttrs (old: {
@@ -66,7 +66,7 @@ let
 
     # patches = [ ./01-remove-benchmark-flags.patch ];
 
-    cargoDeps = pkgs.rustPlatform.fetchCargoVendor{
+    cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
       inherit src;
       name = "${pname}-${version}";
       hash = "sha256-faPM2hlJ2/UnXG+saFvk31lxyIYGIMY4QKTenWwIhS0=";
@@ -148,7 +148,7 @@ let
       })
       pythonPackages.python-dateutil
       pythonPackages.typing-inspect
-     	httpx 
+      httpx
     ];
 
     nativeBuildInputs = [
@@ -167,18 +167,18 @@ let
         sha256 = "sha256-f6U2zUtkRxhkW4dNJwbjbbvvOLMn5CygYjJ12jR+4ak=";
       };
       doCheck = false;
-			postPatch = "";
+      postPatch = "";
       dependencies = [
         pydantic
         pythonPackages.anyio
         pythonPackages.distro
-				# TODO: override the httpx version higher up
+        # TODO: override the httpx version higher up
         httpx
         pythonPackages.jiter
         pythonPackages.sniffio
         pythonPackages.tqdm
         pythonPackages.typing-extensions
-				pythonPackages.hatchling
+        pythonPackages.hatchling
       ];
     }))
     (pythonPackages.simple-term-menu.overridePythonAttrs (old: rec {
@@ -319,6 +319,22 @@ in
     enable = true;
     generateCompletions = true;
     interactiveShellInit = "theme_gruvbox dark hard";
+    functions = {
+      replace_in_files = {
+        body = ''
+
+            set -l from "$argv[1]"
+            set -l to "$argv[2]"
+
+            # Escape special regex characters
+            set -l from_esc (string escape --style=regex -- "$from")
+            set -l to_esc (string escape --style=regex -- "$to")
+
+            # Find files and run sed replacement
+            find . -type f -exec sed -i "s/$from_esc/$to_esc/g" {} +
+          			'';
+      };
+    };
     plugins = [
       {
         name = "fish-ai";
