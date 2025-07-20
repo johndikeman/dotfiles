@@ -108,7 +108,7 @@ in
       nvim-lspconfig
       blink-cmp
       rustaceanvim
-      nvim-treesitter
+      nvim-treesitter.withAllGrammars
       plenary-nvim
       lsp-colors-nvim
       trouble-nvim
@@ -121,9 +121,6 @@ in
       marks-nvim
       workspaces-nvim
       conform-nvim
-      nvim-treesitter-parsers.svelte
-      nvim-treesitter-parsers.markdown
-      nvim-treesitter-parsers.markdown_inline
       codecompanion-nvim
     ];
     extraLuaConfig = ''

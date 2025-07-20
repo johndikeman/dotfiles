@@ -171,6 +171,7 @@ return {
 					sort_lastused = true,
 				},
 			},
+			dependencies = { "nvim-treesitter/nvim-treesitter" },
 		},
 	},
 	{ "ckipp01/stylua-nvim" },
