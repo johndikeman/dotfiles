@@ -62,6 +62,7 @@ in
     pkgs.blender
     pkgs.anki
     pkgs.calibre
+    pkgs.goose-cli
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";

@@ -45,18 +45,6 @@ let
     dependencies = [ pkgs.stylua ];
   };
 
-  model-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "model.nvim";
-    version = "2025-01-25";
-    src = pkgs.fetchFromGitHub {
-      owner = "gsuuon";
-      repo = "model.nvim";
-      rev = "aac9525e0ce9fa074807f43f2537ad73b88010a5";
-      hash = "sha256-fsXn/MGP9NAXBXmTlW9y/QUNqKkKSKOJhIfNGg/PZNg=";
-    };
-    meta.hydraPlatforms = [ ];
-  };
-
   workspaces-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "workspaces.nvim";
     version = "2024-10-08";
@@ -82,6 +70,19 @@ let
     meta.hydraPlatforms = [ ];
   };
 
+  goose-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "goose.nvim";
+    version = "2025-06-17";
+    src = pkgs.fetchFromGitHub {
+      owner = "azorng";
+      repo = "goose.nvim";
+      rev = "ada7651562bbcd0601d08896741cf7b4862178a8";
+      sha256 = "sha256-u7NabwnlwNixc0Axu50Kr81TkHMNbWKvCTTsPQascbA=";
+    };
+    meta.homepage = "https://github.com/numtostr/comment.nvim/";
+    meta.hydraPlatforms = [ ];
+    dependencies = [ pkgs.vimPlugins.plenary-nvim ];
+  };
 in
 {
   home.sessionVariables = {
@@ -115,13 +116,13 @@ in
       vim-svelte-plugin
       telescope-nvim
       stylua-nvim
-      model-nvim
       comment-nvim
       nvim-ts-context-commentstring
       marks-nvim
       workspaces-nvim
       conform-nvim
-      codecompanion-nvim
+      goose-nvim
+      render-markdown-nvim
     ];
     extraLuaConfig = ''
                   vim.g.mapleader = " " -- Need to set leader before lazy for correct keybindings
