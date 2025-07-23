@@ -53,6 +53,30 @@ in
     pkgs.black
     pkgs.lazygit
     pkgs.git-filter-repo
+    pkgs.goose-cli
+    # nixGL.nixVulkanIntel
+    # (pkgs.godot_4.overrideAttrs (old: rec {
+    #   version = "4.5-dev1";
+    #   commitHash = "97241ffea6df579347653a8ce0c75db44e28f0c8"; # Replace with the actual commit hash
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "godotengine";
+    #     repo = "godot";
+    #     rev = commitHash;
+    #     sha256 = "adT8kQKiO7zD5EFHTjxofpj4sUvpu+nO+Atw/hZs0Gw="; # Replace with the actual source hash
+    #   };
+    # }))
+    # # # It is sometimes useful to fine-tune packages, for example, by applying
+    # # overrides. You can do that directly here, just don't forget the
+    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+    # # fonts?
+    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+
+    # # You can also create simple shell scripts directly inside your
+    # # configuration. For example, this adds a command 'my-hello' to your
+    # # environment:
+    # (pkgs.writeShellScriptBin "my-hello" ''
+    #   echo "Hello, ${config.home.username}!"
+    # '')
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
