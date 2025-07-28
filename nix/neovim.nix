@@ -7,8 +7,6 @@
 }:
 let
 
-  sources = import ./sources.nix;
-
   conform-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "conform.nvim";
     version = "2025-04-20";

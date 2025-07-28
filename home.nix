@@ -5,9 +5,6 @@
   # nixGL,
   ...
 }:
-let
-  sources = import ./nix/sources.nix;
-in
 {
   imports = [
     ./nix/fish.nix
@@ -15,8 +12,8 @@ in
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "dikeman";
-  home.homeDirectory = "/home/dikeman";
+  home.username = "john";
+  home.homeDirectory = "/home/john";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -57,8 +54,6 @@ in
     pkgs.black
     pkgs.qbittorrent
     pkgs.vlc
-    (import sources.nixGL { inherit pkgs; }).nixVulkanIntel
-    (import sources.nixGL { inherit pkgs; }).nixGLIntel
     pkgs.blender
     pkgs.anki
     pkgs.calibre
@@ -101,15 +96,6 @@ in
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
-    "${config.xdg.configHome}/touchegg" = {
-      source = dotfiles/touchegg;
-      recursive = true;
-    };
-
-    "${config.xdg.configHome}/xkeysnail" = {
-      source = dotfiles/xkeysnail;
-      recursive = true;
-    };
     "${config.xdg.configHome}/containers" = {
       source = dotfiles/containers;
       recursive = true;
@@ -192,30 +178,4 @@ in
   programs.git.userEmail = "jrobdikeman@gmail.com";
   programs.git.userName = "john";
 
-  # Systemd service to auto-start xkeysnail
-  systemd.user.services.xkeysnail = {
-    Unit = {
-      Description = "xkeysnail Keyboard Remapper";
-      After = [ "graphical-session.target" ];
-    };
-
-    Service = {
-      Type = "simple";
-      # needed to edit sudoers to remove the need for a password for this program
-      # https://stackoverflow.com/questions/21659637/how-to-fix-sudo-no-tty-present-and-no-askpass-program-specified-error
-      ExecStart = "sudo ${pkgs.xkeysnail}/bin/xkeysnail --quiet ${~/.config/xkeysnail/config.py}";
-      Restart = "on-failure";
-      # Run with sudo (required for key grabbing)
-      ExecStartPre = "${pkgs.coreutils}/bin/sleep 1";
-    };
-
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
-  };
-
-  # Disable GNOME's Super key overlay (to avoid conflicts)
-  home.activation.ensureXkeysnail = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    		${pkgs.glib}/bin/gsettings set org.gnome.mutter overlay-key "" 
-    	'';
 }
