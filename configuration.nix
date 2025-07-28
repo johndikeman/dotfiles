@@ -5,6 +5,24 @@
 { config, pkgs, ... }:
 
 {
+  # Custom font package definition
+  nixpkgs.overlays = [
+    (self: super: {
+      cartograph-font = super.stdenv.mkDerivation {
+        name = "cartograph-font";
+        src = super.fetchFromGitHub {
+          owner = "g5becks";
+          repo = "Cartograph";
+          rev = "master";
+          sha256 = "0hwpvgmjjb04jwk6bd650cnzyba32vm3gvffz42b1xdkny5j5irz";
+        };
+        installPhase = ''
+          mkdir -p $out/share/fonts/opentype
+          cp *.otf $out/share/fonts/opentype/
+        '';
+      };
+    })
+  ];
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -100,6 +118,20 @@
     git
   #  wget
   ];
+
+  # Font configuration
+  fonts = {
+    packages = with pkgs; [
+      cartograph-font
+    ];
+    fontconfig = {
+      defaultFonts = {
+        monospace = [ "Cartograph CF" ];
+        sansSerif = [ "Cartograph CF" ];
+        serif = [ "Cartograph CF" ];
+      };
+    };
+  };
 
   environment.variables.EDITOR="nvim";
   # Some programs need SUID wrappers, can be configured further or are
