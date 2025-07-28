@@ -58,16 +58,10 @@
     pkgs.blender
     pkgs.anki
     pkgs.calibre
-    (pkgs.goose-cli.overrideAttrs (old: rec {
-      version = "1.1.3";
-      checkFlags = old.checkFlags ++ [
-        "--skip=google_drive::storage::tests::test_file_system_error_handling"
-      ];
-    }))
+    pkgs.goose-cli
     pkgs.spotify
     pkgs.discord
     pkgs.pavucontrol
-
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";
