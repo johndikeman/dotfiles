@@ -121,10 +121,10 @@ in
       marks-nvim
       workspaces-nvim
       conform-nvim
-      nvim-treesitter-parsers.svelte
-      nvim-treesitter-parsers.markdown
-      nvim-treesitter-parsers.markdown_inline
-      codecompanion-nvim
+      goose-nvim
+      render-markdown-nvim
+      vim-fugitive
+      diffview-nvim
     ];
     extraLuaConfig = ''
                   vim.g.mapleader = " " -- Need to set leader before lazy for correct keybindings
