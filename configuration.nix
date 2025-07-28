@@ -100,10 +100,14 @@
     isNormalUser = true;
     description = "john";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.fish;
     packages = with pkgs; [
     #  thunderbird
     ];
   };
+
+  # Enable fish shell
+  programs.fish.enable = true;
 
   # Install firefox.
   programs.firefox.enable = true;

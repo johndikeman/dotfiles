@@ -63,6 +63,7 @@
         "--skip=google_drive::storage::tests::test_file_system_error_handling"
       ];
     }))
+    pkgs.spotify
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";
