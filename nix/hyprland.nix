@@ -46,8 +46,6 @@
 
         # See swww-img(1)
         RESIZE_TYPE="crop"
-        export SWWW_TRANSITION_FPS="${SWWW_TRANSITION_FPS: -60}"
-        export SWWW_TRANSITION_STEP="${SWWW_TRANSITION_STEP: -2}"
 
         while true; do
         	find "$1" -type f \
@@ -584,5 +582,7 @@
     GTK_THEME = "Catppuccin-Mocha-Standard-Blue-Dark";
     LIBVA_DRIVER_NAME = "nvidia";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    SWWW_TRANSITION_FPS = 60;
+    SWWW_TRANSITION_STEP = 2;
   };
 }
