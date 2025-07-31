@@ -27,7 +27,7 @@
     polkit_gnome # Authentication agent
     qt5.qtwayland # QT wayland support
     qt6.qtwayland # QT6 wayland support
-    gnome.adwaita-icon-theme # Icon theme
+    adwaita-icon-theme # Icon theme
     papirus-icon-theme # Additional icon theme
     catppuccin-gtk # GTK theme
     # Fonts are managed in configuration.nix
