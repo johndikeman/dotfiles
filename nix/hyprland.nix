@@ -52,8 +52,8 @@
       ];
 
       monitor = [
-        "HDMI-A-1,3840x2160,0x0,1.25"
-        "HDMI-A-2,3840x2160,-2160x840,1.25,transform,1"
+        "HDMI-A-1,3840x2160,0x0,1.5"
+        "HDMI-A-2,3840x2160,-2160x840,1.5,transform,1"
       ];
 
       # General configuration
