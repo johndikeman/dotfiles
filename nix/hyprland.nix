@@ -72,11 +72,13 @@
       "$mod" = "SUPER";
 
       exec-once = [
+        "swww-daemon"
         "waybar"
         "dunst"
         "nm-applet"
         "blueman-applet"
         "/usr/libexec/polkit-gnome-authentication-agent-1"
+        "swww-randomize.sh ~/wallpapers/"
       ];
 
       monitor = [
