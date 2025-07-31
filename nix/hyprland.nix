@@ -550,5 +550,7 @@
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     # GTK theme
     GTK_THEME = "Catppuccin-Mocha-Standard-Blue-Dark";
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 }
