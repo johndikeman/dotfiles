@@ -53,7 +53,8 @@
 
       monitor = [
         "HDMI-A-1,3840x2160,0x0,1.5"
-        "HDMI-A-2,3840x2160,-2160x840,1.5,transform,1"
+        # need to take the scaling into account in the position!
+        "HDMI-A-2,3840x2160,-1440x-450,1.5,transform,1"
       ];
 
       # General configuration
