@@ -52,7 +52,8 @@
       ];
 
       monitor = [
-        ",preferred,auto,1"
+        "HDMI-A-1,3840x2160,0x0,1.25"
+        "HDMI-A-2,3840x2160,-2160x840,1.25,transform,1"
       ];
 
       # General configuration
@@ -73,9 +74,9 @@
           size = 3;
           passes = 1;
         };
-        drop_shadow = true;
-        shadow_range = 4;
-        shadow_render_power = 3;
+        # drop_shadow = true;
+        # shadow_range = 4;
+        # shadow_render_power = 3;
       };
 
       # Animation configuration
