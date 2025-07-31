@@ -68,6 +68,7 @@
   # services.xserver.desktopManager.gnome.enable = true;
 
   services.displayManager.sddm.wayland.enable = true;
+  programs.dconf.enable = true;
 
   # Configure keymap in X11
   # services.xserver.xkb = {
