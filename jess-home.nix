@@ -61,12 +61,6 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # KDE Plasma
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-
-  programs.kdeconnect.enable = true;
-
   home.file.".config/kdeglobals".text = ''
     [General]
     BrowserApplication=google-chrome.desktop
