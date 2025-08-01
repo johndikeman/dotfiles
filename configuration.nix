@@ -71,9 +71,6 @@
   services.displayManager.sddm.wayland.enable = true;
   programs.dconf.enable = true;
 
-  # KDE Plasma
-  services.desktopManager.plasma6.enable = true;
-
   # Configure keymap in X11
   # services.xserver.xkb = {
   #  layout = "us";
