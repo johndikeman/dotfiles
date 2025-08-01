@@ -132,6 +132,15 @@
     ];
   };
 
+  users.users.jess = {
+    isNormalUser = true;
+    description = "jess";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    initialHashedPassword = "$6$6uCfkbpJR0gOWaa/$n9rdhFZPpjqI5MK21Y10OOQCnjkV35yxI9C9gpk1SdOqAnLoIA5G4DyOJ7km7dM9l.YtRPOCG2FcVmHapISu.1";
+  };
   # Enable fish shell
   programs.fish.enable = true;
 
