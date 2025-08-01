@@ -65,11 +65,6 @@
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.wayland.enable = true;
 
-  environment.plasma6.excludePackages = with pkgs.plasma6; [
-    elisa
-    kwrite
-  ];
-
   programs.kdeconnect.enable = true;
 
   home.file.".config/kdeglobals".text = ''
