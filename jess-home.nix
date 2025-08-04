@@ -30,6 +30,7 @@
     pkgs.spotify
     pkgs.google-chrome
     pkgs.discord
+
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -54,11 +55,30 @@
   #  /etc/profiles/per-user/jess/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
+
     # EDITOR = "emacs";
     SHELL = "fish";
   };
 
-  # Let Home Manager install and manage itself.
+  gtk = {
+    gtk3 = {
+      enable = true;
+      theme = {
+        name = "Yaru-pink-dark";
+        package = pkgs.yaru-theme;
+      };
+      iconTheme = {
+        name = "Yaru-pink";
+        package = pkgs.yaru-theme;
+      };
+      cursorTheme = {
+        name = "Yaru-pink";
+        package = pkgs.yaru-theme;
+        size = 24;
+      };
+    };
+  };
+
   programs.home-manager.enable = true;
 
   home.file.".config/kdeglobals".text = ''

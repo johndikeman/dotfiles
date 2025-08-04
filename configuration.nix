@@ -78,6 +78,9 @@
   #};
 
   # Enable CUPS to print documents.
+  services.xserver.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
+
   services.printing.enable = true;
 
   # Enable sound with pipewire.
@@ -142,6 +145,8 @@
     ];
     initialHashedPassword = "$6$6uCfkbpJR0gOWaa/$n9rdhFZPpjqI5MK21Y10OOQCnjkV35yxI9C9gpk1SdOqAnLoIA5G4DyOJ7km7dM9l.YtRPOCG2FcVmHapISu.1";
   };
+
+  # Let Home Manager install and manage itself.
   # Enable fish shell
   programs.fish.enable = true;
 
