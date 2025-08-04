@@ -31,11 +31,14 @@
     pkgs.google-chrome
     pkgs.discord
     pkgs.yaru-theme
+    pkgs.dconf-editor
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    ".config/cinnamon/spices/grouped-window-list@cinnamon.org/2.json".source =
+      ./dotfiles/cinnamon/2.json;
   };
 
   # Home Manager can also manage your environment variables through
@@ -64,14 +67,18 @@
 
   dconf.settings = {
     "org/cinnamon/desktop/interface" = {
-      "gtk-theme" = "Yaru-pink-dark";
-      "icon-theme" = "Yaru-pink";
-      "cursor-theme" = "Yaru-pink";
+      "gtk-theme" = "Mint-L-Pink";
+      "icon-theme" = "Mint-L-Pink";
+      "cursor-theme" = "Mint-L-Pink";
       "cursor-size" = 24;
     };
 
+    "org/cinnamon/desktop/wm/preferences" = {
+      "theme" = "Mint-L-Pink";
+    };
+
     "org/cinnamon/theme" = {
-      "name" = "Yaru-pink-dark";
+      "name" = "Mint-L-Pink";
     };
 
     "org.cinnamon" = {
