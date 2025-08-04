@@ -30,7 +30,7 @@
     pkgs.spotify
     pkgs.google-chrome
     pkgs.discord
-
+    pkgs.yaru-theme
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -60,34 +60,43 @@
     SHELL = "fish";
   };
 
-  gtk = {
-    gtk3 = {
-      enable = true;
-      theme = {
-        name = "Yaru-pink-dark";
-        package = pkgs.yaru-theme;
-      };
-      iconTheme = {
-        name = "Yaru-pink";
-        package = pkgs.yaru-theme;
-      };
-      cursorTheme = {
-        name = "Yaru-pink";
-        package = pkgs.yaru-theme;
-        size = 24;
-      };
+  dconf.enable = true;
+
+  dconf.settings = {
+    "org/cinnamon/desktop/interface" = {
+      "gtk-theme" = "Yaru-pink-dark";
+      "icon-theme" = "Yaru-pink";
+      "cursor-theme" = "Yaru-pink";
+      "cursor-size" = 24;
+    };
+
+    "org/cinnamon/theme" = {
+      "name" = "Yaru-pink-dark";
+    };
+
+    "org.cinnamon" = {
+      "enabled-applets" = [
+        "panel1:left:0:menu@cinnamon.org"
+        "panel1:left:1:show-desktop@cinnamon.org"
+        "panel1:left:2:grouped-window-list@cinnamon.org"
+        "panel1:right:0:systray@cinnamon.org"
+        "panel1:right:1:xapp-status@cinnamon.org"
+        "panel1:right:2:notifications@cinnamon.org"
+        "panel1:right:3:printers@cinnamon.org"
+        "panel1:right:4:removable-drives@cinnamon.org"
+        "panel1:right:5:keyboard@cinnamon.org"
+        "panel1:right:6:favorites@cinnamon.org"
+        "panel1:right:7:clock@cinnamon.org"
+      ];
+    };
+
+    "org/cinnamon/applets/grouped-window-list" = {
+      "pinned-apps" = [
+        "google-chrome.desktop"
+        "discord.desktop"
+      ];
     };
   };
 
   programs.home-manager.enable = true;
-
-  home.file.".config/kdeglobals".text = ''
-    [General]
-    BrowserApplication=google-chrome.desktop
-  '';
-
-  home.file.".config/plasma-org.kde.plasma.desktop-appletsrc".text = ''
-    [Containments][1][Applets][2][Configuration][General]
-    launchers=applications:google-chrome.desktop,applications:discord.desktop
-  '';
 }
