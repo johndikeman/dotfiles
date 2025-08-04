@@ -528,6 +528,18 @@ in
         '';
       };
 
+      ntvoicegemini2 = {
+        description = "Run gemini2 voice agent without tests";
+        body = ''
+          python test.py --modality=voice --agent=projects/att-aam-external/locations/us-east1/agents/a1cb3ef1-6203-485f-83e0-a8f88410e69f --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
+        '';
+      };
+      ntchatgemini2 = {
+        description = "Run gemini2 chat agent without tests";
+        body = ''
+          python test.py --modality=chat --agent=projects/att-aam-external/locations/us-east1/agents/aa58d207-5e50-4a23-9a0c-61e0da12fcae --repo_root=/usr/local/google/home/dikeman --gs_bucket=john-util --creds=/usr/local/google/home/dikeman/df-rm-scripts/creds.json --out_root=/usr/local/google/home/dikeman/df-rm-scripts-logs --run_tests=False "$argv"
+        '';
+      };
       # Utility alias
       gr = {
         description = "quickly reset your git repo";
