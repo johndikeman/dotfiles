@@ -39,6 +39,16 @@
   home.file = {
     ".config/cinnamon/spices/grouped-window-list@cinnamon.org/2.json".source =
       ./dotfiles/cinnamon/2.json;
+
+    "wallpapers" = {
+      source = pkgs.fetchFromGitHub {
+        owner = "johndikeman";
+        repo = "wallpapers";
+        rev = "main"; # Or a specific commit hash/tag if you want to pin it
+        sha256 = "sha256-XIuWNIPeUwn4vJNmezBTJ9pX2KNO1VvYwDRoJiEgu1Y="; # REPLACE WITH ACTUAL SHA256
+      };
+      recursive = true;
+    };
   };
 
   # Home Manager can also manage your environment variables through
@@ -58,17 +68,6 @@
   #  /etc/profiles/per-user/jess/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-
-    "wallpapers" = {
-      source = pkgs.fetchFromGitHub {
-        owner = "johndikeman";
-        repo = "wallpapers";
-        rev = "main"; # Or a specific commit hash/tag if you want to pin it
-        sha256 = "sha256-PLACEHOLDER"; # REPLACE WITH ACTUAL SHA256
-      };
-      recursive = true;
-    };
-
 
     # EDITOR = "emacs";
     SHELL = "fish";
