@@ -76,12 +76,14 @@
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
-  services.displayManager.sddm = {
+  services.xserver.displayManager.sddm = {
     enable = true;
     theme = "catppuccin-sddm-corners";
+    wayland = {
+      enable = true;
+    };
   };
 
-  services.displayManager.sddm.wayland.enable = true;
   programs.dconf.enable = true;
 
   # Configure keymap in X11
