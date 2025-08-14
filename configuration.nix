@@ -76,9 +76,12 @@
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "catppuccin-sddm-corners";
+  };
+
   services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.sddm.theme = "catppuccin-sddm-corners";
   programs.dconf.enable = true;
 
   # Configure keymap in X11
@@ -176,15 +179,7 @@
     git
     unzip
     sbctl
-    (catppuccin-sddm-corners.overrideAttrs (old: rec {
-      src = pkgs.fetchFromGitHub {
-        owner = "johndikeman";
-        repo = "catppuccin-sddm-corners";
-        rev = "main";
-        sha256 = "sha256-2Ucu6HIfPs7RmF8y+BQCSO52D1eUajKsZs6BwfGr5Rg=";
-      };
-    }))
-    #  wget
+    catppuccin-sddm-corners
   ];
 
   # Font configuration
