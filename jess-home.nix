@@ -32,6 +32,7 @@
     pkgs.discord
     pkgs.yaru-theme
     pkgs.dconf-editor
+    pkgs.gnome-screenshot
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
