@@ -180,6 +180,15 @@ in
   #
   #  /etc/profiles/per-user/dikeman/etc/profile.d/hm-session-vars.sh
   #
+
+  nix = {
+    package = pkgs.nix;
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
+
   home.sessionVariables = {
     # EDITOR = "emacs";
     SHELL = "fish";
