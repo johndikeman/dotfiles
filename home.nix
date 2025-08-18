@@ -17,7 +17,6 @@ in
   # manage.
   home.username = "dikeman";
   home.homeDirectory = "/usr/local/google/home/dikeman";
-
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -168,4 +167,12 @@ in
   programs.git.enable = true;
   programs.git.userEmail = "dikeman@google.com";
   programs.git.userName = "john dikeman";
+
+  nix = {
+    package = pkgs.nix;
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 }
