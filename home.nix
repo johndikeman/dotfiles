@@ -63,10 +63,16 @@ in
     pkgs.anki
     pkgs.calibre
     (pkgs.goose-cli.overrideAttrs (old: rec {
-      version = "1.1.3";
+      version = "1.4.1";
       checkFlags = old.checkFlags ++ [
         "--skip=google_drive::storage::tests::test_file_system_error_handling"
       ];
+      src = pkgs.fetchFromGitHub {
+        owner = "block";
+        repo = "goose-cli";
+        rev = version;
+        sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # REPLACE_WITH_ACTUAL_SHA256
+      };
     }))
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
