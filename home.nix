@@ -209,10 +209,13 @@ in
 
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    settings = {
+      sandbox = "relaxed";
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
   };
 
   home.sessionVariables = {
