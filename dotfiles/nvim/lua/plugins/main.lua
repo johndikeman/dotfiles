@@ -310,6 +310,15 @@ return {
 			},
 		},
 	},
-	{ "sindrets/diffview.nvim" },
+	{
+		"sindrets/diffview.nvim",
+		keys = {
+			-- Toggle diffview
+			{ "<leader>dv", "<cmd>DiffviewOpen<cr>", desc = "Diffview" },
+			{ "<leader>dvc", "<cmd>DiffviewClose<cr>", desc = "Diffview" },
+			-- Open git history for current buffer
+			{ "<leader>fh", "<cmd>DiffviewFileHistory %<cr>", desc = "Diffview File History" },
+		},
+	},
 	{ "tpope/vim-fugitive" },
 }
