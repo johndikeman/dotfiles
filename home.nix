@@ -62,38 +62,7 @@ in
     pkgs.blender
     pkgs.anki
     pkgs.calibre
-    (pkgs.goose-cli.overrideAttrs (old: rec {
-      version = "1.4.1";
-      checkFlags = old.checkFlags ++ [
-        "--skip=google_drive::storage::tests::test_file_system_error_handling"
-        "--skip=test_concurrent_access"
-        "--skip=test_model_not_in_openrouter"
-        "--skip=test_pricing_cache_performance"
-        "--skip=test_pricing_refresh"
-        "--skip=transport::streamable_http::tests::test_handle_outgoing_message_http_error"
-        "--skip=transport::streamable_http::tests::test_handle_outgoing_message_invalid_json"
-        "--skip=transport::streamable_http::tests::test_handle_outgoing_message_notification"
-        "--skip=transport::streamable_http::tests::test_handle_outgoing_message_session_id_handling"
-        "--skip=transport::streamable_http::tests::test_handle_outgoing_message_session_not_found"
-        "--skip=transport::streamable_http::tests::test_handle_outgoing_message_successful_request"
-        "--skip=context_mgmt::auto_compact::tests::test_auto_compact_respects_config"
-      ];
-      src = pkgs.fetchFromGitHub {
-        owner = "block";
-        repo = "goose";
-        tag = "v1.4.1";
-        sha256 = "sha256-54Zq9R9NBj2wL3YNlJxk11qWkciL5skKejshn39hxvk=";
-      };
-
-      cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
-        inherit src;
-        name = "goose-cli-${version}";
-        hash = "sha256-bonf18D4peWuhA45p6ON/xcXZYR8X2HregbWrASPN3k=";
-      };
-
-      cargoHash = null;
-    }))
-
+    pkgs.goose-cli
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";
