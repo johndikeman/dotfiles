@@ -38,6 +38,11 @@
       runtimeInputs = [ swww ];
       text = builtins.readFile ../scripts/swww-randomize.sh;
     })
+    (pkgs.writeShellApplication {
+      name = "modcopypaste.sh";
+      runtimeInputs = [ jq ];
+      text = builtins.readFile ../scripts/modcopypaste.sh;
+    })
   ];
 
   # Enable Hyprland
@@ -136,10 +141,9 @@
         "$mod, J, togglesplit,"
 
         # global copy-paste with mod key
-        "$mod, C, sendshortcut, CTRL_SHIFT, C, class:kitty"
-        "$mod, C, sendshortcut, CTRL, C, class:^(.{0,4}|.{6,}|[^k]....|k[^i]...|ki[^t]..|kit[^t].|kitt[^y])$"
-        "$mod, V, sendshortcut, CTRL_SHIFT, V, class:kitty"
-        "$mod, V, sendshortcut, CTRL, V, class:^(.{0,4}|.{6,}|[^k]....|k[^i]...|ki[^t]..|kit[^t].|kitt[^y])$"
+        "$mod, C, exec, modcopypaste.sh copy kitty"
+        "$mod, V, exec, modcopypaste.sh paste kitty"
+
         # Move focus with mod + arrow keys
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
