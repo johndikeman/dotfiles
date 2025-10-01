@@ -131,11 +131,6 @@
 
       # Key bindings
       bind = [
-        # Basic window management
-        "$mod, T, exec, kitty"
-        "$mod, Q, killactive,"
-        "$mod, M, exit,"
-        "$mod, F, sendshortcut, CTRL, F,"
         "$mod, space, exec, wofi --show drun"
         "$mod, P, pseudo,"
         "$mod, J, togglesplit,"
@@ -143,6 +138,15 @@
         # global copy-paste with mod key
         "$mod, C, exec, modcopypaste.sh copy kitty"
         "$mod, V, exec, modcopypaste.sh paste kitty"
+
+        # macos-esque bindings
+        "$mod, Q, killactive,"
+        "$mod, M, exit,"
+        "$mod, F, sendshortcut, CTRL, F, active"
+        "$mod, A, sendshortcut, CTRL, A, active"
+        "$mod, R, sendshortcut, CTRL, R, active"
+        "$mod, T, sendshortcut, CTRL, T, active"
+        "$mod, W, sendshortcut, CTRL, W, active"
 
         # Move focus with mod + arrow keys
         "$mod, left, movefocus, l"
