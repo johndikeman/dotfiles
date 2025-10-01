@@ -130,7 +130,7 @@
         "$mod, T, exec, kitty"
         "$mod, Q, killactive,"
         "$mod, M, exit,"
-        "$mod, F, sendshortcut, CTRL, F"
+        "$mod, F, sendshortcut, CTRL, F,"
         "$mod, space, exec, wofi --show drun"
         "$mod, P, pseudo,"
         "$mod, J, togglesplit,"
