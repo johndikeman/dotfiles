@@ -66,6 +66,7 @@
     }))
     pkgs.spotify
     pkgs.discord
+    pkgs.pavucontrol
 
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
