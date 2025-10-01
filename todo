@@ -1,3 +1,6 @@
-- configure blinkcmp (tab to cycle completions)
-- switch the fish-ai thing to use a faster model
+- waybar, 
+- widgets for volume control
+- cmd for copy-paste shortcuts
+- kitty/fish theming
+- different cursor
 
