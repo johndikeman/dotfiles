@@ -582,5 +582,6 @@
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     SWWW_TRANSITION_FPS = 60;
     SWWW_TRANSITION_STEP = 2;
+    HYPRCURSOR_THEME = "rose-pine-hyprcursor";
   };
 }

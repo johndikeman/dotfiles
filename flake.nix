@@ -18,6 +18,12 @@
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/hyprland?ref=v0.51.1";
+    rose-pine-hyprcursor = {
+      url = "github:ndom91/rose-pine-hyprcursor";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hyprlang.follows = "hyprland/hyprlang";
+    };
   };
 
   outputs =
@@ -26,12 +32,15 @@
       nixpkgs,
       home-manager,
       lanzaboote,
+      rose-pine-hyprcursor,
       ...
     }@inputs:
     {
-      # Please replace my-nixos with your hostname
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
+        specialArgs = {
+          rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
+        };
         modules = [
           lanzaboote.nixosModules.lanzaboote
           # Import the previous configuration.nix we used,

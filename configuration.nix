@@ -6,6 +6,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 
@@ -176,12 +177,13 @@
   ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    git
-    unzip
-    sbctl
-    catppuccin-sddm-corners
+  environment.systemPackages = [
+    pkgs.neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    pkgs.git
+    pkgs.unzip
+    pkgs.sbctl
+    pkgs.catppuccin-sddm-corners
+    inputs.rose-pine-hyprcursor
   ];
 
   # Font configuration
