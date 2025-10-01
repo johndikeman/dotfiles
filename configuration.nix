@@ -76,7 +76,7 @@
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
-  services.xserver.displayManager.sddm = {
+  services.displayManager.sddm = {
     enable = true;
     theme = "catppuccin-sddm-corners";
     wayland = {
