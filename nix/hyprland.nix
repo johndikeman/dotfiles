@@ -49,6 +49,10 @@
     settings = {
       "$mod" = "SUPER";
 
+      debug = {
+        disable_logs = false;
+      };
+
       exec-once = [
         "swww-daemon"
         "waybar"
