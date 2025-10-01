@@ -136,10 +136,10 @@
         "$mod, J, togglesplit,"
 
         # global copy-paste with mod key
-        "$mod, C, sendshortcut, CONTROL+SHIFT, C, ^(alacritty|kitty|wezterm|foot)$"
-        "$mod, C, sendshortcut, CONTROL, C, ^[^(alacritty|kitty|wezterm|foot)]$"
-        "$mod, V, sendshortcut, CONTROL+SHIFT, V, ^(alacritty|kitty|wezterm|foot)$"
-        "$mod, V, sendshortcut, CONTROL, V, ^[^(alacritty|kitty|wezterm|foot)]$"
+        "$mod, C, sendshortcut, CONTROL+SHIFT, C, ^kitty$"
+        "$mod, C, sendshortcut, CONTROL, C,"
+        "$mod, V, sendshortcut, CONTROL+SHIFT, V, ^kitty$"
+        "$mod, V, sendshortcut, CONTROL, V,"
 
         # Move focus with mod + arrow keys
         "$mod, left, movefocus, l"
