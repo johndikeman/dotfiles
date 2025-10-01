@@ -136,11 +136,10 @@
         "$mod, J, togglesplit,"
 
         # global copy-paste with mod key
-        "$mod, C, sendshortcut, CONTROL+SHIFT, C, class:kitty"
-        "$mod, C, sendshortcut, CONTROL, C, class:^(.{0,4}|.{6,}|[^k]....|k[^i]...|ki[^t]..|kit[^t].|kitt[^y])$"
-        "$mod, V, sendshortcut, CONTROL+SHIFT, V, class:kitty"
-        "$mod, V, sendshortcut, CONTROL, V, class:^(.{0,4}|.{6,}|[^k]....|k[^i]...|ki[^t]..|kit[^t].|kitt[^y])$"
-
+        "$mod, C, sendshortcut, CTRL_SHIFT, C, class:kitty"
+        "$mod, C, sendshortcut, CTRL, C, class:^(.{0,4}|.{6,}|[^k]....|k[^i]...|ki[^t]..|kit[^t].|kitt[^y])$"
+        "$mod, V, sendshortcut, CTRL_SHIFT, V, class:kitty"
+        "$mod, V, sendshortcut, CTRL, V, class:^(.{0,4}|.{6,}|[^k]....|k[^i]...|ki[^t]..|kit[^t].|kitt[^y])$"
         # Move focus with mod + arrow keys
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
