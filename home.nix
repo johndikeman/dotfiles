@@ -62,6 +62,7 @@
     pkgs.spotify
     pkgs.discord
     pkgs.pavucontrol
+    pkgs.lazygit
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";
