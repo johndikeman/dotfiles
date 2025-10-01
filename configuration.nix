@@ -6,7 +6,7 @@
   config,
   pkgs,
   lib,
-  inputs,
+  rose-pine-hyprcursor,
   ...
 }:
 
@@ -183,7 +183,7 @@
     pkgs.unzip
     pkgs.sbctl
     pkgs.catppuccin-sddm-corners
-    inputs.rose-pine-hyprcursor
+    rose-pine-hyprcursor
   ];
 
   # Font configuration
