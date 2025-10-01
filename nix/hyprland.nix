@@ -13,6 +13,7 @@
     libnotify # Notification library
     swww # Wallpaper
     wl-clipboard # Clipboard manager
+    cliphist # clipboard history
     grim # Screenshot utility
     slurp # Screen area selection
     pamixer # Audio control
@@ -56,6 +57,8 @@
         "blueman-applet"
         "/usr/libexec/polkit-gnome-authentication-agent-1"
         "swww-randomize.sh ~/wallpapers/"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
       ];
 
       monitor = [
@@ -123,11 +126,16 @@
         "$mod, T, exec, kitty"
         "$mod, Q, killactive,"
         "$mod, M, exit,"
-        "$mod, F, exec, nautilus"
-        "$mod, V, togglefloating,"
-        "$mod, E, exec, wofi --show drun"
+        "$mod, F, sendshortcut, CTRL, F"
+        "$mod, space, exec, wofi --show drun"
         "$mod, P, pseudo,"
         "$mod, J, togglesplit,"
+
+        # global copy-paste with mod key
+        "$mod, C, sendshortcut, CONTROL+SHIFT, C, ^(alacritty|kitty|wezterm|foot)$"
+        "$mod, C, sendshortcut, CONTROL, C, ^[^(alacritty|kitty|wezterm|foot)]$"
+        "$mod, V, sendshortcut, CONTROL+SHIFT, V, ^(alacritty|kitty|wezterm|foot)$"
+        "$mod, V, sendshortcut, CONTROL, V, ^[^(alacritty|kitty|wezterm|foot)]$"
 
         # Move focus with mod + arrow keys
         "$mod, left, movefocus, l"
