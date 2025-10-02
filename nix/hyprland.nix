@@ -51,9 +51,9 @@
       lock = "${pkgs.swaylock}/bin/swaylock --daemonize";
       # TODO: modify "display" function based on your window manager
       # Sway
-      display = status: "swaymsg 'output * power ${status}'";
+      # display = status: "swaymsg 'output * power ${status}'";
       # Hyprland
-      # display = status: "hyprctl dispatch dpms ${status}";
+      display = status: "hyprctl dispatch dpms ${status}";
       # Niri
       # display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
     in
