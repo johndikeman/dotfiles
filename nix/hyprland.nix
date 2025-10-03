@@ -81,21 +81,14 @@
       events = [
         {
           event = "before-sleep";
-          # adding duplicated entries for the same event may not work
-          command = (display "off") + "; " + lock;
+          command = lock + "; " + (display "off");
         }
         {
           event = "after-resume";
-          command = display "on";
+          command = "${pkgs.procps}/bin/killall swaylock; " + (display "on");
         }
-        {
-          event = "lock";
-          command = (display "off") + "; " + lock;
-        }
-        {
-          event = "unlock";
-          command = display "on";
-        }
+
+
       ];
     };
 
