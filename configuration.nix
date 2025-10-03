@@ -131,12 +131,16 @@
   # Enable NVIDIA settings
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
+  systemd.services."nvidia-suspend".enable = true;
+  systemd.services."nvidia-resume".enable = true;
+  systemd.services."nvidia-hibernate".enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.john = {
