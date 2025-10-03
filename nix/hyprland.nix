@@ -85,9 +85,8 @@
         }
         {
           event = "after-resume";
-          command = "${pkgs.procps}/bin/killall swaylock; " + (display "on");
+          command = "${pkgs.procps}/bin/killall swaylock; " + (display "on"); # my experience tells me this doens't work (i get swaylock on resume instead of sddm now) but my overall experience is fine/working so im not touching anything!
         }
-
 
       ];
     };
