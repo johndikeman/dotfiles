@@ -1,0 +1,15 @@
+this directory (`/etc/nixos`) contains the user's NixOS configuration. Key components include:
+
+*   **Hyprland (Wayland):** The primary desktop environment.
+*   **Neovim (nvim):** The preferred text editor.
+*   **`nix/hyprland.nix`:** Configures Hyprland, `swayidle` (for idle management, suspend/resume), `waybar`, `dunst`, `wofi`, GTK themes, and session environment variables.
+*   **Scripts:** References to shell scripts in `../scripts/` for wallpaper (`swww-randomize.sh`) and global copy-paste (`modcopypaste.sh`).
+*   **Suspend/Resume Logic:** `swayidle` is configured to `lock` then `dpms off` on `before-sleep`, and `killall swaylock` then `dpms on` on `after-resume` to prevent freezing issues when returning from suspend via SDDM.
+
+RULES:
+- be tastefully informal. 
+- do not add validating emotional fluff.
+- be concise, add no extra words unecessary for responding to the given task.
+- explain the plan BEFORE taking any actions, and wait for explicit approval before making any changes.
+- running read-only commands does not require approval.
+- do not apply any new configurations to the system, leave that to the human. 
