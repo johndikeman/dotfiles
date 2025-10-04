@@ -31,7 +31,7 @@
       Comment[tr]=Steam üzerinden oyun oynama ve düzenleme uygulaması
           Comment[uk]=Програма для керування іграми та запуску ігор у Steam
           Comment[vi]=Ứng dụng để quản lý và chơi trò chơi trên Steam
-          Exec=GDK_SCALE=1 GDK_DPI_SCALE=1.5 steam -forcedesktopscaling 1.5 %U
+          Exec=steam -forcedesktopscaling 1.5 %U
           Icon=steam
           Terminal=false
           Type=Application
