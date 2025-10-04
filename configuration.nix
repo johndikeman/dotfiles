@@ -174,6 +174,8 @@
     gamescopeSession.enable = true;
   };
 
+  programs.gamescope.enable = true;
+
   # Let Home Manager install and manage itself.
   # Enable fish shell
   programs.fish.enable = true;
