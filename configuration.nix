@@ -166,6 +166,13 @@
     initialHashedPassword = "$6$6uCfkbpJR0gOWaa/$n9rdhFZPpjqI5MK21Y10OOQCnjkV35yxI9C9gpk1SdOqAnLoIA5G4DyOJ7km7dM9l.YtRPOCG2FcVmHapISu.1";
   };
 
+  programs.steam = {
+    enable = true; # Master switch, already covered in installation
+    remotePlay.openFirewall = true; # For Steam Remote Play
+    dedicatedServer.openFirewall = true; # For Source Dedicated Server hosting
+    # Other general flags if available can be set here.
+  };
+
   # Let Home Manager install and manage itself.
   # Enable fish shell
   programs.fish.enable = true;
