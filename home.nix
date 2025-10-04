@@ -1,8 +1,3 @@
-
-  xdg.dataHome = {
-    "applications/steam.desktop".source = "${./desktop-overrides/steam.desktop}";
-  };
-
 {
   config,
   lib,
@@ -15,6 +10,7 @@
     ./nix/fish.nix
     ./nix/neovim.nix
     ./nix/hyprland.nix
+    ./nix/steam-desktop-override.nix
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -81,6 +77,7 @@
     # }))
     # # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
+
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
@@ -122,6 +119,7 @@
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
+
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
