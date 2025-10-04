@@ -165,7 +165,8 @@
         touchpad = {
           natural_scroll = true;
         };
-        sensitivity = 0;
+        sensitivity = .8;
+        accel_profile = "flat";
       };
 
       # Window rules
