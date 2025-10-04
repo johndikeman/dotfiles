@@ -1,3 +1,8 @@
+
+  xdg.dataHome = {
+    "applications/steam.desktop".source = "${./desktop-overrides/steam.desktop}";
+  };
+
 {
   config,
   lib,
