@@ -174,7 +174,10 @@
     gamescopeSession.enable = true;
   };
 
-  programs.gamescope.enable = true;
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
 
   # Let Home Manager install and manage itself.
   # Enable fish shell
