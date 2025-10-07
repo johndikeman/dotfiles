@@ -171,7 +171,6 @@
     remotePlay.openFirewall = true; # For Steam Remote Play
     dedicatedServer.openFirewall = true; # For Source Dedicated Server hosting
     # Other general flags if available can be set here.
-    gamescopeSession.enable = true;
   };
 
   programs.gamescope.enable = true;
