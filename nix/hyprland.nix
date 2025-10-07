@@ -95,7 +95,10 @@
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
-    xwayland.enable = true;
+
+    xwayland = {
+      enable = true;
+    };
 
     settings = {
       "$mod" = "SUPER";
@@ -121,6 +124,10 @@
         # need to take the scaling into account in the position!
         "HDMI-A-2,3840x2160,-1440x-450,1.5,transform,1"
       ];
+
+      xwayland = {
+        force_zero_scaling = true;
+      };
 
       # General configuration
       general = {
