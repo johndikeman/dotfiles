@@ -171,9 +171,23 @@
     remotePlay.openFirewall = true; # For Steam Remote Play
     dedicatedServer.openFirewall = true; # For Source Dedicated Server hosting
     # Other general flags if available can be set here.
+    package = pkgs.steam.override {
+      buildFHSEnv = pkgs.buildFHSEnv.override {
+        bubblewrap = "${config.security.wrapperDir}/..";
+      };
+    };
+  };
+  security.wrappers.bwrap = {
+    owner = "root";
+    group = "root";
+    source = "${pkgs.bubblewrap}/bin/bwrap";
+    setuid = true;
   };
 
-  programs.gamescope.enable = true;
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
 
   # Let Home Manager install and manage itself.
   # Enable fish shell
