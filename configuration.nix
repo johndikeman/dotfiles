@@ -77,7 +77,95 @@
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
-  programs.regreet.enable = true;
+  programs.regreet = {
+    enable = true;
+
+    # Optional: Configure regreet settings
+    settings = {
+      # Add any regreet-specific settings here
+      # Example:
+      # background = {
+      #   path = "/path/to/wallpaper.jpg";
+      #   fit = "Cover";
+      # };
+    };
+
+    # Optional: Configure theme settings
+    theme = {
+      name = "Adwaita-dark"; # or your preferred theme
+    };
+
+    iconTheme = {
+      name = "Adwaita";
+    };
+
+    font = {
+      name = "Cartograph CF";
+      size = 16;
+    };
+
+    # Optional: Add custom CSS
+    # extraCss = ''
+    #   window {
+    #     background: rgba(0, 0, 0, 0.8);
+    #   }
+    # '';
+  };
+
+  # Configure greetd to use Hyprland instead of cage
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.hyprland}/bin/Hyprland --config /etc/greetd/hyprland.conf";
+        user = "greeter";
+      };
+    };
+  };
+
+  # Create the Hyprland config file for the greeter
+  environment.etc."greetd/hyprland.conf".text = ''
+    # Launch regreet and exit Hyprland when it's done
+    exec-once = ${pkgs.regreet}/bin/regreet; hyprctl dispatch exit
+
+    # Disable Hyprland branding and splash
+    misc {
+      disable_hyprland_logo = true
+      disable_splash_rendering = true
+      disable_hyprland_qtutils_check = true
+    }
+
+    monitor = HDMI-A-1,3840x2160,0x0,1.5
+
+    # Optional: Set some basic input settings
+    input {
+      kb_layout = us
+      follow_mouse = 1
+      touchpad {
+        natural_scroll = false
+      }
+    }
+
+    # Optional: Basic window rules for regreet
+    general {
+      gaps_in = 0
+      gaps_out = 0
+      border_size = 0
+    }
+
+    # Optional: Disable animations for faster startup
+    animations {
+      enabled = false
+    }
+  '';
+
+  # Ensure the greeter user exists
+  users.users.greeter = {
+    isSystemUser = true;
+    group = "greeter";
+  };
+
+  users.groups.greeter = { };
 
   programs.dconf.enable = true;
 
