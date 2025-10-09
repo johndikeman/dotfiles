@@ -159,6 +159,11 @@
     }
   '';
 
+  environment.etc."1password/custom_allowed_browsers" = {
+    text = "firefox";
+    mode = "0755";
+  };
+
   # Ensure the greeter user exists
   users.users.greeter = {
     isSystemUser = true;
@@ -295,6 +300,16 @@
   };
 
   environment.variables.EDITOR = "nvim";
+
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [
+      "john"
+      "jess"
+    ];
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
