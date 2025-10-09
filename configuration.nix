@@ -195,7 +195,6 @@
     pkgs.git
     pkgs.unzip
     pkgs.sbctl
-    pkgs.catppuccin-sddm-corners
     rose-pine-hyprcursor
   ];
 
