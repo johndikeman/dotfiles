@@ -189,6 +189,9 @@
         "$mod, P, pseudo,"
         "$mod, J, togglesplit,"
 
+        # fullscreen
+        "$mod SHIFT, F, fullscreen"
+
         # global copy-paste with mod key
         "$mod, C, exec, modcopypaste.sh copy kitty"
         "$mod, V, exec, modcopypaste.sh paste kitty"
