@@ -604,7 +604,7 @@
     settings = {
       dynamic_background_opacity = true;
       window_padding_width = 10;
-      background_opacity = "0.5";
+      background_opacity = "0.8";
       background_blur = 5;
       background = "#29262f";
       foreground = "#d9e6f2";
