@@ -119,12 +119,6 @@
         "wl-paste --type image --watch cliphist store"
       ];
 
-      monitor = [
-        "HDMI-A-1,3840x2160,0x0,1.5"
-        # need to take the scaling into account in the position!
-        "HDMI-A-2,3840x2160,-1440x-450,1.5,transform,1"
-      ];
-
       xwayland = {
         force_zero_scaling = true;
       };
@@ -666,8 +660,6 @@
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     # GTK theme
     GTK_THEME = "Catppuccin-Mocha-Standard-Blue-Dark";
-    LIBVA_DRIVER_NAME = "nvidia";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     SWWW_TRANSITION_FPS = 60;
     SWWW_TRANSITION_STEP = 2;
     HYPRCURSOR_THEME = "rose-pine-hyprcursor";

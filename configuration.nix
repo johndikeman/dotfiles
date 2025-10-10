@@ -37,12 +37,8 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl/";
-  };
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos-macpro"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -211,23 +207,7 @@
     enable = true;
   };
 
-  # Load nvidia driver
-  services.xserver.videoDrivers = [ "nvidia" ];
   programs.hyprland.enable = true;
-
-  # Enable NVIDIA settings
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  systemd.services."nvidia-suspend".enable = true;
-  systemd.services."nvidia-resume".enable = true;
-  systemd.services."nvidia-hibernate".enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.john = {
