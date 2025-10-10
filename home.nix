@@ -59,7 +59,6 @@
     pkgs.blender
     pkgs.anki
     pkgs.calibre
-    pkgs.goose-cli
     pkgs.spotify
     pkgs.discord
     pkgs.pavucontrol
