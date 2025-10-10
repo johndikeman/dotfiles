@@ -35,7 +35,7 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos-macpro"; # Define your hostname.

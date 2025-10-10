@@ -12,12 +12,6 @@
       # to avoid problems caused by different versions of nixpkgs.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
-
-      # Optional but recommended to limit the size of your system closure.
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     hyprland.url = "github:hyprwm/hyprland?ref=v0.51.1";
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
@@ -31,7 +25,6 @@
       self,
       nixpkgs,
       home-manager,
-      lanzaboote,
       rose-pine-hyprcursor,
       ...
     }@inputs:
@@ -42,7 +35,6 @@
           rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
         };
         modules = [
-          lanzaboote.nixosModules.lanzaboote
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
           ./configuration.nix
