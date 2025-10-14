@@ -15,3 +15,5 @@ check current brightness value
 inc/dec by increment
 calculate %
 display notification with updated percentage
+- laptop hyprland: add volume indicators
+- laptop: make kb lights work
