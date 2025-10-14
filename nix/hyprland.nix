@@ -460,7 +460,8 @@
         opacity: 0.8;
         padding: 0px 10px;
         margin: 3px 0px;
-        margin-top: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
         border: 1px solid #181825;
       }
 
