@@ -1,2 +1,17 @@
 - make system theme (colors from wildflower graycie pic?)
 - theme swaylock-effects
+- laptop: close lid should go back to login mgr
+- laptop: fix chrome flickering on jess login
+- fix nvim lsp...
+
+
+- laptop hyprland: add volume/brightness indicators
+- laptop: make kb lights work
+plan:
+use dunst to display notifs with the % for volume, keyboard brightness, and screen brightness
+
+brightness script, takes device + increment as argument
+check current brightness value
+inc/dec by increment
+calculate %
+display notification with updated percentage
