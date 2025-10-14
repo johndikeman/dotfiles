@@ -45,8 +45,12 @@
     })
     (pkgs.writeShellApplication {
       name = "brightnessbuttons.sh";
-      runtimeInputs = [ libnotify,brightnessctl,bc ];
-      text = builtins.readFile ../scripts/modcopypaste.sh;
+      runtimeInputs = [
+        libnotify
+        brightnessctl
+        bc
+      ];
+      text = builtins.readFile ../scripts/brightnessbuttons.sh;
     })
   ];
 
@@ -244,8 +248,12 @@
         ",XF86AudioMute, exec, pamixer -t"
 
         # Brightness control
-        ",XF86MonBrightnessUp, exec, brightnessctl set +10%"
-        ",XF86MonBrightnessDown, exec, brightnessctl set 10%-"
+        ",XF86MonBrightnessUp, exec, brightnessbuttons.sh intel_backlight .1"
+        ",XF86MonBrightnessDown, exec, brightnessbuttons.sh intel_backlight -.1"
+
+        # keyboard backlight control
+        ",XF86KbdBrightnessUp, exec, brightnessbuttons.sh smc::kbd_backlight .1"
+        ",XF86KbdBrightnessDown, exec, brightnessbuttons.sh smc::kbd_backlight -.1"
       ];
 
       # Mouse bindings

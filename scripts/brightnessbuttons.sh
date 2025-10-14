@@ -5,15 +5,15 @@
 # calculate %
 # display notification with updated percentage
 
-DEVICE = $1
-INCREMENT = $2
+DEVICE=$1
+INCREMENT=$2
 
-CURRENT_BRIGHTNESS = $(brightnessctl --device=$DEVICE get)
-MAX_BRIGHTNESS = $(brightnessctl --device=$DEVICE max)
-BRIGHTNESS_INC = $(echo "scale 2; $MAX_BRIGHTNESS * $INCREMENT" | bc)
-NEW_BRIGHTNESS = $(echo "$CURRENT_BRIGHTNESS + $BRIGHTNESS_INC" | bc)
-NEW_BRIGHTNESS_PERCENTAGE = $(echo "$NEW_BRIGHTNESS / $MAX_BRIGHTNESS" | bc)
+CURRENT_BRIGHTNESS=$(brightnessctl --device="$DEVICE" get)
+MAX_BRIGHTNESS="$(brightnessctl --device="$DEVICE" max)"
+BRIGHTNESS_INC="$(echo "$MAX_BRIGHTNESS * $INCREMENT" | bc)"
+NEW_BRIGHTNESS="$(echo "$CURRENT_BRIGHTNESS + $BRIGHTNESS_INC" | bc)"
+NEW_BRIGHTNESS_PERCENTAGE="$(echo "scale=2;$NEW_BRIGHTNESS / $MAX_BRIGHTNESS * 100" | bc)"
 
-brightnessctl --device=$DEVICE set NEW_BRIGHTNESS
+brightnessctl --device="$DEVICE" set "$NEW_BRIGHTNESS"
 
-notify-send "🔔 %$NEW_BRIGHTNESS_PERCENTAGE"
+notify-send "🌞 $NEW_BRIGHTNESS_PERCENTAGE% 🌞" --replace-id=69 --expire-time=1500
