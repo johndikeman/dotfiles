@@ -17,3 +17,4 @@ calculate %
 display notification with updated percentage
 - laptop hyprland: add volume indicators
 - laptop: make kb lights work
+- fix nvim lsp...
