@@ -459,7 +459,7 @@
       						#backlight {
       							background: #1e1e2e;
       							opacity: 0.8;
-      							padding: 0px 0px;
+      							padding: 0px 5px;
       							margin: 5px 1px;
       							border: 1px solid #181825;
       							border-radius: 10px;
