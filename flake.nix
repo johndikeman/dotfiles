@@ -29,7 +29,7 @@
       ...
     }@inputs:
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem rec {
+      nixosConfigurations.nixos-macpro = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
           rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
