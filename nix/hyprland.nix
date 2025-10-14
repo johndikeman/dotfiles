@@ -327,12 +327,12 @@
         };
 
         "cpu" = {
-          format = "{usage}% ";
+          format = "cpu: {usage}% ";
           tooltip = false;
         };
 
         "memory" = {
-          format = "{}% ";
+          format = "mem: {}% ";
         };
 
         "battery" = {
@@ -346,20 +346,20 @@
           format-plugged = "{capacity}% ";
           format-alt = "{time} {icon}";
           format-icons = [
-            ""
-            ""
-            ""
-            ""
-            ""
+            "🔋"
+            "🔋"
+            "🔋"
+            "🪫"
+            "🪫"
           ];
         };
 
         "network" = {
-          format-wifi = "{essid} ({signalStrength}%) ";
+          format-wifi = "🛜 {essid} ({signalStrength}%) ";
           format-ethernet = "{ipaddr}/{cidr} ";
           tooltip-format = "{ifname} via {gwaddr} ";
           format-linked = "{ifname} (No IP) ";
-          format-disconnected = "Disconnected ⚠";
+          format-disconnected = "disconnected :(";
           format-alt = "{ifname}: {ipaddr}/{cidr}";
         };
 
@@ -371,16 +371,16 @@
           format-source = "{volume}% ";
           format-source-muted = "";
           format-icons = {
-            headphone = "";
-            hands-free = "";
-            headset = "";
-            phone = "";
-            portable = "";
-            car = "";
+            headphone = "🎧";
+            hands-free = "🎧";
+            headset = "🎧";
+            phone = "📱";
+            portable = "📱";
+            car = "🚗";
             default = [
-              ""
-              ""
-              ""
+              "🎧"
+              "🎧"
+              "🎧"
             ];
           };
           on-click = "pavucontrol";
@@ -449,7 +449,7 @@
       				#window,
       				#clock,
       				#cpu,
-      				#memory
+      				#memory,
       				#battery,
       				#pulseaudio,
       				#network,
