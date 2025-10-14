@@ -69,6 +69,12 @@
   #  /etc/profiles/per-user/jess/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
+    # Tell electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+
+    # Enable QT apps to use wayland
+    QT_QPA_PLATFORM = "wayland;xcb";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
 
     # EDITOR = "emacs";
     SHELL = "fish";
@@ -117,4 +123,5 @@
   };
 
   programs.home-manager.enable = true;
+
 }
