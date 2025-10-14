@@ -43,6 +43,11 @@
       runtimeInputs = [ jq ];
       text = builtins.readFile ../scripts/modcopypaste.sh;
     })
+    (pkgs.writeShellApplication {
+      name = "brightnessbuttons.sh";
+      runtimeInputs = [ libnotify,brightnessctl,bc ];
+      text = builtins.readFile ../scripts/modcopypaste.sh;
+    })
   ];
 
   services.swayidle =
