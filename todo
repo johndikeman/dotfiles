@@ -1,9 +1,10 @@
 - make system theme (colors from wildflower graycie pic?)
 - theme swaylock-effects
-- laptop: close lid should go back to login mgr
 - laptop: fix chrome flickering on jess login
 - fix nvim lsp...
 - laptop hyprland: add volume indicators
 - hyprspace!!! or hyprexpo?? compare
 - quick logout thing?
 -> use wofi: https://www.reddit.com/r/hyprland/comments/1l72vz4/turn_wofi_into_a_power_menu/
+- two finger click = rightclick
+- battery waybar emoji for charging
