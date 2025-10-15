@@ -336,25 +336,16 @@
             "critical" = 15;
           };
           format = "{capacity}% {icon}";
-          format-charging = "{capacity}% ";
+          format-charging = "{capacity}% ⚡{icon}";
           format-plugged = "{capacity}% ";
           format-alt = "{time} {icon}";
-          format-icons = {
-            default = [
-              "🪫"
-              "🪫"
-              "🔋"
-              "🔋"
-              "🔋"
-            ];
-            charging = [
-              "⚡🪫"
-              "⚡🪫"
-              "⚡🔋"
-              "⚡🔋"
-              "⚡🔋"
-            ];
-          };
+          format-icons = [
+            "🪫"
+            "🪫"
+            "🔋"
+            "🔋"
+            "🔋"
+          ];
         };
 
         "network" = {
