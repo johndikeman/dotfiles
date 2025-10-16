@@ -28,7 +28,7 @@
     pkgs.blender
     pkgs.anki
     pkgs.spotify
-    pkgs.google-chrome
+    (pkgs.google-chrome.override { commandLineArgs = "--ozone-platform=x11"; })
     pkgs.discord
     pkgs.yaru-theme
     pkgs.dconf-editor
