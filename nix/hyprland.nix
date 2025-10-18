@@ -43,6 +43,13 @@
       runtimeInputs = [ jq ];
       text = builtins.readFile ../scripts/modcopypaste.sh;
     })
+    (pkgs.writeShellApplication {
+      name = "powermenu.sh";
+      runtimeInputs = [
+        wofi
+      ];
+      text = builtins.readFile ../scripts/powermenu.sh;
+    })
   ];
 
   services.swayidle =
@@ -313,7 +320,13 @@
           "memory"
           "battery"
           "tray"
+          "custom/powermenu"
         ];
+
+        "custom/powermenu" = {
+          format = "🌖";
+          on-click = "powermenu.sh";
+        };
 
         "hyprland/workspaces" = {
           format = "{name}";
