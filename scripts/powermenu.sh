@@ -1,19 +1,12 @@
 DISPLAY_NAMES=('lock' 'logout' 'power off' 'reboot' 'suspend')
 COMMANDS=('loginctl lock-session' 'hyprctl dispatch exit' 'systemctl poweroff' 'systemctl reboot' 'systemctl suspend')
-ICON_PATHS=(
-  /usr/share/icons/Adwaita/symbolic/status/system-lock-screen-symbolic.svg
-  /usr/share/icons/Adwaita/symbolic/actions/system-log-out-symbolic.svg
-  /usr/share/icons/Adwaita/symbolic/actions/system-shutdown-symbolic.svg
-  /usr/share/icons/Adwaita/symbolic/actions/system-reboot-symbolic.svg
-  /usr/share/icons/Adwaita/symbolic/actions/media-playback-pause-symbolic.svg
-)
 
 MENU_ITEMS=()
 for i in "${!DISPLAY_NAMES[@]}"; do
-  MENU_ITEMS+=("img:${ICON_PATHS[i]}:text:${DISPLAY_NAMES[i]}")
+  MENU_ITEMS+=("text:${DISPLAY_NAMES[i]}")
 done
 
-CHOICE=$(printf '%s\n' "${MENU_ITEMS[@]}" | wofi --normal-window --show dmenu --allow-images --prompt "Choose an action")
+CHOICE=$(printf '%s\n' "${MENU_ITEMS[@]}" | wofi --show dmenu --prompt "Choose an action")
 
 # Extract label from `text:...`
 SELECTED_NAME="${CHOICE#*:text:}"
