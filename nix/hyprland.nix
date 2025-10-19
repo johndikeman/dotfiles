@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -90,6 +91,10 @@
     xwayland = {
       enable = true;
     };
+
+    plugins = [
+      inputs.Hyprspace
+    ];
 
     settings = {
       "$mod" = "SUPER";
@@ -251,6 +256,10 @@
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
       };
+      gesture = [
+        "3, horizontal, workspace"
+        "3, vertical, dispatcher, overview:toggle all"
+      ];
     };
   };
 

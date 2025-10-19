@@ -24,6 +24,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
+    Hyprspace = {
+      url = "github:KZDKM/Hyprspace";
+
+      # Hyprspace uses latest Hyprland. We declare this to keep them in sync.
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
   outputs =
@@ -33,6 +39,7 @@
       home-manager,
       lanzaboote,
       rose-pine-hyprcursor,
+      Hyprspace,
       ...
     }@inputs:
     {
@@ -51,8 +58,14 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.john = import ./home.nix;
-            home-manager.users.jess = import ./jess-home.nix;
+            home-manager.users.john = {
+              imports = [ ./home.nix ];
+              extraSpecialArgs = { inherit inputs; };
+            };
+            home-manager.users.jess = {
+              imports = [ ./jess-home.nix ];
+              extraSpecialArgs = { inherit inputs; };
+            };
           }
         ];
       };
