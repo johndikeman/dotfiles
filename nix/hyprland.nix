@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -99,6 +100,10 @@
     xwayland = {
       enable = true;
     };
+
+    plugins = [
+      inputs.Hyprspace
+    ];
 
     settings = {
       "$mod" = "SUPER";
@@ -253,6 +258,11 @@
       bindm = [
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
+      ];
+
+      gesture = [
+        "3, horizontal, workspace"
+        "3, vertical, dispatcher, overview:toggle all"
       ];
     };
   };
