@@ -60,11 +60,11 @@
             home-manager.useUserPackages = true;
             home-manager.users.john = {
               imports = [ ./home.nix ];
-              extraSpecialArgs = { inherit inputs; };
+              specialArgs = { inherit inputs; };
             };
             home-manager.users.jess = {
               imports = [ ./jess-home.nix ];
-              extraSpecialArgs = { inherit inputs; };
+              specialArgs = { inherit inputs; };
             };
           }
         ];
