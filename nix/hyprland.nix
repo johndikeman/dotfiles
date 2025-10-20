@@ -296,7 +296,6 @@
         modules-center = [ "clock" ];
         modules-right = [
           "pulseaudio"
-          "network"
           "cpu"
           "memory"
           "battery"
@@ -315,12 +314,12 @@
         };
 
         "cpu" = {
-          format = "{usage}% ";
+          format = "cpu: {usage}% ";
           tooltip = false;
         };
 
         "memory" = {
-          format = "{}% ";
+          format = "mem: {}% ";
         };
 
         "battery" = {
@@ -330,45 +329,45 @@
             "critical" = 15;
           };
           format = "{capacity}% {icon}";
-          format-charging = "{capacity}% ";
+          format-charging = "{capacity}% ⚡{icon}";
           format-plugged = "{capacity}% ";
           format-alt = "{time} {icon}";
           format-icons = [
-            ""
-            ""
-            ""
-            ""
-            ""
+            "🪫"
+            "🪫"
+            "🔋"
+            "🔋"
+            "🔋"
           ];
         };
 
         "network" = {
-          format-wifi = "{essid} ({signalStrength}%) ";
+          format-wifi = "🛜 {essid} ({signalStrength}%) ";
           format-ethernet = "{ipaddr}/{cidr} ";
           tooltip-format = "{ifname} via {gwaddr} ";
           format-linked = "{ifname} (No IP) ";
-          format-disconnected = "Disconnected ⚠";
+          format-disconnected = "disconnected :(";
           format-alt = "{ifname}: {ipaddr}/{cidr}";
         };
 
         "pulseaudio" = {
-          format = "{volume}% {icon} {format_source}";
-          format-bluetooth = "{volume}% {icon} {format_source}";
-          format-bluetooth-muted = " {icon} {format_source}";
-          format-muted = " {format_source}";
+          format = "{volume}% {icon}";
+          format-bluetooth = "{volume}% {icon}";
+          format-bluetooth-muted = "muted {icon}";
+          format-muted = "muted {icon}";
           format-source = "{volume}% ";
           format-source-muted = "";
           format-icons = {
-            headphone = "";
-            hands-free = "";
-            headset = "";
-            phone = "";
-            portable = "";
-            car = "";
+            headphone = "🎧";
+            hands-free = "🎧";
+            headset = "🎧";
+            phone = "📱";
+            portable = "📱";
+            car = "🚗";
             default = [
-              ""
-              ""
-              ""
+              "🎧"
+              "🎧"
+              "🎧"
             ];
           };
           on-click = "pavucontrol";
@@ -381,139 +380,122 @@
       };
     };
     style = ''
-      * {
-        border: none;
-        border-radius: 0;
-        font-family: "Cartograph CF";
-        font-size: 13px;
-        min-height: 0;
-      }
+      						* {
+      							border: none;
+      							border-radius: 0;
+      							font-family: "Cartograph CF";
+      							font-size: 13px;
+      							min-height: 0;
+      						}
 
-      window#waybar {
-        background: rgba(21, 18, 27, 0.8);
-        color: #cdd6f4;
-      }
+      						window#waybar {
+      							background: rgba(21, 18, 27, 0.8);
+      							color: #cdd6f4;
+      						}
 
-      tooltip {
-        background: #1e1e2e;
-        border-radius: 10px;
-        border-width: 2px;
-        border-style: solid;
-        border-color: #11111b;
-      }
+      						tooltip {
+      							background: #1e1e2e;
+      							border-radius: 10px;
+      							border-width: 2px;
+      							border-style: solid;
+      							border-color: #11111b;
+      						}
 
-      #workspaces button {
-        padding: 5px;
-        color: #313244;
-        margin-right: 5px;
-      }
+      						#workspaces button {
+      							padding: 5px;
+      							color: #313244;
+      							margin-right: 5px;
+      						}
 
-      #workspaces button.active {
-        color: #a6adc8;
-      }
+      						#workspaces button.active {
+      							color: #a6adc8;
+      						}
 
-      #workspaces button.focused {
-        color: #a6adc8;
-        background: #eba0ac;
-        border-radius: 10px;
-      }
+      						#workspaces button.focused {
+      							color: #a6adc8;
+      							background: #eba0ac;
+      							border-radius: 10px;
+      						}
 
-      #workspaces button.urgent {
-        color: #11111b;
-        background: #a6e3a1;
-        border-radius: 10px;
-      }
+      						#workspaces button.urgent {
+      							color: #11111b;
+      							background: #a6e3a1;
+      							border-radius: 10px;
+      						}
 
-      #workspaces button:hover {
-        background: #11111b;
-        color: #cdd6f4;
-        border-radius: 10px;
-      }
+      						#workspaces button:hover {
+      							background: #11111b;
+      							color: #cdd6f4;
+      							border-radius: 10px;
+      						}
 
-      #custom-launch_wofi,
-      #custom-power_btn,
-      #custom-power_profile,
-      #custom-weather,
-      #window,
-      #clock,
-      #battery,
-      #pulseaudio,
-      #network,
-      #bluetooth,
-      #temperature,
-      #workspaces,
-      #tray,
-      #backlight {
-        background: #1e1e2e;
-        opacity: 0.8;
-        padding: 0px 10px;
-        margin: 3px 0px;
-        margin-top: 10px;
-        border: 1px solid #181825;
-      }
+      						#custom-launch_wofi,
+      						#custom-power_btn,
+      						#custom-power_profile,
+      						#custom-weather,
+      						#window,
+      						#clock,
+      						#cpu,
+      						#memory,
+      						#battery,
+      						#pulseaudio,
+      						#network,
+      						#bluetooth,
+      						#temperature,
+      						#workspaces,
+      						#tray,
+      						#backlight {
+      							background: #1e1e2e;
+      							opacity: 0.8;
+      							padding: 0px 5px;
+      							margin: 5px 1px;
+      							border: 1px solid #181825;
+      							border-radius: 10px;
+      						}
 
-      #temperature.critical {
-        color: #eba0ac;
-      }
+      						#tray {
+      							padding-right: 5px;
+      						}
 
-      #workspaces {
-        background: #1e1e2e;
-        border-radius: 10px;
-        margin-left: 10px;
-        padding-right: 0px;
-        padding-left: 5px;
-      }
+      						#temperature.critical {
+      							color: #eba0ac;
+      						}
 
-      #custom-power_profile {
-        color: #a6e3a1;
-        border-left: 0px;
-        border-right: 0px;
-      }
+      						#workspaces {
+      							background: #1e1e2e;
+      							margin-left: 10px;
+      							padding-right: 0px;
+      							padding-left: 5px;
+      						}
 
-      #window {
-        border-radius: 10px;
-        margin-left: 60px;
-        margin-right: 60px;
-      }
+      						#custom-power_profile {
+      							color: #a6e3a1;
+      						}
 
-      #clock {
-        color: #fab387;
-        border-radius: 10px;
-        margin-left: 5px;
-        border-right: 0px;
-      }
+      						#window {
+      							margin-left: 60px;
+      							margin-right: 60px;
+      						}
 
-      #network {
-        color: #f9e2af;
-        border-radius: 10px;
-        border-left: 0px;
-        border-right: 0px;
-      }
+      						#clock {
+      							color: #fab387;
+      						}
 
-      #bluetooth {
-        color: #89b4fa;
-        border-radius: 10px;
-        margin-right: 10px
-      }
+      						#network {
+      							color: #f9e2af;
+      						}
 
-      #pulseaudio {
-        color: #89b4fa;
-        border-left: 0px;
-        border-right: 0px;
-      }
+      						#bluetooth {
+      							color: #89b4fa;
+      						}
 
-      #battery {
-        color: #a6e3a1;
-        border-radius: 10px;
-        margin-right: 10px;
-        border-left: 0px;
-      }
+      						#pulseaudio {
+      							color: #89b4fa;
+      						}
 
-      #custom-weather {
-        border-radius: 10px;
-        border-right: 0px;
-        margin-left: 0px;
-      }
+      						#battery {
+      							color: #a6e3a1;
+      						}
     '';
   };
 
@@ -547,7 +529,7 @@
         margin: 0px;
         border: 2px solid #8aadf4;
         background-color: rgba(36, 39, 58, 0.9);
-        border-radius: 15px;
+        border-radius: 10px;
       }
 
       #input {
