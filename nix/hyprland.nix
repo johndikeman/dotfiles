@@ -43,6 +43,13 @@
       runtimeInputs = [ jq ];
       text = builtins.readFile ../scripts/modcopypaste.sh;
     })
+    (pkgs.writeShellApplication {
+      name = "powermenu.sh";
+      runtimeInputs = [
+        wofi
+      ];
+      text = builtins.readFile ../scripts/powermenu.sh;
+    })
   ];
 
   services.swayidle =
@@ -300,7 +307,13 @@
           "memory"
           "battery"
           "tray"
+          "custom/powermenu"
         ];
+
+        "custom/powermenu" = {
+          format = "🌖";
+          on-click = "powermenu.sh";
+        };
 
         "hyprland/workspaces" = {
           format = "{name}";
@@ -380,122 +393,142 @@
       };
     };
     style = ''
-      						* {
-      							border: none;
-      							border-radius: 0;
-      							font-family: "Cartograph CF";
-      							font-size: 13px;
-      							min-height: 0;
-      						}
+            * {
+              border: none;
+              border-radius: 0;
+              font-family: "Cartograph CF";
+              font-size: 13px;
+              min-height: 0;
+            }
 
-      						window#waybar {
-      							background: rgba(21, 18, 27, 0.8);
-      							color: #cdd6f4;
-      						}
+            window#waybar {
+              background: rgba(21, 18, 27, 0.8);
+              color: #cdd6f4;
+            }
 
-      						tooltip {
-      							background: #1e1e2e;
-      							border-radius: 10px;
-      							border-width: 2px;
-      							border-style: solid;
-      							border-color: #11111b;
-      						}
+            tooltip {
+              background: #1e1e2e;
+              border-radius: 10px;
+              border-width: 2px;
+              border-style: solid;
+              border-color: #11111b;
+            }
 
-      						#workspaces button {
-      							padding: 5px;
-      							color: #313244;
-      							margin-right: 5px;
-      						}
+            #workspaces button {
+              padding: 5px;
+              color: #313244;
+              margin-right: 5px;
+            }
 
-      						#workspaces button.active {
-      							color: #a6adc8;
-      						}
+            #workspaces button.active {
+              color: #a6adc8;
+            }
 
-      						#workspaces button.focused {
-      							color: #a6adc8;
-      							background: #eba0ac;
-      							border-radius: 10px;
-      						}
+            #workspaces button.focused {
+              color: #a6adc8;
+              background: #eba0ac;
+              border-radius: 10px;
+            }
 
-      						#workspaces button.urgent {
-      							color: #11111b;
-      							background: #a6e3a1;
-      							border-radius: 10px;
-      						}
+            #workspaces button.urgent {
+              color: #11111b;
+              background: #a6e3a1;
+              border-radius: 10px;
+            }
 
-      						#workspaces button:hover {
-      							background: #11111b;
-      							color: #cdd6f4;
-      							border-radius: 10px;
-      						}
+            #workspaces button:hover {
+              background: #11111b;
+              color: #cdd6f4;
+              border-radius: 10px;
+            }
 
-      						#custom-launch_wofi,
-      						#custom-power_btn,
-      						#custom-power_profile,
-      						#custom-weather,
-      						#window,
-      						#clock,
-      						#cpu,
-      						#memory,
-      						#battery,
-      						#pulseaudio,
-      						#network,
-      						#bluetooth,
-      						#temperature,
-      						#workspaces,
-      						#tray,
-      						#backlight {
-      							background: #1e1e2e;
-      							opacity: 0.8;
-      							padding: 0px 5px;
-      							margin: 5px 1px;
-      							border: 1px solid #181825;
-      							border-radius: 10px;
-      						}
+      			#custom-launch_wofi,
+      			#custom-power_btn,
+      			#custom-power_profile,
+      			#custom-weather,
+      			#window,
+      			#clock,
+      			#cpu,
+      			#memory,
+      			#battery,
+      			#pulseaudio,
+      			#network,
+      			#bluetooth,
+      			#temperature,
+      			#workspaces,
+      			#tray,
+      			#custom-powermenu,
+      			#backlight {
+      				background: #1e1e2e;
+      				opacity: 0.8;
+      				padding: 0px 5px;
+      				margin: 5px 1px;
+      				border: 1px solid #181825;
+      				border-radius: 10px;
+      			}
 
-      						#tray {
-      							padding-right: 5px;
-      						}
+            #temperature.critical {
+              color: #eba0ac;
+            }
 
-      						#temperature.critical {
-      							color: #eba0ac;
-      						}
+            #workspaces {
+              background: #1e1e2e;
+              border-radius: 10px;
+              margin-left: 10px;
+              padding-right: 0px;
+              padding-left: 5px;
+            }
 
-      						#workspaces {
-      							background: #1e1e2e;
-      							margin-left: 10px;
-      							padding-right: 0px;
-      							padding-left: 5px;
-      						}
+            #custom-power_profile {
+              color: #a6e3a1;
+              border-left: 0px;
+              border-right: 0px;
+            }
 
-      						#custom-power_profile {
-      							color: #a6e3a1;
-      						}
+            #window {
+              border-radius: 10px;
+              margin-left: 60px;
+              margin-right: 60px;
+            }
 
-      						#window {
-      							margin-left: 60px;
-      							margin-right: 60px;
-      						}
+            #clock {
+              color: #fab387;
+              border-radius: 10px;
+              margin-left: 5px;
+              border-right: 0px;
+            }
 
-      						#clock {
-      							color: #fab387;
-      						}
+            #network {
+              color: #f9e2af;
+              border-radius: 10px;
+              border-left: 0px;
+              border-right: 0px;
+            }
 
-      						#network {
-      							color: #f9e2af;
-      						}
+            #bluetooth {
+              color: #89b4fa;
+              border-radius: 10px;
+              margin-right: 10px
+            }
 
-      						#bluetooth {
-      							color: #89b4fa;
-      						}
+            #pulseaudio {
+              color: #89b4fa;
+              border-left: 0px;
+              border-right: 0px;
+            }
 
-      						#pulseaudio {
-      							color: #89b4fa;
-      						}
+            #battery {
+              color: #a6e3a1;
+              border-radius: 10px;
+              margin-right: 10px;
+              border-left: 0px;
+            }
 
-      						#battery {
-      							color: #a6e3a1;
-      						}
+            #custom-weather {
+              border-radius: 10px;
+              border-right: 0px;
+              margin-left: 0px;
+            }
     '';
   };
 
