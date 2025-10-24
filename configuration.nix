@@ -236,6 +236,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "podman"
     ];
     shell = pkgs.fish;
     packages = with pkgs; [
@@ -341,4 +342,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
+  virtualisation.podman = {
+    enable = true;
+    dockerSocket.enable = true;
+  };
 }
