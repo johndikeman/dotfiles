@@ -135,7 +135,7 @@
 
   programs.tmux = {
     enable = true;
-    shell = "/home/dikeman/.nix-profile/bin/fish";
+    shell = "${pkgs.fish}/bin/fish";
     prefix = "C-a";
     keyMode = "vi"; # Optional: Use vi-style key bindings
     baseIndex = 1; # Start window numbering at 1
