@@ -93,7 +93,7 @@
     };
 
     plugins = [
-      inputs.Hyprspace
+      inputs.Hyprspace.packages.x86_64-linux.default
     ];
 
     settings = {
