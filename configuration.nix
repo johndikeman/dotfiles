@@ -7,6 +7,7 @@
   pkgs,
   lib,
   rose-pine-hyprcursor,
+  goose-cli,
   ...
 }:
 
@@ -265,6 +266,7 @@
     pkgs.git
     pkgs.unzip
     rose-pine-hyprcursor
+    goose-cli
   ];
 
   # Font configuration

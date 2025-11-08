@@ -45,7 +45,7 @@
         system = "x86_64-linux";
         specialArgs = {
           rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
-          goose-cli = goose-cli.packages.${system}.default;
+          goose-cli = goose-cli.defaultPackage.${system};
         };
         modules = [
           # Import the previous configuration.nix we used,
