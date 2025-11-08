@@ -24,6 +24,10 @@
       # Hyprspace uses latest Hyprland. We declare this to keep them in sync.
       inputs.hyprland.follows = "hyprland";
     };
+    goose-cli = {
+      url = "github:block/goose";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -33,6 +37,7 @@
       home-manager,
       rose-pine-hyprcursor,
       Hyprspace,
+      goose-cli,
       ...
     }@inputs:
     {
@@ -40,6 +45,7 @@
         system = "x86_64-linux";
         specialArgs = {
           rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
+          goose-cli = goose-cli.packages.${system}.default;
         };
         modules = [
           # Import the previous configuration.nix we used,
@@ -49,13 +55,12 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.users.john = {
               imports = [ ./home.nix ];
-              specialArgs = { inherit inputs; };
             };
             home-manager.users.jess = {
               imports = [ ./jess-home.nix ];
-              specialArgs = { inherit inputs; };
             };
           }
         ];
