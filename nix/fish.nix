@@ -284,6 +284,18 @@ in
         '';
       };
 
+      revert_tickets_voice = {
+        description = "Revert commits associated with given ticket codes on stable branch";
+        body = ''
+          set -l codes $argv[1]
+          set -l regex (string join '\|' (string split ' ' $codes))
+          set -l hashes (string split '\n' (git log --grep="$regex" --pretty=format:%H))
+
+          git checkout stable
+          git revert $hashes
+        '';
+      };
+
       # Core tmux setup function
       tmux-setup = {
         description = "Sets up a standard tmux development environment for a given path.";
