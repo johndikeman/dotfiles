@@ -39,6 +39,7 @@
       nixosConfigurations.nixos-macpro = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
+          inherit inputs;
           rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
         };
         modules = [
