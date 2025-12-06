@@ -174,9 +174,10 @@
         follow_mouse = 1;
         touchpad = {
           natural_scroll = true;
+          clickfinger_behavior = true;
         };
         sensitivity = -0.2;
-        accel_profile = "flat";
+        accel_profile = "adaptive";
       };
 
       # Window rules
