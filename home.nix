@@ -44,7 +44,6 @@ in
     pkgs.ncdu
     pkgs.nixfmt-rfc-style
     pkgs.tmux
-    pkgs.google-cloud-sdk
     pkgs.libevent # dependencies for playwright for some reason
     pkgs.flite
     pkgs.uv
