@@ -9,7 +9,17 @@ return {
 		-- example using `opts` for defining servers
 		opts = {
 			servers = {
-				lua_ls = {},
+				lua_ls = {
+					settings = {
+						Lua = {
+							runtime = { version = "LuaJIT" },
+							workspace = {
+								checkThirdParty = false,
+								library = { unpack(vim.api.nvim_get_runtime_file("", true)) },
+							},
+						},
+					},
+				},
 				pyright = {},
 				rust_analyzer = {},
 				ts_ls = {},
