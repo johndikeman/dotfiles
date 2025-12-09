@@ -7,6 +7,7 @@
 }:
 {
   imports = [
+    inputs.nix-colors.homeManagerModules.default
     ./nix/fish.nix
     ./nix/neovim.nix
     ./nix/hyprland.nix
@@ -97,7 +98,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
-
+  colorScheme = inputs.nix-colors.colorSchemes.everforest-dark-hard;
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
