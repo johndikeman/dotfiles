@@ -125,8 +125,9 @@
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        "col.active_border" =
+          "rgba(${config.colorscheme.palette.base08}ee) rgba(${config.colorscheme.palette.base09}ee) 45deg";
+        "col.inactive_border" = "rgba(${config.colorscheme.palette.base03}aa)";
         layout = "dwindle";
       };
 
@@ -402,10 +403,10 @@
               min-height: 0;
             }
 
-            window#waybar {
-              background: rgba(21, 18, 27, 0.8);
-              color: #cdd6f4;
-            }
+      					window#waybar {
+      						background-color: #${config.colorScheme.palette.base03};
+      						color: #${config.colorScheme.palette.base08};
+      					}
 
             tooltip {
               background: #1e1e2e;
@@ -443,30 +444,30 @@
               border-radius: 10px;
             }
 
-      			#custom-launch_wofi,
-      			#custom-power_btn,
-      			#custom-power_profile,
-      			#custom-weather,
-      			#window,
-      			#clock,
-      			#cpu,
-      			#memory,
-      			#battery,
-      			#pulseaudio,
-      			#network,
-      			#bluetooth,
-      			#temperature,
-      			#workspaces,
-      			#tray,
-      			#custom-powermenu,
-      			#backlight {
-      				background: #1e1e2e;
-      				opacity: 0.8;
-      				padding: 0px 5px;
-      				margin: 5px 1px;
-      				border: 1px solid #181825;
-      				border-radius: 10px;
-      			}
+      					#custom-launch_wofi,
+      					#custom-power_btn,
+      					#custom-power_profile,
+      					#custom-weather,
+      					#window,
+      					#clock,
+      					#cpu,
+      					#memory,
+      					#battery,
+      					#pulseaudio,
+      					#network,
+      					#bluetooth,
+      					#temperature,
+      					#workspaces,
+      					#tray,
+      					#custom-powermenu,
+      					#backlight {
+      						background: #${config.colorScheme.palette.base03};
+      						opacity: 0.8;
+      						padding: 0px 5px;
+      						margin: 5px 5px;
+      						border: 1px solid #${config.colorScheme.palette.base02};
+      						border-radius: 10px;
+      					}
 
             #temperature.critical {
               color: #eba0ac;
@@ -499,37 +500,25 @@
               border-right: 0px;
             }
 
-            #network {
-              color: #f9e2af;
-              border-radius: 10px;
-              border-left: 0px;
-              border-right: 0px;
-            }
+      					#clock {
+      						color: #${config.colorScheme.palette.base08};
+      					}
 
-            #bluetooth {
-              color: #89b4fa;
-              border-radius: 10px;
-              margin-right: 10px
-            }
+      					#network {
+      						color: #${config.colorScheme.palette.base09};
+      					}
 
-            #pulseaudio {
-              color: #89b4fa;
-              border-left: 0px;
-              border-right: 0px;
-            }
+      					#bluetooth {
+      						color: #${config.colorScheme.palette.base0A};
+      					}
 
-            #battery {
-              color: #a6e3a1;
-              border-radius: 10px;
-              margin-right: 10px;
-              border-left: 0px;
-            }
+      					#pulseaudio {
+      						color: #${config.colorScheme.palette.base0B};
+      					}
 
-            #custom-weather {
-              border-radius: 10px;
-              border-right: 0px;
-              margin-left: 0px;
-            }
+      					#battery {
+      						color: #${config.colorScheme.palette.base0C};
+      					}
     '';
   };
 
@@ -554,55 +543,55 @@
       gtk_dark = true;
     };
     style = ''
-      * {
-        font-family: "Cartograph CF";
-        font-size: 14px;
-      }
+      			* {
+      				font-family: "Cartograph CF";
+      				font-size: 14px;
+      			}
 
-      window {
-        margin: 0px;
-        border: 2px solid #8aadf4;
-        background-color: rgba(36, 39, 58, 0.9);
-        border-radius: 10px;
-      }
+      			window {
+      				margin: 0px;
+      				border: 2px solid #${config.colorScheme.palette.base03};
+      				background-color: #${config.colorScheme.palette.base08};
+      				border-radius: 10px;
+      			}
 
-      #input {
-        margin: 5px;
-        border: none;
-        color: #cad3f5;
-        background-color: rgba(54, 58, 79, 0.8);
-        border-radius: 10px;
-      }
+      			#input {
+      				margin: 5px;
+      				border: none;
+      				color: #cad3f5;
+      				background-color: rgba(54, 58, 79, 0.8);
+      				border-radius: 10px;
+      			}
 
-      #inner-box {
-        margin: 5px;
-        border: none;
-        background-color: transparent;
-        border-radius: 10px;
-      }
+      			#inner-box {
+      				margin: 5px;
+      				border: none;
+      				background-color: transparent;
+      				border-radius: 10px;
+      			}
 
-      #outer-box {
-        margin: 5px;
-        border: none;
-        background-color: transparent;
-        border-radius: 10px;
-      }
+      			#outer-box {
+      				margin: 5px;
+      				border: none;
+      				background-color: transparent;
+      				border-radius: 10px;
+      			}
 
-      #scroll {
-        margin: 0px;
-        border: none;
-      }
+      			#scroll {
+      				margin: 0px;
+      				border: none;
+      			}
 
-      #text {
-        margin: 5px;
-        border: none;
-        color: #cad3f5;
-      }
+      			#text {
+      				margin: 5px;
+      				border: none;
+      				color: #cad3f5;
+      			}
 
-      #entry:selected {
-        background-color: rgba(54, 58, 79, 0.8);
-        border-radius: 10px;
-      }
+      			#entry:selected {
+      				background-color: rgba(54, 58, 79, 0.8);
+      				border-radius: 10px;
+      			}
     '';
   };
 
