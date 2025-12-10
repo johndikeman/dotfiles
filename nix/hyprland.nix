@@ -297,7 +297,7 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 30;
+        height = 40;
         modules-left = [
           "hyprland/workspaces"
           "hyprland/window"
@@ -394,132 +394,11 @@
         };
       };
     };
-    style = ''
-            * {
-              border: none;
-              border-radius: 0;
-              font-family: "Cartograph CF";
-              font-size: 13px;
-              min-height: 0;
-            }
-
-      					window#waybar {
-      						background-color: #${config.colorScheme.palette.base03};
-      						color: #${config.colorScheme.palette.base08};
-      					}
-
-            tooltip {
-              background: #1e1e2e;
-              border-radius: 10px;
-              border-width: 2px;
-              border-style: solid;
-              border-color: #11111b;
-            }
-
-            #workspaces button {
-              padding: 5px;
-              color: #313244;
-              margin-right: 5px;
-            }
-
-            #workspaces button.active {
-              color: #a6adc8;
-            }
-
-            #workspaces button.focused {
-              color: #a6adc8;
-              background: #eba0ac;
-              border-radius: 10px;
-            }
-
-            #workspaces button.urgent {
-              color: #11111b;
-              background: #a6e3a1;
-              border-radius: 10px;
-            }
-
-            #workspaces button:hover {
-              background: #11111b;
-              color: #cdd6f4;
-              border-radius: 10px;
-            }
-
-      					#custom-launch_wofi,
-      					#custom-power_btn,
-      					#custom-power_profile,
-      					#custom-weather,
-      					#window,
-      					#clock,
-      					#cpu,
-      					#memory,
-      					#battery,
-      					#pulseaudio,
-      					#network,
-      					#bluetooth,
-      					#temperature,
-      					#workspaces,
-      					#tray,
-      					#custom-powermenu,
-      					#backlight {
-      						background: #${config.colorScheme.palette.base03};
-      						opacity: 0.8;
-      						padding: 0px 5px;
-      						margin: 5px 5px;
-      						border: 1px solid #${config.colorScheme.palette.base02};
-      						border-radius: 10px;
-      					}
-
-            #temperature.critical {
-              color: #eba0ac;
-            }
-
-            #workspaces {
-              background: #1e1e2e;
-              border-radius: 10px;
-              margin-left: 10px;
-              padding-right: 0px;
-              padding-left: 5px;
-            }
-
-            #custom-power_profile {
-              color: #a6e3a1;
-              border-left: 0px;
-              border-right: 0px;
-            }
-
-            #window {
-              border-radius: 10px;
-              margin-left: 60px;
-              margin-right: 60px;
-            }
-
-            #clock {
-              color: #fab387;
-              border-radius: 10px;
-              margin-left: 5px;
-              border-right: 0px;
-            }
-
-      					#clock {
-      						color: #${config.colorScheme.palette.base08};
-      					}
-
-      					#network {
-      						color: #${config.colorScheme.palette.base09};
-      					}
-
-      					#bluetooth {
-      						color: #${config.colorScheme.palette.base0A};
-      					}
-
-      					#pulseaudio {
-      						color: #${config.colorScheme.palette.base0B};
-      					}
-
-      					#battery {
-      						color: #${config.colorScheme.palette.base0C};
-      					}
-    '';
+    style = pkgs.replaceVars ../css/waybar.css (
+      lib.attrsets.filterAttrs (
+        name: value: lib.strings.hasInfix name "base02 base03 base04 base09 base0B base0A base0D base0F"
+      ) config.colorScheme.palette
+    );
   };
 
   # Configure wofi application launcher
@@ -542,57 +421,11 @@
       image_size = 40;
       gtk_dark = true;
     };
-    style = ''
-      			* {
-      				font-family: "Cartograph CF";
-      				font-size: 14px;
-      			}
-
-      			window {
-      				margin: 0px;
-      				border: 2px solid #${config.colorScheme.palette.base03};
-      				background-color: #${config.colorScheme.palette.base08};
-      				border-radius: 10px;
-      			}
-
-      			#input {
-      				margin: 5px;
-      				border: none;
-      				color: #cad3f5;
-      				background-color: rgba(54, 58, 79, 0.8);
-      				border-radius: 10px;
-      			}
-
-      			#inner-box {
-      				margin: 5px;
-      				border: none;
-      				background-color: transparent;
-      				border-radius: 10px;
-      			}
-
-      			#outer-box {
-      				margin: 5px;
-      				border: none;
-      				background-color: transparent;
-      				border-radius: 10px;
-      			}
-
-      			#scroll {
-      				margin: 0px;
-      				border: none;
-      			}
-
-      			#text {
-      				margin: 5px;
-      				border: none;
-      				color: #cad3f5;
-      			}
-
-      			#entry:selected {
-      				background-color: rgba(54, 58, 79, 0.8);
-      				border-radius: 10px;
-      			}
-    '';
+    style = pkgs.replaceVars ../css/wofi.css (
+      lib.attrsets.filterAttrs (
+        name: value: lib.strings.hasInfix name "base03 base04 base05"
+      ) config.colorScheme.palette
+    );
   };
 
   programs.kitty = lib.mkForce {

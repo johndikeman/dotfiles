@@ -1,0 +1,51 @@
+* {
+	font-family: "Cartograph CF";
+	font-size: 14px;
+}
+
+window {
+	margin: 0px;
+	border: 2px solid #@base03@;
+	background-color: #@base04@;
+	border-radius: 10px;
+}
+
+#input {
+	margin: 5px;
+	border: none;
+	color: #cad3f5;
+	background-color: #@base05@;
+	opacity: 0.9;
+
+	border-radius: 10px;
+}
+
+#inner-box {
+	margin: 5px;
+	border: none;
+	background-color: transparent;
+	border-radius: 10px;
+}
+
+#outer-box {
+	margin: 5px;
+	border: none;
+	background-color: transparent;
+	border-radius: 10px;
+}
+
+#scroll {
+	margin: 0px;
+	border: none;
+}
+
+#text {
+	margin: 5px;
+	border: none;
+	color: #cad3f5;
+}
+
+#entry:selected {
+	background-color: rgba(54, 58, 79, 0.8);
+	border-radius: 10px;
+}
