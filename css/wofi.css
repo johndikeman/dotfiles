@@ -6,17 +6,16 @@
 window {
 	margin: 0px;
 	border: 2px solid #@base03@;
-	background-color: #@base04@;
+	background-color: #@base02@;
 	border-radius: 10px;
 }
 
 #input {
 	margin: 5px;
 	border: none;
-	color: #cad3f5;
+	color: #@base01@;
 	background-color: #@base05@;
 	opacity: 0.9;
-
 	border-radius: 10px;
 }
 
@@ -46,6 +45,6 @@ window {
 }
 
 #entry:selected {
-	background-color: rgba(54, 58, 79, 0.8);
+	background-color: @base02@;
 	border-radius: 10px;
 }
