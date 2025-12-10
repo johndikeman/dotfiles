@@ -17,7 +17,6 @@ in
   programs.fish = {
     enable = true;
     generateCompletions = true;
-    interactiveShellInit = "theme_gruvbox dark hard";
     functions = {
       replace_in_files = {
         body = ''
