@@ -137,8 +137,9 @@
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        "col.active_border" =
+          "rgba(${config.colorscheme.palette.base08}ee) rgba(${config.colorscheme.palette.base09}ee) 45deg";
+        "col.inactive_border" = "rgba(${config.colorscheme.palette.base03}aa)";
         layout = "dwindle";
       };
 
@@ -424,8 +425,8 @@
       					}
 
       					window#waybar {
-      						background: rgba(21, 18, 27, 0.8);
-      						color: #cdd6f4;
+      						background-color: #${config.colorScheme.palette.base03};
+      						color: #${config.colorScheme.palette.base08};
       					}
 
       					tooltip {
@@ -481,11 +482,11 @@
       					#tray,
       					#custom-powermenu,
       					#backlight {
-      						background: #1e1e2e;
+      						background: #${config.colorScheme.palette.base03};
       						opacity: 0.8;
       						padding: 0px 5px;
-      						margin: 5px 1px;
-      						border: 1px solid #181825;
+      						margin: 5px 5px;
+      						border: 1px solid #${config.colorScheme.palette.base02};
       						border-radius: 10px;
       					}
 
@@ -514,23 +515,23 @@
       					}
 
       					#clock {
-      						color: #fab387;
+      						color: #${config.colorScheme.palette.base08};
       					}
 
       					#network {
-      						color: #f9e2af;
+      						color: #${config.colorScheme.palette.base09};
       					}
 
       					#bluetooth {
-      						color: #89b4fa;
+      						color: #${config.colorScheme.palette.base0A};
       					}
 
       					#pulseaudio {
-      						color: #89b4fa;
+      						color: #${config.colorScheme.palette.base0B};
       					}
 
       					#battery {
-      						color: #a6e3a1;
+      						color: #${config.colorScheme.palette.base0C};
       					}
     '';
   };
@@ -556,55 +557,55 @@
       gtk_dark = true;
     };
     style = ''
-      * {
-        font-family: "Cartograph CF";
-        font-size: 14px;
-      }
+      			* {
+      				font-family: "Cartograph CF";
+      				font-size: 14px;
+      			}
 
-      window {
-        margin: 0px;
-        border: 2px solid #8aadf4;
-        background-color: rgba(36, 39, 58, 0.9);
-        border-radius: 10px;
-      }
+      			window {
+      				margin: 0px;
+      				border: 2px solid #${config.colorScheme.palette.base03};
+      				background-color: #${config.colorScheme.palette.base08};
+      				border-radius: 10px;
+      			}
 
-      #input {
-        margin: 5px;
-        border: none;
-        color: #cad3f5;
-        background-color: rgba(54, 58, 79, 0.8);
-        border-radius: 10px;
-      }
+      			#input {
+      				margin: 5px;
+      				border: none;
+      				color: #cad3f5;
+      				background-color: rgba(54, 58, 79, 0.8);
+      				border-radius: 10px;
+      			}
 
-      #inner-box {
-        margin: 5px;
-        border: none;
-        background-color: transparent;
-        border-radius: 10px;
-      }
+      			#inner-box {
+      				margin: 5px;
+      				border: none;
+      				background-color: transparent;
+      				border-radius: 10px;
+      			}
 
-      #outer-box {
-        margin: 5px;
-        border: none;
-        background-color: transparent;
-        border-radius: 10px;
-      }
+      			#outer-box {
+      				margin: 5px;
+      				border: none;
+      				background-color: transparent;
+      				border-radius: 10px;
+      			}
 
-      #scroll {
-        margin: 0px;
-        border: none;
-      }
+      			#scroll {
+      				margin: 0px;
+      				border: none;
+      			}
 
-      #text {
-        margin: 5px;
-        border: none;
-        color: #cad3f5;
-      }
+      			#text {
+      				margin: 5px;
+      				border: none;
+      				color: #cad3f5;
+      			}
 
-      #entry:selected {
-        background-color: rgba(54, 58, 79, 0.8);
-        border-radius: 10px;
-      }
+      			#entry:selected {
+      				background-color: rgba(54, 58, 79, 0.8);
+      				border-radius: 10px;
+      			}
     '';
   };
 
