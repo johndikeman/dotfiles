@@ -423,7 +423,7 @@
     };
     style = pkgs.replaceVars ../css/wofi.css (
       lib.attrsets.filterAttrs (
-        name: value: lib.strings.hasInfix name "base03 base04 base05"
+        name: value: lib.strings.hasInfix name "base01 base02 base03 base05"
       ) config.colorScheme.palette
     );
   };
