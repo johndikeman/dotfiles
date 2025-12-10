@@ -98,7 +98,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
-  colorScheme = inputs.nix-colors.colorSchemes.everforest-dark-hard;
+  colorScheme = inputs.nix-colors.colorSchemes.chalk;
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
