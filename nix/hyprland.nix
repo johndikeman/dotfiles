@@ -417,7 +417,7 @@
     };
     style = pkgs.replaceVars ../css/waybar.css (
       lib.attrsets.filterAttrs (
-        name: value: lib.strings.hasInfix name "base02 base03 base04 base09 base0B base0A base0D base0F"
+        name: value: lib.strings.hasInfix name "base00 base02 base05 base09 base0B base0A base0D base0F"
       ) config.colorScheme.palette
     );
   };
