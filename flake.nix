@@ -59,13 +59,12 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.users.john = {
               imports = [ ./home.nix ];
-              specialArgs = { inherit inputs; };
             };
             home-manager.users.jess = {
               imports = [ ./jess-home.nix ];
-              specialArgs = { inherit inputs; };
             };
           }
         ];
