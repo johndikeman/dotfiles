@@ -286,7 +286,7 @@ return {
 				python = { "black" },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },
-				svelte = { "prettier-plugin-svelte" },
+				svelte = { "prettierd", "prettier", stop_after_first = true },
 				nix = { "nixfmt" },
 			},
 			-- Set default options
