@@ -297,7 +297,7 @@
     pkgs.unzip
     rose-pine-hyprcursor
   ];
-
+  hardware.facetimehd.enable = true;
   # Font configuration
   fonts = {
     packages = with pkgs; [
