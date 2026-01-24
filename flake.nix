@@ -31,6 +31,9 @@
       inputs.hyprland.follows = "hyprland";
     };
     nix-colors.url = "github:misterio77/nix-colors";
+    opencode = {
+      url = "github:anomalyco/opencode";
+    };
   };
 
   outputs =
@@ -59,7 +62,11 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              opencode = inputs.opencode.packages.${system}.default;
+            };
+
             home-manager.users.john = {
               imports = [ ./home.nix ];
             };
