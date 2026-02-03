@@ -26,7 +26,7 @@
     };
     nix-colors.url = "github:misterio77/nix-colors";
     opencode = {
-      url = "github:anomalyco/opencode";
+      url = "github:anomalyco/opencode/v1.1.49";
     };
   };
 
