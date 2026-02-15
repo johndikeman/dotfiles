@@ -45,6 +45,7 @@
         specialArgs = {
           inherit inputs;
           rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
+          opencode = inputs.opencode.packages.${system}.default;
         };
         modules = [
           # Import the previous configuration.nix we used,
@@ -56,7 +57,6 @@
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = {
               inherit inputs;
-              opencode = inputs.opencode.packages.${system}.default;
             };
 
             home-manager.users.john = {

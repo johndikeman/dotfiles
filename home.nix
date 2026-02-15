@@ -74,7 +74,6 @@
         sha256 = "sha256-vt5X+2dBdW2F7owUfZSeEQJD0aSBlHFTHM/SxDmhGsA=";
       };
     }))
-    pkgs.opencode
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";
