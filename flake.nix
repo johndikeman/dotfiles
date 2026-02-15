@@ -52,6 +52,7 @@
         specialArgs = {
           inherit inputs;
           rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
+          opencode = inputs.opencode.packages.${system}.default;
         };
         modules = [
           lanzaboote.nixosModules.lanzaboote
@@ -64,7 +65,6 @@
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = {
               inherit inputs;
-              opencode = inputs.opencode.packages.${system}.default;
             };
 
             home-manager.users.john = {

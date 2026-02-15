@@ -7,6 +7,7 @@
   pkgs,
   lib,
   rose-pine-hyprcursor,
+  opencode,
   inputs,
   ...
 }:
@@ -314,6 +315,7 @@
     pkgs.unzip
     pkgs.sbctl
     rose-pine-hyprcursor
+    opencode
   ];
 
   # Font configuration
