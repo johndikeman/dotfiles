@@ -53,6 +53,9 @@ in
         };
       }
     ];
+    interactiveShellInit = ''
+      fish_add_path $HOME/.npm-packages/bin
+    '';
   };
   home.file = {
   };
