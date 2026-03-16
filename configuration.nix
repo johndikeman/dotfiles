@@ -342,6 +342,8 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
+  services.mullvad-vpn.enable = true;
+
   # Open ports in the firewall.
   # 8010 is used for chromecast support for vlc
   networking.firewall.allowedTCPPorts = [ 8010 ];
