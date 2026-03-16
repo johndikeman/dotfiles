@@ -52,7 +52,6 @@
     pkgs.google-cloud-sdk
     pkgs.libevent # dependencies for playwright for some reason
     pkgs.flite
-    pkgs.mullvad-vpn
     pkgs.uv
     pkgs.terraform
     pkgs.black
