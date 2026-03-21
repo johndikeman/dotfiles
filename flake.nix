@@ -31,9 +31,6 @@
       inputs.hyprland.follows = "hyprland";
     };
     nix-colors.url = "github:misterio77/nix-colors";
-    opencode = {
-      url = "github:anomalyco/opencode/v1.1.49";
-    };
   };
 
   outputs =
@@ -52,7 +49,6 @@
         specialArgs = {
           inherit inputs;
           rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
-          opencode = inputs.opencode.packages.${system}.default;
         };
         modules = [
           lanzaboote.nixosModules.lanzaboote
