@@ -4,7 +4,6 @@
   pkgs,
   # nixGL,
   inputs,
-  opencode,
   ...
 }:
 {

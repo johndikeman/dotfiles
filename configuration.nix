@@ -7,7 +7,6 @@
   pkgs,
   lib,
   rose-pine-hyprcursor,
-  opencode,
   inputs,
   ...
 }:
@@ -309,7 +308,6 @@
     pkgs.git
     pkgs.unzip
     rose-pine-hyprcursor
-    opencode
   ];
   hardware.facetimehd.enable = true;
   # Font configuration
