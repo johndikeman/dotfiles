@@ -13,12 +13,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
+      url = "github:nix-community/lanzaboote/v1.0.0";
 
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/hyprland?ref=v0.51.1";
+    hyprland.url = "github:hyprwm/hyprland?ref=v0.54.2";
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
