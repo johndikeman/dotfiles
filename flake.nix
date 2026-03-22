@@ -24,12 +24,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
-    Hyprspace = {
-      url = "github:KZDKM/Hyprspace";
-
-      # Hyprspace uses latest Hyprland. We declare this to keep them in sync.
-      inputs.hyprland.follows = "hyprland";
-    };
     nix-colors.url = "github:misterio77/nix-colors";
   };
 
@@ -40,7 +34,6 @@
       home-manager,
       lanzaboote,
       rose-pine-hyprcursor,
-      Hyprspace,
       ...
     }@inputs:
     {

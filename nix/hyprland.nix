@@ -92,10 +92,6 @@
       enable = true;
     };
 
-    plugins = [
-      inputs.Hyprspace.packages.x86_64-linux.default
-    ];
-
     settings = {
       "$mod" = "SUPER";
 
@@ -256,10 +252,6 @@
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
       };
-      gesture = [
-        "3, horizontal, workspace"
-        "3, vertical, dispatcher, overview:toggle all"
-      ];
     };
   };
 
