@@ -124,7 +124,7 @@ in
       vim-fugitive
       diffview-nvim
     ];
-    extraLuaConfig = ''
+    initLua = ''
                   vim.g.mapleader = " " -- Need to set leader before lazy for correct keybindings
                   require("lazy").setup({
             				spec = {
