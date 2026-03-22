@@ -230,6 +230,18 @@
   };
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.wayland.enableGnomeKeyring = true;
+
+  security.sudo.extraRules = [
+    {
+      users = [ "john" ];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
