@@ -16,6 +16,9 @@ in
 
   programs.fish = {
     enable = true;
+    shellAliases = {
+      nixos-rebuild = "sudo nixos-rebuild";
+    };
     generateCompletions = true;
     functions = {
       replace_in_files = {
