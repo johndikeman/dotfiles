@@ -494,6 +494,8 @@
   home.sessionVariables = {
     # Tell electron apps to use wayland
     NIXOS_OZONE_WL = "1";
+    # make firefox use wayland?
+    MOZ_ENABLE_WAYLAND = "1";
     # Set default applications
     TERMINAL = "kitty";
     BROWSER = "firefox";
