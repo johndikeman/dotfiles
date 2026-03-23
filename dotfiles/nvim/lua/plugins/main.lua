@@ -1,7 +1,7 @@
 return {
 	{ "lewis6991/gitsigns.nvim", opts = {} },
 	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = { contrast = "hard" } },
-	{ "numToStr/FTerm.nvim" },
+
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = { "saghen/blink.cmp" },
@@ -322,13 +322,23 @@ return {
 		},
 	},
 	{
-		"sindrets/diffview.nvim",
+		"kdheepak/lazygit.nvim",
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		-- setting the keybinding for LazyGit with 'keys' is recommended in
+		-- order to load the plugin when the command is run for the first time
 		keys = {
-			-- Toggle diffview
-			{ "<leader>dv", "<cmd>DiffviewOpen<cr>", desc = "Diffview" },
-			{ "<leader>dvc", "<cmd>DiffviewClose<cr>", desc = "Diffview" },
-			-- Open git history for current buffer
-			{ "<leader>fh", "<cmd>DiffviewFileHistory %<cr>", desc = "Diffview File History" },
+			{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+			{ "<leader>gf", "<cmd>LazyGitCurrentFile<cr>", desc = "LazyGit Current File" },
 		},
 	},
 	{ "tpope/vim-fugitive" },

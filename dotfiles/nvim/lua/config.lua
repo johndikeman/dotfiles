@@ -24,8 +24,16 @@ vim.g.vim_svelte_plugin_use_typescript = 1
 -- format lua files
 -- vim.keymap.set("n", "<leader>f", [[<cmd>lua require("stylua-nvim").format_file()<CR>]], opts)
 
--- cute fterm
-vim.keymap.set({ "n", "t" }, "<Leader>i", '<CMD>lua require("FTerm").toggle()<CR>')
+-- Terminal mappings
+-- Toggle terminal with <Leader>t
+vim.keymap.set("n", "<Leader>t", "<CMD>terminal<CR>", { noremap = true })
+-- Exit terminal mode with Esc
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
+-- Window navigation from terminal
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h", { noremap = true })
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j", { noremap = true })
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", { noremap = true })
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", { noremap = true })
 
 -- treesitter stuff
 local parser_install_dir = vim.fn.stdpath("cache") .. "/treesitters"

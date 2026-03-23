@@ -86,7 +86,6 @@ let
       lazy-nvim
       gitsigns-nvim
       gruvbox-nvim
-      FTerm-nvim
       nvim-lspconfig
       blink-cmp
       rustaceanvim
@@ -105,7 +104,7 @@ let
       goose-nvim
       render-markdown-nvim
       vim-fugitive
-      diffview-nvim
+      lazygit-nvim
     ];
 
   packDir = pkgs.vimUtils.packDir {
