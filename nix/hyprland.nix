@@ -84,16 +84,10 @@
           command = "${pkgs.systemd}/bin/systemctl suspend";
         }
       ];
-      events = [
-        {
-          event = "before-sleep";
-          command = display "off";
-        }
-        {
-          event = "after-resume";
-          command = display "on";
-        }
-      ];
+      events = {
+        before-sleep = display "off";
+        after-resume = display "on";
+      };
     };
 
   # Enable Hyprland
@@ -478,6 +472,12 @@
   # GTK theme settings
   gtk = {
     enable = true;
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
     theme = {
       name = "Catppuccin-Mocha-Standard-Blue-Dark";
       package = pkgs.catppuccin-gtk.override {
@@ -485,6 +485,7 @@
         variant = "mocha";
       };
     };
+    gtk4.theme = config.gtk.theme;
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;

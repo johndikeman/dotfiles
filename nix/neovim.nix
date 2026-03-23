@@ -131,7 +131,7 @@ in
 
   programs.neovim = {
     plugins = myPlugins;
-    extraLuaConfig = ''
+    initLua = ''
                   vim.opt.packpath:prepend("${packDir}")
                   vim.g.mapleader = " " -- Need to set leader before lazy for correct keybindings
                   require("lazy").setup({

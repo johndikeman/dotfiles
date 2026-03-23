@@ -47,7 +47,7 @@
     pkgs.maturin
     pkgs.niv
     pkgs.ncdu
-    pkgs.nixfmt-rfc-style
+    pkgs.nixfmt
     pkgs.obsidian
     pkgs.tmux
     pkgs.google-cloud-sdk
@@ -200,8 +200,17 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.git.enable = true;
-  programs.git.userEmail = "jrobdikeman@gmail.com";
-  programs.git.userName = "john";
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        email = "jrobdikeman@gmail.com";
+        name = "john";
+      };
+    };
+    signing = {
+      format = null;
+    };
+  };
 
 }

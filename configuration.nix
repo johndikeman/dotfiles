@@ -86,15 +86,15 @@
     speechd-minimal
     udev
     vulkan-loader
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXinerama
-    xorg.libXext
-    xorg.libXrandr
-    xorg.libXrender
-    xorg.libXi
-    xorg.libXfixes
-    xorg.libxcb
+    libx11
+    libxcursor
+    libxinerama
+    libxext
+    libxrandr
+    libxrender
+    libxi
+    libxfixes
+    libxcb
     libxkbcommon
     fontconfig
     alsa-lib
