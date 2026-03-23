@@ -81,25 +81,8 @@ let
     meta.hydraPlatforms = [ ];
     dependencies = [ pkgs.vimPlugins.plenary-nvim ];
   };
-in
-{
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
 
-  # install language servers
-  home.packages = [
-    pkgs.nil
-    pkgs.lua-language-server
-    pkgs.pyright
-    pkgs.typescript-language-server
-    pkgs.svelte-language-server
-    pkgs.ripgrep # dependency for the telescope live-grep finder
-    pkgs.stylua
-  ];
-
-  programs.neovim = {
-    plugins = with pkgs.vimPlugins; [
+  myPlugins = with pkgs.vimPlugins; [
       lazy-nvim
       gitsigns-nvim
       gruvbox-nvim
@@ -124,7 +107,33 @@ in
       vim-fugitive
       diffview-nvim
     ];
-    initLua = ''
+
+  packDir = pkgs.vimUtils.packDir {
+    myNeovimPackages = {
+      start = myPlugins;
+    };
+  };
+in
+{
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
+  # install language servers
+  home.packages = [
+    pkgs.nil
+    pkgs.lua-language-server
+    pkgs.pyright
+    pkgs.typescript-language-server
+    pkgs.svelte-language-server
+    pkgs.ripgrep # dependency for the telescope live-grep finder
+    pkgs.stylua
+  ];
+
+  programs.neovim = {
+    plugins = myPlugins;
+    extraLuaConfig = ''
+                  vim.opt.packpath:prepend("${packDir}")
                   vim.g.mapleader = " " -- Need to set leader before lazy for correct keybindings
                   require("lazy").setup({
             				spec = {
@@ -138,8 +147,9 @@ in
                         }
                       },
                     dev = {
-                      path = "${pkgs.vimUtils.packDir config.programs.neovim.finalPackage.passthru.packpathDirs}/pack/myNeovimPackages/start",
-      								patterns = {""},
+                      path = "${packDir}/pack/myNeovimPackages/start",
+                      patterns = {"."},
+                      fallback = true,
                     },
                     install = {
                       -- Safeguard in case we forget to install a plugin with Nix
