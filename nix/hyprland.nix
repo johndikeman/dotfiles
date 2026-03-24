@@ -60,6 +60,11 @@
       ];
       text = builtins.readFile ../scripts/powermenu.sh;
     })
+    (pkgs.writeShellApplication {
+      name = "window-switcher.sh";
+      runtimeInputs = [ jq wofi gawk ];
+      text = builtins.readFile ../scripts/window-switcher.sh;
+    })
   ];
 
   services.swayidle =
@@ -196,7 +201,7 @@
         # Move focus with mod + arrow keys
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
+        "$mod, up, exec, window-switcher.sh"
         "$mod, down, movefocus, d"
 
         # Switch workspaces
