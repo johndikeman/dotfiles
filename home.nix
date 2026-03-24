@@ -75,7 +75,6 @@
     pkgs.inkscape-with-extensions
     pkgs.tailscale
     pkgs.chromium
-    pkgs.nix-output-monitor
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";
