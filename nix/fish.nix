@@ -17,10 +17,31 @@ in
   programs.fish = {
     enable = true;
     shellAliases = {
-      nixos-rebuild = "sudo nixos-rebuild";
+      # Some common aliases
     };
     generateCompletions = true;
     functions = {
+      nix = {
+        body = ''
+          switch "$argv[1]"
+            case build shell develop
+              nom $argv
+            case flake
+              if test "$argv[2]" = "check"
+                command nix $argv --log-format internal-json -v 2>&1 | nom --json
+              else
+                command nix $argv
+              end
+            case "*"
+              command nix $argv
+          end
+        '';
+      };
+      nixos-rebuild = {
+        body = ''
+          sudo nixos-rebuild $argv --log-format internal-json -v 2>&1 | nom --json
+        '';
+      };
       replace_in_files = {
         body = ''
 

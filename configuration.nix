@@ -325,6 +325,7 @@
     pkgs.git
     pkgs.unzip
     pkgs.sbctl
+    pkgs.nix-output-monitor
     rose-pine-hyprcursor
   ];
 
