@@ -99,10 +99,6 @@
       enable = true;
     };
 
-    plugins = [
-      inputs.Hyprspace.packages.x86_64-linux.default
-    ];
-
     settings = {
       "$mod" = "SUPER";
 
