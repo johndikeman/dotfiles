@@ -5,17 +5,16 @@
 
 window {
 	margin: 0px;
-	border: 2px solid #@base03@;
-	background-color: #@base02@;
+	border: 2px solid #@base08@;
+	background-color: #@base00@;
 	border-radius: 10px;
 }
 
 #input {
 	margin: 5px;
 	border: none;
-	color: #@base01@;
-	background-color: #@base05@;
-	opacity: 0.9;
+	color: #@base05@;
+	background-color: #@base01@;
 	border-radius: 10px;
 }
 
@@ -41,10 +40,20 @@ window {
 #text {
 	margin: 5px;
 	border: none;
-	color: #cad3f5;
+	color: #@base05@;
 }
 
 #entry:selected {
-	background-color: @base02@;
+	background-color: #@base02@;
 	border-radius: 10px;
 }
+
+#text:selected {
+	color: #@base08@;
+}
+
+/* 
+  Included for nix-colors substitution compatibility 
+  @base00@ @base01@ @base02@ @base03@ @base04@ @base05@ @base06@ @base07@
+  @base08@ @base09@ @base0A@ @base0B@ @base0C@ @base0D@ @base0E@ @base0F@
+*/
