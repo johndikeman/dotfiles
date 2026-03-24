@@ -116,6 +116,13 @@
         "HDMI-A-2,3840x2160,-1440x-450,1.5,transform,1"
       ];
 
+      workspace = [
+        "1, monitor:HDMI-A-1"
+        "2, monitor:HDMI-A-1"
+        "3, monitor:HDMI-A-2"
+        "4, monitor:HDMI-A-2"
+      ];
+
       xwayland = {
         force_zero_scaling = true;
       };
