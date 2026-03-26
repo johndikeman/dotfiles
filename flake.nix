@@ -8,10 +8,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    dude.url = "git+ssh://git@github.com/johndikeman/dude.git?ref=main";
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }:
+    { nixpkgs, home-manager, dude, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
@@ -22,7 +23,10 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./home.nix ];
+        modules = [ 
+          ./home.nix
+          dude.homeManagerModules.dude-agent
+        ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix

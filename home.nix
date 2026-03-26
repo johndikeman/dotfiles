@@ -67,4 +67,9 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  services.dude-agent = {
+    enable = true;
+    workingDirectory = "/home/ubuntu/dude";
+  };
 }
