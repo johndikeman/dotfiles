@@ -18,11 +18,11 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-	pkgs.gh
-	pkgs.git
-	pkgs.lazygit	
-	pkgs.neovim
-	pkgs._1password-cli
+    pkgs.gh
+    pkgs.git
+    pkgs.lazygit
+    pkgs.neovim
+    pkgs._1password-cli
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -59,10 +59,13 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
-  
+
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   # Let Home Manager install and manage itself.
@@ -70,6 +73,5 @@
 
   services.dude-agent = {
     enable = true;
-    workingDirectory = "/home/ubuntu/dude";
   };
 }
