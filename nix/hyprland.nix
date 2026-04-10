@@ -115,9 +115,9 @@
 
       # General configuration
       general = {
-        gaps_in = 5;
-        gaps_out = 10;
-        border_size = 2;
+        gaps_in = 2;
+        gaps_out = 4;
+        border_size = 1;
         "col.active_border" =
           "rgba(${config.colorscheme.palette.base08}ee) rgba(${config.colorscheme.palette.base09}ee) 45deg";
         "col.inactive_border" = "rgba(${config.colorscheme.palette.base03}aa)";
@@ -126,7 +126,7 @@
 
       # Decoration configuration
       decoration = {
-        rounding = 10;
+        rounding = 5;
         blur = {
           enabled = true;
           size = 3;
