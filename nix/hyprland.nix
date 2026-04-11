@@ -60,6 +60,16 @@
       ];
       text = builtins.readFile ../scripts/window-switcher.sh;
     })
+    (pkgs.writeShellApplication {
+      name = "firefox-history.sh";
+      runtimeInputs = [
+        sqlite
+        wofi
+        libnotify
+        gawk
+      ];
+      text = builtins.readFile ../scripts/firefox-history.sh;
+    })
   ];
 
   services.swayidle =
@@ -184,9 +194,10 @@
         "$mod, space, exec, wofi --show drun"
         "$mod, P, pseudo,"
         "$mod, J, togglesplit,"
-
         # fullscreen
         "$mod SHIFT, F, fullscreen"
+        # firefox history
+        "$mod SHIFT, O, exec, firefox-history.sh"
 
         # global copy-paste with mod key
         "$mod, C, exec, modcopypaste.sh copy kitty"
