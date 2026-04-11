@@ -7,11 +7,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1775918271,
-        "narHash": "sha256-rAE3emnL4E6rgPxbNvdrp9iejUWVFA3vINQBhV8a4g0=",
+        "lastModified": 1775920148,
+        "narHash": "sha256-g1kWGKUPsimTSSXRxRd3Ebgb2jUzkT4vrmQ9NKo72ss=",
         "ref": "main",
-        "rev": "fccec5770c6fdaa9150002c68df7211ebe161b26",
-        "revCount": 127,
+        "rev": "799bcef66a77c7fd58ae1c1b4c99326e0d750a58",
+        "revCount": 129,
         "type": "git",
         "url": "ssh://git@github.com/johndikeman/dude.git"
       },
