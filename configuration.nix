@@ -102,7 +102,8 @@
     libpulseaudio
   ];
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
-
+  programs.k3b.enable = true;
+  services.udisks2.enable = true;
   programs.regreet = {
     enable = true;
 
@@ -261,6 +262,7 @@
       "networkmanager"
       "wheel"
       "podman"
+      "cdrom"
     ];
     shell = pkgs.fish;
     packages = with pkgs; [
