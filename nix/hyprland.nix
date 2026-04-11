@@ -71,33 +71,7 @@
     })
   ];
 
-  services.swayidle =
-    let
-      # Hyprland
-      display = status: "hyprctl dispatch dpms ${status}";
-    in
-    {
-      enable = true;
-      timeouts = [
-        {
-          timeout = 300; # in seconds
-          command = "${pkgs.libnotify}/bin/notify-send 'monitor turning off in two mins' -t 5000";
-        }
-        {
-          timeout = 420;
-          command = display "off";
-          resumeCommand = display "on";
-        }
-        {
-          timeout = 600;
-          command = "${pkgs.systemd}/bin/systemctl suspend";
-        }
       ];
-      events = {
-        before-sleep = display "off";
-        after-resume = display "on";
-      };
-    };
 
   # Enable Hyprland
   wayland.windowManager.hyprland = {
