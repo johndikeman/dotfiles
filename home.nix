@@ -74,4 +74,10 @@
   services.dude-agent = {
     enable = true;
   };
+
+  services.dude-lichess-checker = {
+    enable = true;
+    lichessUsername = "woaster";
+    interval = "hourly";
+  };
 }

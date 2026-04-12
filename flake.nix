@@ -8,7 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dude.url = "git+ssh://git@github.com/johndikeman/dude.git?ref=main";
+    dude.url = "git+ssh://git@github.com/johndikeman/dude.git?ref=feature/chess-critic-agent";
   };
 
   outputs =
