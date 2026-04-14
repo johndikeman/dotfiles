@@ -12,7 +12,7 @@
     wofi # Application launcher
     dunst # Notification daemon
     libnotify # Notification library
-    swww # Wallpaper
+    awww # Wallpaper
     wl-clipboard # Clipboard manager
     cliphist # clipboard history
     grim # Screenshot utility
@@ -36,7 +36,7 @@
 
     (pkgs.writeShellApplication {
       name = "swww-randomize.sh";
-      runtimeInputs = [ swww ];
+      runtimeInputs = [ awww ];
       text = builtins.readFile ../scripts/swww-randomize.sh;
     })
     (pkgs.writeShellApplication {
@@ -98,7 +98,7 @@
       };
 
       exec-once = [
-        "swww-daemon"
+        "awww-daemon"
         "waybar"
         "dunst"
         "nm-applet"
@@ -500,8 +500,8 @@
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     # GTK theme
     GTK_THEME = "Catppuccin-Mocha-Standard-Blue-Dark";
-    SWWW_TRANSITION_FPS = 60;
-    SWWW_TRANSITION_STEP = 2;
+    AWWW_TRANSITION_FPS = 60;
+    AWWW_TRANSITION_STEP = 2;
     HYPRCURSOR_THEME = "rose-pine-hyprcursor";
   };
 }
