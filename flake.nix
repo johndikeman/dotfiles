@@ -25,9 +25,6 @@
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
     nix-colors.url = "github:misterio77/nix-colors";
-    llama-cpp = {
-      url = "github:ggml-org/llama.cpp";
-    };
   };
 
   outputs =
@@ -37,7 +34,6 @@
       home-manager,
       lanzaboote,
       rose-pine-hyprcursor,
-      llama-cpp,
       ...
     }@inputs:
     {
