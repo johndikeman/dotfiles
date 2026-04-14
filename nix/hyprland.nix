@@ -100,7 +100,7 @@
 
       exec-once = [
         "awww-daemon"
-        "waybar"
+        "sleep 2 && waybar &> /tmp/waybar.log"
         "dunst"
         "nm-applet"
         "blueman-applet"
