@@ -33,7 +33,7 @@ while true; do
 	for img in $(printf '%s\n' "${images[@]}" | shuf); do
 		if [ -f "$img" ]; then
 			echo "Setting wallpaper: $img"
-			swww img --resize="$RESIZE_TYPE" -t random "$img"
+			awww img --resize="$RESIZE_TYPE" -t random "$img"
 			sleep "$INTERVAL"
 		fi
 	done
