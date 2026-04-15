@@ -5,9 +5,11 @@
       "api": "openai-completions",
       "apiKey": "sk-no-key-required",
       "models": [
-        { "id": "Gemma-4-26B-A4B-It" }
-      ],
-			"contextWindow":64000
+        { 
+					"id": "Gemma-4-26B-A4B-It", 
+					"contextWindow": 64000
+				}
+      ]
     }
   }
 }
