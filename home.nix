@@ -108,6 +108,8 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
+    ".pi/agent/models.json".source = dotfiles/ai/models.json;
+
     "${config.xdg.configHome}/containers" = {
       source = dotfiles/containers;
       recursive = true;

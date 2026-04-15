@@ -1,0 +1,12 @@
+{
+  "providers": {
+    "ollama": {
+      "baseUrl": "http://localhost:8001/completion",
+      "api": "openai-completions",
+      "apiKey": "sk-no-key-required",
+      "models": [
+        { "id": "Gemma-4-26B-A4B-It" }
+      ]
+    }
+  }
+}
