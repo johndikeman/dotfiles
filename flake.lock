@@ -548,11 +548,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1776216694,
-        "narHash": "sha256-BS5TkpjbAM16m4NQS+xT0I/luBHgxlDhODoCuEAhVPA=",
+        "lastModified": 1776546932,
+        "narHash": "sha256-TRJp0fCx6RKaRyVREjclcubMzGTWBQDdJSfpPkkN6uQ=",
         "ref": "llama-gemma",
-        "rev": "095683ce1191cb2ed0c57c642f33246a83ae849d",
-        "revCount": 18,
+        "rev": "5d3255e06e7d8362ae3c2644d1c4b1beb32f8235",
+        "revCount": 19,
         "type": "git",
         "url": "ssh://git@github.com/johndikeman/experiments.git"
       },

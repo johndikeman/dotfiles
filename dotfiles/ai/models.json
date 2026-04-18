@@ -7,7 +7,7 @@
       "models": [
         { 
 					"id": "Gemma-4-26B-A4B-It", 
-					"contextWindow": 64000
+					"contextWindow": 32000
 				}
       ]
     }
