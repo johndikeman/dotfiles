@@ -28,7 +28,7 @@ return {
 						enableTsPlugin = true,
 					},
 				},
-				nil_ls = { ["nil"] = { formatting = { command = { "nixfmt" } } } },
+				nixd = { { nixd = { formatting = { command = { "nixfmt" } } } } },
 				gdscript = {},
 			},
 		},
