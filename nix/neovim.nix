@@ -120,7 +120,7 @@ in
 
   # install language servers
   home.packages = [
-    pkgs.nil
+    pkgs.nixd
     pkgs.lua-language-server
     pkgs.pyright
     pkgs.typescript-language-server
