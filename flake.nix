@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dude.url = "git+ssh://git@github.com/johndikeman/dude.git?ref=main";
-    dude-chess.url = "git+ssh://git@github.com/johndikeman/dude-chess.git?ref=add-checker-module";
+    dude-chess.url = "git+ssh://git@github.com/johndikeman/dude-chess.git?ref=main";
   };
 
   outputs =
