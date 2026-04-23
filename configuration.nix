@@ -329,6 +329,7 @@
     pkgs.unzip
     pkgs.sbctl
     pkgs.nix-output-monitor
+    pkgs.gparted
     rose-pine-hyprcursor
   ];
 
