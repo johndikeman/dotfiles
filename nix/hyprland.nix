@@ -137,6 +137,8 @@
         "4, monitor:HDMI-A-2"
       ];
 
+      windowrule = [ "workspace 3, ^(discord)$" ];
+
       xwayland = {
         force_zero_scaling = true;
       };
