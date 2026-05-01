@@ -9,11 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dude.url = "git+ssh://git@github.com/johndikeman/dude.git?ref=main";
-    dude-chess.url = "git+ssh://git@github.com/johndikeman/dude-chess.git?ref=main";
   };
 
   outputs =
-    { nixpkgs, home-manager, dude, dude-chess, ... }:
+    { nixpkgs, home-manager, dude, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
@@ -27,7 +26,6 @@
         modules = [ 
           ./home.nix
           dude.homeManagerModules.dude-agent
-          dude-chess.homeManagerModules.dude-chess
         ];
 
         # Optionally use extraSpecialArgs
