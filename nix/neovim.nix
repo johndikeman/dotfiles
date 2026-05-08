@@ -106,6 +106,7 @@ let
     nvim-notify
     nui-nvim
     noice-nvim
+    tiny-inline-diagnostic-nvim
   ];
 
   packDir = pkgs.vimUtils.packDir {
