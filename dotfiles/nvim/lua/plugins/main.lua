@@ -345,23 +345,19 @@ return {
 		opts = function()
 			local splash = require("milli").load({ splash = "vibecattwo" })
 			return {
-				theme = "doom",
+				theme = "hyper",
 				config = {
 					header = splash.frames[1], -- seed header with frame 0
-					center = {
+					shortcut = {
 						{
-							icon = " ",
-							icon_hl = "Title",
+							icon = "󱣀",
+							icon_hl = "@variable",
 							desc = "workspaces",
-							desc_hl = "String",
-							key = "b",
-							keymap = "SPC f w",
-							key_hl = "Number",
-							key_format = " %s", -- remove default surrounding `[]`
+							group = "Label",
 							action = "Telescope workspaces",
+							key = "w",
 						},
 					},
-
 					change_to_vcs_root = true,
 				},
 			}
