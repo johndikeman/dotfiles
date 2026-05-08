@@ -57,7 +57,7 @@ let
 
   comment-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "Comment.nvim";
-    version = "2024-06-09";
+    version = "unstable-2024-06-09";
     src = pkgs.fetchFromGitHub {
       owner = "numtostr";
       repo = "Comment.nvim";
@@ -70,12 +70,12 @@ let
 
   goose-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "goose.nvim";
-    version = "2025-06-17";
+    version = "unstable-2026-04-16";
     src = pkgs.fetchFromGitHub {
       owner = "azorng";
       repo = "goose.nvim";
-      rev = "ada7651562bbcd0601d08896741cf7b4862178a8";
-      sha256 = "sha256-u7NabwnlwNixc0Axu50Kr81TkHMNbWKvCTTsPQascbA=";
+      rev = "c16133a0c4e3fb2b733887ebdd6d0dff67af31e1";
+      sha256 = "0p2s3jdsqpghf6ybdr48j1ycx0gc38qp4rsv707a1pjdh3wk651w";
     };
     meta.homepage = "https://github.com/numtostr/comment.nvim/";
     meta.hydraPlatforms = [ ];
