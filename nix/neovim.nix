@@ -68,44 +68,29 @@ let
     meta.hydraPlatforms = [ ];
   };
 
-  goose-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "goose.nvim";
-    version = "unstable-2026-04-16";
-    src = pkgs.fetchFromGitHub {
-      owner = "azorng";
-      repo = "goose.nvim";
-      rev = "c16133a0c4e3fb2b733887ebdd6d0dff67af31e1";
-      sha256 = "0p2s3jdsqpghf6ybdr48j1ycx0gc38qp4rsv707a1pjdh3wk651w";
-    };
-    meta.homepage = "https://github.com/numtostr/comment.nvim/";
-    meta.hydraPlatforms = [ ];
-    dependencies = [ pkgs.vimPlugins.plenary-nvim ];
-  };
-
   myPlugins = with pkgs.vimPlugins; [
-      lazy-nvim
-      gitsigns-nvim
-      gruvbox-nvim
-      nvim-lspconfig
-      blink-cmp
-      rustaceanvim
-      nvim-treesitter.withAllGrammars
-      plenary-nvim
-      lsp-colors-nvim
-      trouble-nvim
-      vim-svelte-plugin
-      telescope-nvim
-      stylua-nvim
-      comment-nvim
-      nvim-ts-context-commentstring
-      marks-nvim
-      workspaces-nvim
-      conform-nvim
-      goose-nvim
-      render-markdown-nvim
-      vim-fugitive
-      lazygit-nvim
-    ];
+    lazy-nvim
+    gitsigns-nvim
+    gruvbox-nvim
+    nvim-lspconfig
+    blink-cmp
+    rustaceanvim
+    nvim-treesitter.withAllGrammars
+    plenary-nvim
+    lsp-colors-nvim
+    trouble-nvim
+    vim-svelte-plugin
+    telescope-nvim
+    stylua-nvim
+    comment-nvim
+    nvim-ts-context-commentstring
+    marks-nvim
+    workspaces-nvim
+    conform-nvim
+    render-markdown-nvim
+    vim-fugitive
+    lazygit-nvim
+  ];
 
   packDir = pkgs.vimUtils.packDir {
     myNeovimPackages = {
@@ -132,31 +117,31 @@ in
   programs.neovim = {
     plugins = myPlugins;
     initLua = ''
-                  vim.opt.packpath:prepend("${packDir}")
-                  vim.g.mapleader = " " -- Need to set leader before lazy for correct keybindings
-                  require("lazy").setup({
-            				spec = {
-            								-- Import plugins from lua/plugins
-            								{ import = "plugins" },
-            							},
-                    performance = {
-         reset_packpath = false,
-                      rtp = {
-                          reset = false,
-                        }
-                      },
-                    dev = {
-                      path = "${packDir}/pack/myNeovimPackages/start",
-                      patterns = {"."},
-                      fallback = true,
-                    },
-                    install = {
-                      -- Safeguard in case we forget to install a plugin with Nix
-                      missing = false,
-                    },
-                  })
+               vim.opt.packpath:prepend("${packDir}")
+               vim.g.mapleader = " " -- Need to set leader before lazy for correct keybindings
+               require("lazy").setup({
+         				spec = {
+         								-- Import plugins from lua/plugins
+         								{ import = "plugins" },
+         							},
+                 performance = {
+      reset_packpath = false,
+                   rtp = {
+                       reset = false,
+                     }
+                   },
+                 dev = {
+                   path = "${packDir}/pack/myNeovimPackages/start",
+                   patterns = {"."},
+                   fallback = true,
+                 },
+                 install = {
+                   -- Safeguard in case we forget to install a plugin with Nix
+                   missing = false,
+                 },
+               })
 
-                require "config"
+             require "config"
     '';
     enable = true;
     vimAlias = true;
