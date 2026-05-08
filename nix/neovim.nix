@@ -57,7 +57,7 @@ let
 
   comment-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "Comment.nvim";
-    version = "2024-06-09";
+    version = "unstable-2024-06-09";
     src = pkgs.fetchFromGitHub {
       owner = "numtostr";
       repo = "Comment.nvim";
