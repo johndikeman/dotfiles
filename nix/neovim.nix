@@ -103,6 +103,9 @@ let
     dashboard-nvim
     nvim-web-devicons
     milli-nvim
+    nvim-notify
+    nui-nvim
+    noice-nvim
   ];
 
   packDir = pkgs.vimUtils.packDir {
