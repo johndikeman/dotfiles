@@ -8,6 +8,7 @@ return {
 
 		-- example using `opts` for defining servers
 		opts = {
+			diagnostics = { virtual_text = false },
 			servers = {
 				lua_ls = {
 					settings = {
@@ -388,5 +389,35 @@ return {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
 		},
+	},
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "VeryLazy",
+		priority = 1000,
+		opts = {
+			options = {
+				use_icons_from_diagnostic = true,
+				add_messages = {
+					display_count = true,
+				},
+				multilines = {
+					enabled = true,
+				},
+			},
+			preset = "powerline",
+			hi = {
+				error = "DiagnosticError", -- Highlight for error diagnostics
+				warn = "DiagnosticWarn", -- Highlight for warning diagnostics
+				info = "DiagnosticInfo", -- Highlight for info diagnostics
+				hint = "DiagnosticHint", -- Highlight for hint diagnostics
+				arrow = "NonText", -- Highlight for the arrow pointing to diagnostic
+				background = "CursorLine", -- Background highlight for diagnostics
+				mixing_color = "Normal", -- Color to blend background with (or "None")
+			},
+		},
+
+		config = function(_, opts)
+			require("tiny-inline-diagnostic").setup(opts)
+		end,
 	},
 }
