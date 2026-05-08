@@ -68,6 +68,16 @@ let
     meta.hydraPlatforms = [ ];
   };
 
+  milli-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "milli.nvim";
+    version = "unstable-2026-04-29";
+    src = pkgs.fetchFromGitHub {
+      owner = "Amansingh-afk";
+      repo = "milli.nvim";
+      rev = "6a19fe9ab2a068b7ce384cea277c24672add161e";
+      sha256 = "1w4b3lzddbh6cmg78mwayc1yam97mkyjy1cwi5j44gg88kn816wb";
+    };
+  };
   myPlugins = with pkgs.vimPlugins; [
     lazy-nvim
     gitsigns-nvim
@@ -90,6 +100,9 @@ let
     render-markdown-nvim
     vim-fugitive
     lazygit-nvim
+    dashboard-nvim
+    nvim-web-devicons
+    milli-nvim
   ];
 
   packDir = pkgs.vimUtils.packDir {

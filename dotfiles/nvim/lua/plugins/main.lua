@@ -15,7 +15,18 @@ return {
 							runtime = { version = "LuaJIT" },
 							workspace = {
 								checkThirdParty = false,
-								library = { unpack(vim.api.nvim_get_runtime_file("", true)) },
+								library = (function()
+									local lib = vim.api.nvim_get_runtime_file("", true)
+									local filtered_lib = {}
+									for _, path in ipairs(lib) do
+										-- Check if the path contains the plugin name you want to skip
+										if not path:find("milli.nvim") then
+											table.insert(filtered_lib, path)
+										end
+									end
+									return filtered_lib
+								end)(),
+								ignoreDir = { "milli.nvim" },
 							},
 						},
 					},
@@ -327,4 +338,39 @@ return {
 		},
 	},
 	{ "tpope/vim-fugitive" },
+	{ "nvim-tree/nvim-web-devicons", opts = { default = true } },
+	{
+		"nvimdev/dashboard-nvim",
+		event = "VimEnter",
+		opts = function()
+			local splash = require("milli").load({ splash = "vibecattwo" })
+			return {
+				theme = "doom",
+				config = {
+					header = splash.frames[1], -- seed header with frame 0
+					center = {
+						{
+							icon = " ",
+							icon_hl = "Title",
+							desc = "workspaces",
+							desc_hl = "String",
+							key = "b",
+							keymap = "SPC f w",
+							key_hl = "Number",
+							key_format = " %s", -- remove default surrounding `[]`
+							action = "Telescope workspaces",
+						},
+					},
+
+					change_to_vcs_root = true,
+				},
+			}
+		end,
+		config = function(_, opts)
+			require("dashboard").setup(opts)
+			require("milli").dashboard({ splash = "vibecattwo", loop = true })
+		end,
+		dependencies = { "nvim-tree/nvim-web-devicons", "amansingh-afk/milli.nvim" },
+	},
+	{ "amansingh-afk/milli.nvim", lazy = false },
 }
