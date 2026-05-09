@@ -100,7 +100,9 @@ let
     render-markdown-nvim
     vim-fugitive
     lazygit-nvim
-    dashboard-nvim
+    # dashboard-nvim
+    persistence-nvim
+    snacks-nvim
     nvim-web-devicons
     milli-nvim
     nvim-notify
