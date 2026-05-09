@@ -420,24 +420,32 @@ return {
 				local data = milli.load({ splash = "vibecattwo" })
 				local ns = vim.api.nvim_create_namespace("milli_snacks_right")
 
-				-- Find anchor (first non-empty line of the cat)
-				local anchor_row_offset, anchor_text
-				for i, line in ipairs(data.frames[1]) do
-					if line:find("[^%s]") then
-						anchor_row_offset = i
-						anchor_text = line:gsub("%s+$", "")
-						break
-					end
-				end
-
 				local function locate()
 					local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-					for i, l in ipairs(lines) do
-						local pos = l:find(anchor_text, 1, true)
-						if pos then
-							return i - anchor_row_offset, pos - 1
+					local min_start_col = nil
+					local found_start_row = nil
+
+					for i, frame_line in ipairs(data.frames[1]) do
+						local start_idx, end_idx = frame_line:find("[^%s]")
+						if start_idx then
+							local content = frame_line:sub(start_idx):gsub("%s+$", "")
+							for buf_row, buf_line in ipairs(lines) do
+								local pos = buf_line:find(content, 1, true)
+								if pos then
+									local current_start_col = pos - start_idx
+									if not min_start_col or current_start_col < min_start_col then
+										min_start_col = current_start_col
+									end
+									local current_start_row = buf_row - i
+									if not found_start_row then
+										found_start_row = current_start_row
+									end
+									break
+								end
+							end
 						end
 					end
+					return found_start_row, min_start_col
 				end
 
 				local start_row, start_col = locate()
