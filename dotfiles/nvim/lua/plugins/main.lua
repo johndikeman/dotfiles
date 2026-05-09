@@ -357,16 +357,23 @@ return {
 					pane_gap = 4,
 					preset = {
 						header = header,
+						keys = {
+							{
+								icon = " ",
+								key = "f",
+								desc = "find",
+								action = ":lua Snacks.dashboard.pick('files')",
+							},
+							{ icon = " ", key = "n", desc = "new", action = ":ene | startinsert" },
+						},
 					},
 					sections = {
 						{
-							{
-								pane = 1,
-								{ section = "keys", gap = 1, padding = 1 },
-								{ section = "recent_files", title = "Recent Files", indent = 2, padding = 1 },
-								{ section = "projects", title = "Recent Projects", indent = 2, padding = 1 },
-								{ section = "startup" },
-							},
+							pane = 1,
+							{ section = "keys", gap = 1, padding = 1 },
+							{ section = "recent_files", title = "Recent Files", indent = 2, padding = 1 },
+							{ section = "projects", title = "Projects", indent = 2, padding = 1 },
+							{ section = "startup" },
 						},
 						{ pane = 2, section = "header", padding = 1 },
 					},
@@ -375,112 +382,7 @@ return {
 		end,
 		config = function(_, opts)
 			require("snacks").setup(opts)
-			local milli_ok, milli = pcall(require, "milli")
-			if not milli_ok then
-				return
-			end
-
-			-- Custom animation loop for 2-pane support.
-			-- Standard milli.play uses set_lines which nukes the other pane.
-			-- By putting cat on the right, we can use set_text from start_col to -1.
-			local function play_right_pane()
-				local buf = vim.api.nvim_get_current_buf()
-				if vim.bo[buf].filetype ~= "snacks_dashboard" then
-					return
-				end
-
-				local data = milli.load({ splash = "vibecattwo" })
-				local ns = vim.api.nvim_create_namespace("milli_snacks_right")
-
-				-- Find anchor (first non-empty line of the cat)
-				local anchor_row_offset, anchor_text
-				for i, line in ipairs(data.frames[1]) do
-					if line:find("[^%s]") then
-						anchor_row_offset = i
-						anchor_text = line:gsub("%s+$", "")
-						break
-					end
-				end
-
-				local function locate()
-					local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-					for i, l in ipairs(lines) do
-						local pos = l:find(anchor_text, 1, true)
-						if pos then
-							return i - anchor_row_offset, pos - 1
-						end
-					end
-				end
-
-				local start_row, start_col = locate()
-				if not start_row then
-					return
-				end
-
-				local hl_cache = {}
-				local function get_hl(fg, bg)
-					local key = fg .. "_" .. bg
-					if hl_cache[key] then
-						return hl_cache[key]
-					end
-					local name = "Milli2P_" .. fg:sub(2) .. "_" .. (bg == "NONE" and "NONE" or bg:sub(2))
-					vim.api.nvim_set_hl(0, name, { fg = fg, bg = (bg == "NONE" and nil or bg) })
-					hl_cache[key] = name
-					return name
-				end
-
-				local function paint(idx)
-					if not vim.api.nvim_buf_is_valid(buf) then
-						return
-					end
-					local frame = data.frames[idx]
-					local colors = data.colors and data.colors[idx]
-
-					vim.bo[buf].modifiable = true
-					for i, line in ipairs(frame) do
-						local row = start_row + i - 1
-						-- Replace from start_col to end of line to preserve the left pane
-						pcall(vim.api.nvim_buf_set_text, buf, row, start_col, row, -1, { line })
-					end
-					vim.bo[buf].modified = false
-					vim.bo[buf].modifiable = false
-
-					vim.api.nvim_buf_clear_namespace(buf, ns, start_row, start_row + #frame)
-					if colors then
-						for row_i, row_runs in ipairs(colors) do
-							local buf_row = start_row + row_i - 1
-							for _, run in ipairs(row_runs) do
-								local sb, eb, fg, bg = run[1], run[2], run[3], run[4]
-								local hl = get_hl(fg, bg)
-								pcall(vim.api.nvim_buf_set_extmark, buf, ns, buf_row, start_col + sb, {
-									end_col = start_col + eb,
-									hl_group = hl,
-									priority = 200,
-								})
-							end
-						end
-					end
-				end
-
-				local current_frame = 1
-				local function step()
-					if not vim.api.nvim_buf_is_valid(buf) then
-						return
-					end
-					paint(current_frame)
-					local delay = data.delays[current_frame] or 100
-					current_frame = (current_frame % #data.frames) + 1
-					vim.defer_fn(step, delay)
-				end
-				step()
-			end
-
-			vim.api.nvim_create_autocmd("User", {
-				pattern = { "SnacksDashboardOpened", "SnacksDashboardUpdatePost" },
-				callback = function()
-					vim.schedule(play_right_pane)
-				end,
-			})
+			require("milli").snacks({ splash = "vibecattwo", loop = true })
 		end,
 		dependencies = { "nvim-tree/nvim-web-devicons", "amansingh-afk/milli.nvim" },
 	},
