@@ -363,8 +363,36 @@ return {
 							{
 								pane = 1,
 								{ section = "keys", gap = 1, padding = 1 },
-								{ section = "recent_files", title = "Recent Files", indent = 2, padding = 1 },
-								{ section = "projects", title = "Recent Projects", indent = 2, padding = 1 },
+								{
+									section = "recent_files",
+									title = "Recent Files",
+									indent = 2,
+									padding = 1,
+									action = function(file)
+										local root = Snacks.git.get_root(file) or vim.fs.dirname(file)
+										-- 1. Change to the project root
+										vim.api.nvim_set_current_dir(root)
+										-- 2. Try to restore the session for this project
+										require("persistence").load()
+										-- 3. Open the selected file
+										vim.cmd("edit " .. vim.fn.fnameescape(file))
+									end,
+								},
+								{
+									section = "projects",
+									title = "recent projects",
+									indent = 2,
+									padding = 1,
+									action = function(file)
+										local root = Snacks.git.get_root(file) or vim.fs.dirname(file)
+										-- 1. Change to the project root
+										vim.api.nvim_set_current_dir(root)
+										-- 2. Try to restore the session for this project
+										require("persistence").load()
+										-- 3. Open the selected file
+										vim.cmd("edit " .. vim.fn.fnameescape(file))
+									end,
+								},
 								{ section = "startup" },
 							},
 						},
