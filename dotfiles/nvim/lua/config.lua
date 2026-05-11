@@ -10,7 +10,6 @@ vim.opt.shiftwidth = 2
 vim.opt.clipboard = "unnamed"
 
 vim.keymap.set("i", "jk", "<Esc>")
-vim.keymap.set("t", "jk", "<C-\\><C-n>")
 
 -- space leader pls
 vim.g.mapleader = " "
@@ -24,16 +23,21 @@ vim.g.vim_svelte_plugin_use_typescript = 1
 -- format lua files
 -- vim.keymap.set("n", "<leader>f", [[<cmd>lua require("stylua-nvim").format_file()<CR>]], opts)
 
+-- Buffer navigation
+vim.keymap.set("n", "<C-j>", ":bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-k>", ":bprev<CR>", { noremap = true, silent = true })
+
 -- Terminal mappings
 -- Toggle terminal with <Leader>t
 vim.keymap.set("n", "<Leader>t", "<CMD>terminal<CR>", { noremap = true })
 -- Exit terminal mode with Esc
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
+-- vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 -- Window navigation from terminal
 vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h", { noremap = true })
-vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j", { noremap = true })
-vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", { noremap = true })
 vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", { noremap = true })
+-- Buffer navigation from terminal
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n>:bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n>:bprev<CR>", { noremap = true, silent = true })
 
 -- treesitter stuff
 local parser_install_dir = vim.fn.stdpath("cache") .. "/treesitters"
@@ -74,7 +78,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+		-- vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
 		vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
 		vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
 		vim.keymap.set("n", "<space>wl", function()
