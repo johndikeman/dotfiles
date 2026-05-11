@@ -40,7 +40,13 @@ return {
 						enableTsPlugin = true,
 					},
 				},
-				nixd = { { nixd = { formatting = { command = { "nixfmt" } } } } },
+				nixd = {
+					settings = {
+						nixd = {
+							formatting = { command = { "nixfmt" } },
+						},
+					},
+				},
 				gdscript = {},
 			},
 		},
