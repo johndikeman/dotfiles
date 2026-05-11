@@ -324,26 +324,6 @@ return {
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
-	{
-		"kdheepak/lazygit.nvim",
-		cmd = {
-			"LazyGit",
-			"LazyGitConfig",
-			"LazyGitCurrentFile",
-			"LazyGitFilter",
-			"LazyGitFilterCurrentFile",
-		},
-		-- optional for floating window border decoration
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		-- setting the keybinding for LazyGit with 'keys' is recommended in
-		-- order to load the plugin when the command is run for the first time
-		keys = {
-			{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-			{ "<leader>gf", "<cmd>LazyGitCurrentFile<cr>", desc = "LazyGit Current File" },
-		},
-	},
 	{ "tpope/vim-fugitive" },
 	{ "nvim-tree/nvim-web-devicons", opts = { default = true } },
 	{
@@ -359,6 +339,8 @@ return {
 			end
 
 			return {
+				scroll = {},
+				lazygit = {},
 				dashboard = {
 					pane_gap = 4,
 					preset = {
@@ -512,6 +494,22 @@ return {
 			})
 		end,
 		dependencies = { "nvim-tree/nvim-web-devicons", "amansingh-afk/milli.nvim", "folke/persistence.nvim" },
+		keys = {
+			{
+				"<leader>lg",
+				function()
+					Snacks.lazygit.open()
+				end,
+				desc = "lazygit",
+			},
+			{
+				"<leader>gf",
+				function()
+					Snacks.lazygit.log_file()
+				end,
+				desc = "lazygit log file",
+			},
+		},
 	},
 	{
 		"folke/persistence.nvim",

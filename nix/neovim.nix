@@ -99,7 +99,6 @@ let
     conform-nvim
     render-markdown-nvim
     vim-fugitive
-    lazygit-nvim
     # dashboard-nvim
     persistence-nvim
     snacks-nvim
