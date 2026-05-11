@@ -357,45 +357,21 @@ return {
 					pane_gap = 4,
 					preset = {
 						header = header,
+						keys = {
+							{ icon = " ", key = "n", desc = "new file", action = ":ene | startinsert" },
+							{ icon = " ", key = "q", desc = "quit", action = ":qa" },
+						},
 					},
 					sections = {
+						{ pane = 1, section = "keys", gap = 1, padding = 1 },
 						{
-							{
-								pane = 1,
-								{ section = "keys", gap = 1, padding = 1 },
-								{
-									section = "recent_files",
-									title = "Recent Files",
-									indent = 2,
-									padding = 1,
-									action = function(file)
-										local root = Snacks.git.get_root(file) or vim.fs.dirname(file)
-										-- 1. Change to the project root
-										vim.api.nvim_set_current_dir(root)
-										-- 2. Try to restore the session for this project
-										require("persistence").load()
-										-- 3. Open the selected file
-										vim.cmd("edit " .. vim.fn.fnameescape(file))
-									end,
-								},
-								{
-									section = "projects",
-									title = "recent projects",
-									indent = 2,
-									padding = 1,
-									action = function(file)
-										local root = Snacks.git.get_root(file) or vim.fs.dirname(file)
-										-- 1. Change to the project root
-										vim.api.nvim_set_current_dir(root)
-										-- 2. Try to restore the session for this project
-										require("persistence").load()
-										-- 3. Open the selected file
-										vim.cmd("edit " .. vim.fn.fnameescape(file))
-									end,
-								},
-								{ section = "startup" },
-							},
+							pane = 1,
+							section = "projects",
+							title = "recent projects",
+							indent = 2,
+							padding = 1,
 						},
+						{ pane = 1, section = "startup" },
 						{ pane = 2, section = "header", padding = 1 },
 					},
 				},
@@ -408,13 +384,18 @@ return {
 				return
 			end
 
+			local timer = nil
 			-- Custom animation loop for 2-pane support.
-			-- Standard milli.play uses set_lines which nukes the other pane.
-			-- By putting cat on the right, we can use set_text from start_col to -1.
 			local function play_right_pane()
 				local buf = vim.api.nvim_get_current_buf()
 				if vim.bo[buf].filetype ~= "snacks_dashboard" then
 					return
+				end
+
+				-- Stop existing timer if it exists
+				if timer then
+					timer:stop()
+					timer = nil
 				end
 
 				local data = milli.load({ splash = "vibecattwo" })
@@ -426,7 +407,7 @@ return {
 					local found_start_row = nil
 
 					for i, frame_line in ipairs(data.frames[1]) do
-						local start_idx, end_idx = frame_line:find("[^%s]")
+						local start_idx = frame_line:find("[^%s]")
 						if start_idx then
 							local content = frame_line:sub(start_idx):gsub("%s+$", "")
 							for buf_row, buf_line in ipairs(lines) do
@@ -467,7 +448,7 @@ return {
 
 				local function paint(idx)
 					if not vim.api.nvim_buf_is_valid(buf) then
-						return
+						return false
 					end
 					local frame = data.frames[idx]
 					local colors = data.colors and data.colors[idx]
@@ -475,7 +456,6 @@ return {
 					vim.bo[buf].modifiable = true
 					for i, line in ipairs(frame) do
 						local row = start_row + i - 1
-						-- Replace from start_col to end of line to preserve the left pane
 						pcall(vim.api.nvim_buf_set_text, buf, row, start_col, row, -1, { line })
 					end
 					vim.bo[buf].modified = false
@@ -496,19 +476,26 @@ return {
 							end
 						end
 					end
+					return true
 				end
 
 				local current_frame = 1
-				local function step()
-					if not vim.api.nvim_buf_is_valid(buf) then
-						return
-					end
-					paint(current_frame)
-					local delay = data.delays[current_frame] or 100
-					current_frame = (current_frame % #data.frames) + 1
-					vim.defer_fn(step, delay)
-				end
-				step()
+				timer = vim.uv.new_timer()
+				timer:start(
+					0,
+					100,
+					vim.schedule_wrap(function()
+						if not paint(current_frame) then
+							if timer then
+								timer:stop()
+							end
+							return
+						end
+						local delay = data.delays[current_frame] or 100
+						timer:set_repeat(delay)
+						current_frame = (current_frame % #data.frames) + 1
+					end)
+				)
 			end
 
 			vim.api.nvim_create_autocmd("User", {
@@ -518,7 +505,7 @@ return {
 				end,
 			})
 		end,
-		dependencies = { "nvim-tree/nvim-web-devicons", "amansingh-afk/milli.nvim" },
+		dependencies = { "nvim-tree/nvim-web-devicons", "amansingh-afk/milli.nvim", "folke/persistence.nvim" },
 	},
 	{
 		"folke/persistence.nvim",
