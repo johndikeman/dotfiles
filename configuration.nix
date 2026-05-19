@@ -159,7 +159,6 @@
     misc {
       disable_hyprland_logo = true
       disable_splash_rendering = true
-      disable_hyprland_qtutils_check = true
     }
 
     monitor = HDMI-A-1,3840x2160,0x0,1.5
