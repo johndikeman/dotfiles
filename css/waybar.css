@@ -64,10 +64,10 @@ tooltip {
 #tray,
 #custom-powermenu,
 #backlight {
-	background: #@base00@;
+	color: #@base00@;
+	font-style: italic;
 	padding: 0px 5px;
 	margin: 5px 5px;
-	border: 2px solid #@base02@;
 	border-radius: 10px;
 }
 
@@ -96,20 +96,26 @@ tooltip {
 }
 
 #clock {
-	color: #@base09@;
+	background: #@base09@;
 }
 
 #pulseaudio {
-	color: #@base0B@;
+	background: #@base0B@;
 }
 #cpu {
-	color: #@base0A@;
+	background: #@base0A@;
 }
 
 #memory {
-	color: #@base0D@;
+	background: #@base0D@;
 }
 
 #battery {
-	color: #@base0F@;
+	background: #@base0F@;
 }
+
+/* 
+  Included for nix-colors substitution compatibility 
+  @base00@ @base01@ @base02@ @base03@ @base04@ @base05@ @base06@ @base07@
+  @base08@ @base09@ @base0A@ @base0B@ @base0C@ @base0D@ @base0E@ @base0F@
+*/
