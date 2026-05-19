@@ -19,6 +19,10 @@
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
     nix-colors.url = "github:misterio77/nix-colors";
+    helium = {
+      url = "github:amaanq/helium-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -27,6 +31,7 @@
       nixpkgs,
       home-manager,
       rose-pine-hyprcursor,
+      helium,
       ...
     }@inputs:
     {
@@ -35,6 +40,7 @@
         specialArgs = {
           inherit inputs;
           rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
+          helium = inputs.helium.packages.${system}.default;
         };
         modules = [
           # Import the previous configuration.nix we used,
