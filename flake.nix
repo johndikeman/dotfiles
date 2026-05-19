@@ -57,9 +57,6 @@
             home-manager.users.john = {
               imports = [ ./home.nix ];
             };
-            home-manager.users.jess = {
-              imports = [ ./jess-home.nix ];
-            };
           }
         ];
       };
