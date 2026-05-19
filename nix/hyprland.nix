@@ -166,7 +166,6 @@
       bind = [
         "$mod, space, exec, wofi --show drun"
         "$mod, P, pseudo,"
-        "$mod, J, togglesplit,"
         # fullscreen
         "$mod SHIFT, F, fullscreen"
         # firefox history
