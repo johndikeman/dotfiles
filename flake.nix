@@ -26,6 +26,10 @@
     };
     nix-colors.url = "github:misterio77/nix-colors";
     llama-gemma.url = "git+ssh://git@github.com/johndikeman/experiments.git?ref=llama-gemma";
+    helium = {
+      url = "github:amaanq/helium-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -35,6 +39,7 @@
       home-manager,
       lanzaboote,
       rose-pine-hyprcursor,
+      helium,
       ...
     }@inputs:
     {
@@ -43,6 +48,7 @@
         specialArgs = {
           inherit inputs;
           rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
+          helium = inputs.helium.packages.${system}.default;
         };
         modules = [
           lanzaboote.nixosModules.lanzaboote

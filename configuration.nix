@@ -7,6 +7,7 @@
   pkgs,
   lib,
   rose-pine-hyprcursor,
+  helium,
   inputs,
   ...
 }:
@@ -34,7 +35,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -330,6 +330,7 @@
     pkgs.nix-output-monitor
     pkgs.gparted
     rose-pine-hyprcursor
+    helium
   ];
 
   # Font configuration
