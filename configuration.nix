@@ -190,7 +190,10 @@
   '';
 
   environment.etc."1password/custom_allowed_browsers" = {
-    text = "firefox";
+    text = ''
+      firefox
+      helium
+    '';
     mode = "0755";
   };
 
