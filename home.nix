@@ -32,13 +32,10 @@ in
     # # "Hello, world!" when run.
     # pkgs.hello
     pkgs.gh
-    pkgs.nodejs_22
     pkgs.git
     pkgs.cargo
     pkgs.rustc
     pkgs.prettierd
-    pkgs.python312
-    pkgs.python312Packages.pip
     pkgs.maturin
     pkgs.niv
     pkgs.ncdu
@@ -51,7 +48,6 @@ in
     pkgs.black
     pkgs.lazygit
     pkgs.git-filter-repo
-    pkgs.goose-cli
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";
