@@ -18,7 +18,7 @@
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/hyprland?ref=v0.54.2";
+    hyprland.url = "github:hyprwm/hyprland?ref=v0.55.2";
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
