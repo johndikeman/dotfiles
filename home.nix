@@ -78,6 +78,7 @@
     pkgs.davinci-resolve
     pkgs.obs-studio
     pkgs.ffmpeg
+    (pkgs.writeShellScriptBin "compress-video" (builtins.readFile ./scripts/compress-video.sh))
     (pkgs.writeShellScriptBin "convert-to-dnxhr" ''
       for input_file in "$@"; do
         if [[ -f "$input_file" ]]; then
