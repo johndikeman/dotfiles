@@ -77,6 +77,18 @@
     pkgs.update-nix-fetchgit
     pkgs.davinci-resolve
     pkgs.obs-studio
+    pkgs.ffmpeg
+    (pkgs.writeShellScriptBin "convert-to-dnxhr" ''
+      for input_file in "$@"; do
+        if [[ -f "$input_file" ]]; then
+          output_file="''${input_file%.*}.mov"
+          echo "Converting $input_file to $output_file..."
+          ${pkgs.ffmpeg}/bin/ffmpeg -i "$input_file" -c:v dnxhd -profile:v dnxhr_hq -c:a pcm_s16le -pix_fmt yuv422p "$output_file"
+        else
+          echo "Warning: File not found: $input_file"
+        fi
+      done
+    '')
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";
