@@ -77,6 +77,10 @@
     pkgs.chromium
     pkgs.update-nix-fetchgit
     pkgs.dua
+    pkgs.streamlink
+    pkgs.pipe-viewer
+    pkgs.fzf
+    (pkgs.writeShellScriptBin "yt-subs" (builtins.readFile ./scripts/yt-view.sh))
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";
@@ -110,6 +114,8 @@
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
+
+    ".config/yt-channels.txt".source = ./yt-channels.txt;
 
     "${config.xdg.configHome}/containers" = {
       source = dotfiles/containers;
