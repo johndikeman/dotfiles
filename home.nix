@@ -78,6 +78,10 @@
     pkgs.davinci-resolve
     pkgs.obs-studio
     pkgs.ffmpeg
+    pkgs.streamlink
+    pkgs.pipe-viewer
+    pkgs.fzf
+    (pkgs.writeShellScriptBin "yt-subs" (builtins.readFile ./scripts/yt-view.sh))
     (pkgs.writeShellScriptBin "compress-video" (builtins.readFile ./scripts/compress-video.sh))
     (pkgs.writeShellScriptBin "convert-to-dnxhr" ''
       for input_file in "$@"; do
@@ -125,6 +129,7 @@
     # ".screenrc".source = dotfiles/screenrc;
 
     ".pi/agent/models.json".source = dotfiles/ai/models.json;
+    ".config/yt-channels.txt".source = ./yt-channels.txt;
 
     "${config.xdg.configHome}/containers" = {
       source = dotfiles/containers;
