@@ -158,6 +158,25 @@
     # '';
   };
 
+  services.flameshot = {
+    enable = true;
+    settings = {
+      General = {
+        showStartupLaunchMessage = false;
+        # Auto save to this path
+        savePath = "${config.home.homeDirectory}/Pictures/screenshots";
+        savePathFixed = true;
+        saveAsFileExtension = ".jpg";
+        filenamePattern = "%F_%H-%M";
+        drawThickness = 1;
+        copyPathAfterSave = true;
+
+        # For wayland
+        useGrimAdapter = true;
+      };
+    };
+  };
+
   programs.tmux = {
     enable = true;
     shell = "${pkgs.fish}/bin/fish";
