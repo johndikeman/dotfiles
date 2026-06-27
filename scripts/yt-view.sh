@@ -2,31 +2,54 @@
 # Managed by Home Manager via home.nix
 CHANNELS_FILE="$HOME/.config/yt-channels.txt"
 SUBS_CACHE="$HOME/.config/pipe-viewer/subscribed_channels.txt"
+YTDLP="/nix/store/g7r0k2hzm2la41y01hx7pr71v2g2j9k0-yt-dlp-2026.03.17/bin/yt-dlp"
 
 sync_subs() {
     if [[ -f "$CHANNELS_FILE" ]]; then
-        # Only sync if the channels file is newer than the cache, or cache doesn't exist
-        if [[ ! -f "$SUBS_CACHE" || "$CHANNELS_FILE" -nt "$SUBS_CACHE" ]]; then
+        # Use a state file to track sync because the subscribed_channels.txt 
+        # is modified by pipe-viewer internally.
+        local STATE_FILE="$HOME/.config/pipe-viewer/.yt_subs_sync_state"
+        
+        if [[ ! -f "$STATE_FILE" || "$CHANNELS_FILE" -nt "$STATE_FILE" ]]; then
             echo "Updating subscriptions from $CHANNELS_FILE..."
+            # Clear current subscriptions 
+            > "$SUBS_CACHE"
+            
             while read -r channel; do
                 [[ -z "$channel" || "$channel" =~ ^# ]] && continue
-                # We use --subscribe which is idempotent enough
-                pipe-viewer --subscribe="$channel" --really-quiet &
+                echo "Syncing: $channel"
+                
+                local TARGET="$channel"
+                if [[ "$channel" =~ ^http || "$channel" =~ ^@ ]]; then
+                    UCID=$($YTDLP --print channel_id --playlist-items 1 "$channel" 2>/dev/null)
+                    [[ -n "$UCID" ]] && TARGET="$UCID"
+                fi
+                
+                pipe-viewer --subscribe="$TARGET" --really-quiet
             done < "$CHANNELS_FILE"
-            wait
+            
+            touch "$STATE_FILE"
         fi
     fi
 }
 
 if [[ "$1" == "--select" ]]; then
-    # Optional: Select a specific channel from the list
-    SELECTED=$(grep -v '^#' "$CHANNELS_FILE" | grep -v '^$' | fzf --prompt="Select Channel: " --reverse)
-    [[ -n "$SELECTED" ]] && pipe-viewer --uploads="$SELECTED"
-elif [[ $# -gt 0 ]]; then
-    # Pass arguments directly to pipe-viewer (e.g. search terms)
-    pipe-viewer "$@"
-else
-    # Default: Show recent videos from all subscriptions
     sync_subs
-    pipe-viewer --local-subs
+    # Select from friendly names if available, or URLs
+    SELECTED=$(grep -v '^#' "$CHANNELS_FILE" | grep -v '^$' | fzf --prompt="Select Channel: " --reverse)
+    [[ -z "$SELECTED" ]] && exit 0
+
+    # Resolve selection to ID for the upload call
+    FINAL_TARGET="$SELECTED"
+    if [[ "$SELECTED" =~ ^http || "$SELECTED" =~ ^@ ]]; then
+        UCID=$($YTDLP --print channel_id --playlist-items 1 "$SELECTED" 2>/dev/null)
+        [[ -n "$UCID" ]] && FINAL_TARGET="$UCID"
+    fi
+    pipe-viewer --player=vlc --api=auto --uploads="$FINAL_TARGET"
+elif [[ $# -gt 0 ]]; then
+    pipe-viewer --player=vlc --api=auto "$@"
+else
+    sync_subs
+    # --local-subs merges the 'uploads' of all channels in subscribed_channels.txt
+    pipe-viewer --player=vlc --api=auto --local-subs
 fi
