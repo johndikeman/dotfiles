@@ -129,7 +129,6 @@
     # ".screenrc".source = dotfiles/screenrc;
 
     ".pi/agent/models.json".source = dotfiles/ai/models.json;
-    ".config/pipe-viewer/pipe-viewer.conf".source = dotfiles/pipe-viewer/pipe-viewer.conf;
     ".config/yt-channels.txt".source = ./yt-channels.txt;
 
     "${config.xdg.configHome}/containers" = {
