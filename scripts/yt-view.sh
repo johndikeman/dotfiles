@@ -45,11 +45,11 @@ if [[ "$1" == "--select" ]]; then
         UCID=$($YTDLP --print channel_id --playlist-items 1 "$SELECTED" 2>/dev/null)
         [[ -n "$UCID" ]] && FINAL_TARGET="$UCID"
     fi
-    pipe-viewer --player=vlc --api=auto --uploads="$FINAL_TARGET"
+    pipe-viewer --api=auto --uploads="$FINAL_TARGET" 
 elif [[ $# -gt 0 ]]; then
-    pipe-viewer --player=vlc --api=auto "$@"
+    pipe-viewer --api=auto "$@" 
 else
     sync_subs
     # --local-subs merges the 'uploads' of all channels in subscribed_channels.txt
-    pipe-viewer --player=vlc --api=auto --local-subs
+    pipe-viewer --api=auto --local-subs 
 fi
