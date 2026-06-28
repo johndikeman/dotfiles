@@ -115,7 +115,6 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
-    ".config/pipe-viewer/pipe-viewer.conf".source = dotfiles/pipe-viewer/pipe-viewer.conf;
     ".config/yt-channels.txt".source = ./yt-channels.txt;
 
     "${config.xdg.configHome}/containers" = {
