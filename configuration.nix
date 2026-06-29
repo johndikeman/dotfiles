@@ -40,6 +40,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos-macpro"; # Define your hostname.
+  networking.nameservers = [
+    "1.1.1.1"
+    "8.8.8.8"
+  ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -370,5 +374,6 @@
   virtualisation.podman = {
     enable = true;
     dockerSocket.enable = true;
+    dockerCompat = true;
   };
 }
