@@ -80,6 +80,7 @@
     pkgs.streamlink
     pkgs.pipe-viewer
     pkgs.fzf
+    pkgs.nemo-with-extensions
     (pkgs.writeShellScriptBin "yt-subs" (builtins.readFile ./scripts/yt-view.sh))
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {

@@ -105,6 +105,13 @@
     dbus
     libpulseaudio
   ];
+
+  xdg = {
+    mime.defaultApplications = {
+      "inode/directory" = [ "nemo.desktop" ];
+      "application/x-gnome-saved-search" = [ "nemo.desktop" ];
+    };
+  };
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
   programs.k3b.enable = true;
   services.udisks2.enable = true;
