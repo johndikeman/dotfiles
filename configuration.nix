@@ -15,10 +15,30 @@
 {
   # Custom font package definition
   nixpkgs.overlays = [
-    (self: super: {
-      cartograph-font = super.stdenv.mkDerivation {
+    (final: prev: {
+      # Fix for cantarell-fonts build failure due to AFDKO 5.0 regression
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (python-final: python-prev: {
+          afdko = python-prev.afdko.overrideAttrs (old: {
+            postPatch = (old.postPatch or "") + ''
+              substituteInPlace python/afdko/otfautohint/hinter.py \
+                --replace-fail '        lo = None' "" \
+                --replace-fail '        hi = None' ""
+              sed -i '/for sidx, s0 in enumerate(hs0.stems\[0\]):/a \            hi = None' python/afdko/otfautohint/hinter.py
+              sed -i '/for sidx, s0 in enumerate(hs0.stems\[0\]):/a \            lo = None' python/afdko/otfautohint/hinter.py
+              sed -i "/elif isG == 'high':/{n;s/assert lo is not None and hi is not None/assert hi is not None/;}" python/afdko/otfautohint/hinter.py
+            '';
+          });
+        })
+      ];
+
+      noto-fonts-color-emoji = prev.noto-fonts-color-emoji.overrideAttrs (old: {
+        enableParallelBuilding = false;
+      });
+
+      cartograph-font = prev.stdenv.mkDerivation {
         name = "cartograph-font";
-        src = super.fetchFromGitHub {
+        src = prev.fetchFromGitHub {
           owner = "g5becks";
           repo = "Cartograph";
           rev = "master";

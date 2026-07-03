@@ -39,7 +39,6 @@
     pkgs.cargo
     pkgs.rustc
     pkgs.prettierd
-    pkgs.xkeysnail
     pkgs.python312
     pkgs.python312Packages.pip
     pkgs.xclip
@@ -53,7 +52,6 @@
     pkgs.libevent # dependencies for playwright for some reason
     pkgs.flite
     pkgs.uv
-    pkgs.terraform
     pkgs.black
     pkgs.qbittorrent
     pkgs.vlc
