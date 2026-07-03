@@ -25,7 +25,6 @@
     swayidle # Idle management
     wlsunset # Night light
     kitty # Terminal emulator
-    xdg-desktop-portal-hyprland # XDG portal
     polkit_gnome # Authentication agent
     qt5.qtwayland # QT wayland support
     qt6.qtwayland # QT6 wayland support

@@ -131,6 +131,7 @@
       "inode/directory" = [ "nemo.desktop" ];
       "application/x-gnome-saved-search" = [ "nemo.desktop" ];
     };
+    portal.enable = true;
   };
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
   programs.k3b.enable = true;
@@ -338,6 +339,7 @@
     pkgs.gparted
     rose-pine-hyprcursor
     helium
+    pkgs.xdg-desktop-portal-gtk
   ];
   hardware.facetimehd.enable = true;
   # Font configuration
