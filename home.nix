@@ -56,6 +56,7 @@
     pkgs.qbittorrent
     pkgs.vlc
     pkgs.blender
+    pkgs.cura-appimage
     pkgs.anki
     pkgs.calibre
     pkgs.spotify
