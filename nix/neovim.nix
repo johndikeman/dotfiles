@@ -165,8 +165,6 @@ in
     vimAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;
-    withPython3 = true;
-    withRuby = true;
   };
 
   xdg.configFile."nvim/lua" = {
