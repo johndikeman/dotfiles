@@ -99,7 +99,16 @@
   # Enable Hyprland
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.enable = true;
+    package = null;
+    portalPackage = null;
+    systemd = {
+      enable = true;
+      enableXdgAutostart = true;
+    };
+    configType = "lua";
+    settings = { };
+
+    extraConfig = builtins.readFile ./main.lua;
 
     xwayland = {
       enable = true;

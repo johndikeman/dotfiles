@@ -8,6 +8,7 @@
   lib,
   rose-pine-hyprcursor,
   helium,
+  xdg-desktop-portal-hyprland,
   inputs,
   ...
 }:
@@ -105,6 +106,32 @@
     dbus
     libpulseaudio
   ];
+
+  xdg = {
+    mime.defaultApplications = {
+      "inode/directory" = [ "nemo.desktop" ];
+      "application/x-gnome-saved-search" = [ "nemo.desktop" ];
+    };
+    portal = {
+      enable = true;
+      extraPortals = [
+        xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.kdePackages.xdg-desktop-portal-kde
+      ];
+      # xdgOpenUsePortal = true;
+      config.hyprland = {
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.FileChooser" = "kde";
+        "org.freedesktop.impl.portal.Print" = "kde";
+      };
+
+    };
+  };
+
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
   programs.k3b.enable = true;
   services.udisks2.enable = true;
@@ -334,6 +361,8 @@
     pkgs.gparted
     rose-pine-hyprcursor
     helium
+    pkgs.xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
   ];
 
   # Font configuration
