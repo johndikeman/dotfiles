@@ -2,7 +2,7 @@
 # Managed by Home Manager via home.nix
 CHANNELS_FILE="$HOME/.config/yt-channels.txt"
 SUBS_CACHE="$HOME/.config/pipe-viewer/subscribed_channels.txt"
-YTDLP="/nix/store/g7r0k2hzm2la41y01hx7pr71v2g2j9k0-yt-dlp-2026.03.17/bin/yt-dlp"
+YTDLP="yt-dlp"
 
 sync_subs() {
     if [[ -f "$CHANNELS_FILE" ]]; then

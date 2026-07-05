@@ -78,6 +78,7 @@
     pkgs.dua
     pkgs.streamlink
     pkgs.pipe-viewer
+    pkgs.yt-dlp
     pkgs.fzf
     pkgs.nemo-with-extensions
     (pkgs.writeShellScriptBin "yt-subs" (builtins.readFile ./scripts/yt-view.sh))
