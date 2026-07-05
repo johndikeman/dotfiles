@@ -12,7 +12,7 @@
       # to avoid problems caused by different versions of nixpkgs.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/hyprland?ref=v0.54.2";
+    hyprland.url = "github:hyprwm/hyprland?ref=v0.55.4";
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,6 +41,7 @@
           inherit inputs;
           rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
           helium = inputs.helium.packages.${system}.default;
+          xdg-desktop-portal-hyprland = inputs.hyprland.inputs.xdph;
         };
         modules = [
           # Import the previous configuration.nix we used,
