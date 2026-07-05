@@ -360,6 +360,7 @@
     pkgs.nix-output-monitor
     pkgs.gparted
     rose-pine-hyprcursor
+    pkgs.v4l-utils
     helium
     pkgs.xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
