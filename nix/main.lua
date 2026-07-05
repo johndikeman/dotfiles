@@ -41,6 +41,26 @@ hl.config({
     disable_splash_rendering = true,
   }
 })
+-- desktop monitors
+hl.monitor({
+	output = "HDMI-A-1",
+	mode = "3860x2160@60",
+	position = "0x0",
+	scale = 1.5,
+})
+
+hl.monitor({
+	output = "HDMI-A-2",
+	mode = "3860x2160@60",
+	position = "-1440x-450",
+	scale = 1.5,
+	transform = 1,
+})
+
+hl.workspace_rule({ workspace = 1, monitor = "HDMI-A-1" })
+hl.workspace_rule({ workspace = 2, monitor = "HDMI-A-1" })
+hl.workspace_rule({ workspace = 3, monitor = "HDMI-A-2" })
+hl.workspace_rule({ workspace = 4, monitor = "HDMI-A-2" })
 
 -- Animations
 hl.curve("myBezier", { type = "bezier", points = { {0.05, 0.9}, {0.1, 1.05} } })
