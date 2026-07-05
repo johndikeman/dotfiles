@@ -77,22 +77,32 @@ end)
 
 -- Binds
 hl.bind(mod .. " + space", hl.dsp.exec_cmd("wofi --show drun"))
-hl.bind(mod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mod .. " + SHIFT + F", hl.dsp.exec_cmd("hyprctl dispatch fullscreen 0"))
-hl.bind(mod .. " + SHIFT + O", hl.dsp.exec_cmd("firefox-history.sh"))
+hl.bind(mod .. " + p", hl.dsp.window.pseudo())
+hl.bind(mod .. " + SHIFT + f", hl.dsp.window.fullscreen({ mode = 0 }))
+hl.bind(mod .. " + SHIFT + o", hl.dsp.exec_cmd("firefox-history.sh"))
 
 -- Global copy-paste
-hl.bind(mod .. " + C", hl.dsp.exec_cmd("modcopypaste.sh copy kitty"))
-hl.bind(mod .. " + V", hl.dsp.exec_cmd("modcopypaste.sh paste kitty"))
+hl.bind(mod .. " + c", hl.dsp.exec_cmd("modcopypaste.sh copy kitty"))
+hl.bind(mod .. " + v", hl.dsp.exec_cmd("modcopypaste.sh paste kitty"))
 
 -- MacOS-esque bindings
-hl.bind(mod .. " + Q", hl.dsp.window.close())
-hl.bind(mod .. " + M", hl.dsp.exit())
-hl.bind(mod .. " + F", hl.dsp.exec_cmd("hyprctl dispatch sendshortcut CTRL, F, active"))
-hl.bind(mod .. " + A", hl.dsp.exec_cmd("hyprctl dispatch sendshortcut CTRL, A, active"))
-hl.bind(mod .. " + R", hl.dsp.exec_cmd("hyprctl dispatch sendshortcut CTRL, R, active"))
-hl.bind(mod .. " + T", hl.dsp.exec_cmd("hyprctl dispatch sendshortcut CTRL, T, active"))
-hl.bind(mod .. " + W", hl.dsp.exec_cmd("hyprctl dispatch sendshortcut CTRL, W, active"))
+local macos_binds = {
+  a = "a",
+  f = "f",
+  r = "r",
+  t = "t",
+  w = "w",
+}
+
+for k, v in pairs(macos_binds) do
+  hl.bind(mod .. " + " .. k, function()
+    hl.dispatch(hl.dsp.send_key_state({ mods = "CTRL", key = v, state = "down" }))
+    hl.dispatch(hl.dsp.send_key_state({ mods = "CTRL", key = v, state = "up" }))
+  end, { repeating = false })
+end
+
+hl.bind(mod .. " + q", hl.dsp.window.close())
+hl.bind(mod .. " + m", hl.dsp.exit())
 
 -- Focus
 hl.bind(mod .. " + left", hl.dsp.focus({ direction = "left" }))
