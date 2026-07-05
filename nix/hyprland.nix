@@ -40,7 +40,7 @@
     })
     (pkgs.writeShellApplication {
       name = "modcopypaste.sh";
-      runtimeInputs = [ jq ];
+      runtimeInputs = [ pkgs.jq pkgs.hyprland pkgs.coreutils ];
       text = builtins.readFile ../scripts/modcopypaste.sh;
     })
     (pkgs.writeShellApplication {
