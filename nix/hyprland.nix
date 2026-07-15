@@ -15,7 +15,6 @@
     awww # Wallpaper
     wl-clipboard # Clipboard manager
     cliphist # clipboard history
-    grim # Screenshot utility
     slurp # Screen area selection
     pamixer # Audio control
     brightnessctl # Brightness control
@@ -23,7 +22,6 @@
     blueman # Bluetooth manager
     swaylock-effects # Screen locker
     swayidle # Idle management
-    wlsunset # Night light
     kitty # Terminal emulator
     polkit_gnome # Authentication agent
     qt5.qtwayland # QT wayland support
@@ -31,6 +29,9 @@
     adwaita-icon-theme # Icon theme
     papirus-icon-theme # Additional icon theme
     catppuccin-gtk # GTK theme
+    hyprshutdown
+    hyprpwcenter
+    hyprsunset
     # Fonts are managed in configuration.nix
 
     (pkgs.writeShellApplication {
@@ -56,6 +57,7 @@
       name = "powermenu.sh";
       runtimeInputs = [
         wofi
+        hyprshutdown
       ];
       text = builtins.readFile ../scripts/powermenu.sh;
     })
@@ -116,6 +118,25 @@
     base0D = config.colorScheme.palette.base0D;
     base0E = config.colorScheme.palette.base0E;
     base0F = config.colorScheme.palette.base0F;
+  };
+
+  services.hyprsunset = {
+    enable = true;
+    profile = [
+      {
+        time = "7:30";
+      }
+      {
+        time = "21:00";
+        temperature = 5000;
+        gamma = 0.8;
+      }
+      {
+        time = "22:00";
+        temperature = 3000;
+        gamma = 0.8;
+      }
+    ];
   };
 
   # Configure dunst for notifications
@@ -248,7 +269,7 @@
               "🎧"
             ];
           };
-          on-click = "pavucontrol";
+          on-click = "hyprpwcenter";
         };
 
         "tray" = {
