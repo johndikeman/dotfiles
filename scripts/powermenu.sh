@@ -1,5 +1,5 @@
-DISPLAY_NAMES=('lock' 'logout' 'power off' 'reboot' 'suspend')
-COMMANDS=('loginctl lock-session' 'hyprctl dispatch exit' 'systemctl poweroff' 'systemctl reboot' 'systemctl suspend')
+DISPLAY_NAMES=('logout' 'power off' 'reboot' 'suspend')
+COMMANDS=('hyprshutdown' 'systemctl poweroff' 'systemctl reboot' 'systemctl suspend')
 
 MENU_ITEMS=()
 for i in "${!DISPLAY_NAMES[@]}"; do

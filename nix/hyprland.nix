@@ -15,7 +15,6 @@
     awww # Wallpaper
     wl-clipboard # Clipboard manager
     cliphist # clipboard history
-    grim # Screenshot utility
     slurp # Screen area selection
     pamixer # Audio control
     brightnessctl # Brightness control
@@ -23,7 +22,6 @@
     blueman # Bluetooth manager
     swaylock-effects # Screen locker
     swayidle # Idle management
-    wlsunset # Night light
     kitty # Terminal emulator
     xdg-desktop-portal-hyprland # XDG portal
     polkit_gnome # Authentication agent
@@ -32,6 +30,8 @@
     adwaita-icon-theme # Icon theme
     papirus-icon-theme # Additional icon theme
     catppuccin-gtk # GTK theme
+    hyprshutdown
+    hyprsunset
     # Fonts are managed in configuration.nix
 
     (pkgs.writeShellApplication {
@@ -52,6 +52,7 @@
       name = "powermenu.sh";
       runtimeInputs = [
         wofi
+        hyprshutdown
       ];
       text = builtins.readFile ../scripts/powermenu.sh;
     })
