@@ -126,21 +126,23 @@
 
   services.hyprsunset = {
     enable = true;
-    profile = [
-      {
-        time = "7:30";
-      }
-      {
-        time = "21:00";
-        temperature = 5000;
-        gamma = 0.8;
-      }
-      {
-        time = "22:00";
-        temperature = 3000;
-        gamma = 0.8;
-      }
-    ];
+    settings = {
+      profile = [
+        {
+          time = "7:30";
+        }
+        {
+          time = "21:00";
+          temperature = 5000;
+          gamma = 0.8;
+        }
+        {
+          time = "22:00";
+          temperature = 3000;
+          gamma = 0.8;
+        }
+      ];
+    };
   };
 
   # Configure dunst for notifications
