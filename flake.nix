@@ -30,6 +30,7 @@
       url = "github:amaanq/helium-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wallpapers.url = "github:johndikeman/wallpapers";
   };
 
   outputs =

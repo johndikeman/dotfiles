@@ -747,7 +747,8 @@
         "llama-gemma": "llama-gemma",
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs_4",
-        "rose-pine-hyprcursor": "rose-pine-hyprcursor"
+        "rose-pine-hyprcursor": "rose-pine-hyprcursor",
+        "wallpapers": "wallpapers"
       }
     },
     "rose-pine-hyprcursor": {
@@ -841,6 +842,21 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "wallpapers": {
+      "locked": {
+        "lastModified": 1784149572,
+        "narHash": "sha256-nJOJArA5ZbCswwJjSduclshz7dgvBwPKkUMl/FayD6Q=",
+        "owner": "johndikeman",
+        "repo": "wallpapers",
+        "rev": "981d1dffe2c7bdcf45e91d18058d04e5a78c9048",
+        "type": "github"
+      },
+      "original": {
+        "owner": "johndikeman",
+        "repo": "wallpapers",
         "type": "github"
       }
     },

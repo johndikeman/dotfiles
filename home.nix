@@ -140,16 +140,6 @@
       recursive = true;
     };
 
-    "wallpapers" = {
-      source = pkgs.fetchFromGitHub {
-        owner = "johndikeman";
-        repo = "wallpapers";
-        rev = "main"; # Or a specific commit hash/tag if you want to pin it
-        sha256 = "sha256-XIuWNIPeUwn4vJNmezBTJ9pX2KNO1VvYwDRoJiEgu1Y="; # REPLACE WITH ACTUAL SHA256
-      };
-      recursive = true;
-    };
-
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
 
