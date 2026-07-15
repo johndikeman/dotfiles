@@ -161,7 +161,6 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 15;
         modules-left = [
           "hyprland/workspaces"
           "hyprland/window"
@@ -253,13 +252,17 @@
         };
 
         "tray" = {
-          icon-size = 21;
+          icon-size = 18;
           spacing = 10;
         };
       };
     };
     style = pkgs.replaceVars ../css/waybar.css (
-      lib.attrsets.filterAttrs (
+      {
+        shadow_x = "-3px";
+        shadow_y = "3px";
+      }
+      // lib.attrsets.filterAttrs (
         name: value:
         lib.strings.hasInfix name "base00 base01 base02 base03 base04 base05 base06 base07 base08 base09 base0A base0B base0C base0D base0E base0F"
       ) config.colorScheme.palette
