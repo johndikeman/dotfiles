@@ -30,7 +30,6 @@
     papirus-icon-theme # Additional icon theme
     catppuccin-gtk # GTK theme
     hyprshutdown
-    hyprpwcenter
     hyprsunset
     # Fonts are managed in configuration.nix
 
@@ -287,7 +286,7 @@
               "🎧"
             ];
           };
-          on-click = "hyprpwcenter";
+          on-click = "pavucontrol";
         };
 
         "tray" = {
