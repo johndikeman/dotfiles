@@ -62,7 +62,6 @@
     pkgs.spotify
     pkgs.discord
     pkgs.pavucontrol
-    pkgs.easyeffects
     pkgs.lazygit
     (pkgs.rivalcfg.overrideAttrs (old: {
       src = pkgs.fetchFromGitHub {
@@ -135,8 +134,6 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
-
-  services.easyeffects.enable = true;
 
   services.flameshot = {
     enable = true;
