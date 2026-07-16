@@ -53,7 +53,7 @@
 	background: #@base04@;
 	box-shadow: @shadow_x@ @shadow_y@ 0px shade(#@base04@, 0.8);
 	margin-left: 10px;
-	padding-right: 0px;
+	padding-right: 5px;
 	padding-left: 5px;
 }
 
