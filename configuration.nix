@@ -256,7 +256,64 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
+    wireplumber = {
+      enable = true;
+      extraConfig = {
+        "99-audio-routing" = {
+          # 1. Stop WirePlumber from fighting EasyEffects for routing control
+          "monitor.stream.rules" = [
+            {
+              matches = [
+                { "application.name" = "easyeffects"; }
+              ];
+              actions = {
+                update-props = {
+                  # Forces WirePlumber to back off. EasyEffects will handle its own linking safely.
+                  "node.autoconnect" = false;
+                  "node.dont-fallback" = true;
+                };
+              };
+            }
+          ];
 
+          # wpctl status to find the right name if this stops working for some reason
+          "monitor.alsa.rules" = [
+            {
+              matches = [
+                { "device.name" = "alsa_card.usb-Generic_USB_Audio-00.2"; }
+              ];
+              actions = {
+                update-props = {
+                  "device.profile" = "pro-audio";
+                };
+              };
+            }
+          ];
+        };
+        "100-declarative-defaults" = {
+          # 1. Stop WirePlumber from reading ~/.local state files for defaults
+          "wireplumber.settings" = {
+            "node.restore-default-targets" = false;
+          };
+
+          # 2. Force the USB Audio Pro sink to the top of the priority list
+          "monitor.alsa.rules" = [
+            {
+              matches = [
+                # You must replace this with your exact node.name! (See below)
+                { "node.name" = "alsa_output.usb-Generic_USB_Audio-00.2.pro-output-0"; }
+              ];
+              actions = {
+                update-props = {
+                  "priority.session" = 9999;
+                  "priority.driver" = 9999;
+                };
+              };
+            }
+          ];
+        };
+      };
+    };
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;

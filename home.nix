@@ -64,6 +64,8 @@
     pkgs.discord
     pkgs.pavucontrol
     pkgs.lazygit
+    pkgs.audacity
+    pkgs.easyeffects
     (pkgs.rivalcfg.overrideAttrs (old: {
       src = pkgs.fetchFromGitHub {
         owner = "orsonteodoro";
