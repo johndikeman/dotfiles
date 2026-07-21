@@ -83,6 +83,9 @@
     pkgs.streamlink
     pkgs.pipe-viewer
     pkgs.fzf
+    pkgs.dvdplusrwtools
+    pkgs.devede
+    pkgs.mplayer
     (pkgs.writeShellScriptBin "yt-subs" (builtins.readFile ./scripts/yt-view.sh))
     (pkgs.writeShellScriptBin "compress-video" (builtins.readFile ./scripts/compress-video.sh))
     (pkgs.writeShellScriptBin "convert-to-dnxhr" ''
