@@ -149,7 +149,7 @@
         }
         {
           time = "22:00";
-          temperature = 3000;
+          temperature = 2000;
           gamma = 0.8;
         }
       ];
