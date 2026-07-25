@@ -96,6 +96,10 @@
         fi
       done
     '')
+    (pkgs.writeShellApplication {
+      name = "trim-generations.sh";
+      text = builtins.readFile ./scripts/trim-generations.sh;
+    })
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";
