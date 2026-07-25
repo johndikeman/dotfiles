@@ -82,6 +82,10 @@
     pkgs.fzf
     pkgs.nemo-with-extensions
     (pkgs.writeShellScriptBin "yt-subs" (builtins.readFile ./scripts/yt-view.sh))
+    (pkgs.writeShellApplication {
+      name = "trim-generations.sh";
+      text = builtins.readFile ./scripts/trim-generations.sh;
+    })
     # nixGL.nixVulkanIntel
     # (pkgs.godot_4.overrideAttrs (old: rec {
     #   version = "4.5-dev1";

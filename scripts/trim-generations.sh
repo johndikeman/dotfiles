@@ -7,8 +7,7 @@ keepGens=$keepGensDef; keepDays=$keepDaysDef
 
 ## Usage
 usage () {
-    printf "Usage:\n\t ./trim-generations.sh <keep-gernerations> <keep-days> <profile> \n\n
-(defaults are: Keep-Gens=$keepGensDef Keep-Days=$keepDaysDef Profile=user)\n\n"
+    printf "Usage:\n\t ./trim-generations.sh <keep-gernerations> <keep-days> <profile> \n\n\n(defaults are: Keep-Gens=%s Keep-Days=%s Profile=user)\n\n" "$keepGensDef" "$keepDaysDef"
     printf "If you enter any parameters, you must enter all three, or none to use defaults.\n"
     printf "Example:\n\t trim-generations.sh 15 10 home-manager\n"
     printf "  this will work on the home-manager profile and keep all generations from the\n"
@@ -18,11 +17,11 @@ usage () {
 }
 
 if [ $# -eq 1 ]; then      # if help requested
-    if [ $1 = "-h" ]; then
+    if [ "$1" = "-h" ]; then
          usage
          exit 1;
     fi
-    if [ $1 = "--help" ]; then
+    if [ "$1" = "--help" ]; then
          usage
          exit 2;
     fi
@@ -31,8 +30,8 @@ if [ $# -eq 1 ]; then      # if help requested
     exit 3;
 
     elif [ $# -eq 0 ]; then            # print the defaults
-        printf "The current defaults are:\n Keep-Gens=$keepGensDef Keep-Days=$keepDaysDef \n\n"
-        read -p "Keep these defaults? (y/n):" answer
+        printf "The current defaults are:\n Keep-Gens=%s Keep-Days=%s \n\n" "$keepGensDef" "$keepDaysDef"
+        read -rp "Keep these defaults? (y/n):" answer
 
         case "$answer" in
         [yY1] )
@@ -49,7 +48,7 @@ fi
 
 ## Handle parameters (and change if root)
 if [[ $EUID -ne 0 ]]; then              # if not root
-    profile=$(readlink /home/$USER/.nix-profile)
+    profile=$(readlink "$HOME/.nix-profile")
 else
     if [ -d /nix/var/nix/profiles/system ]; then   # maybe this or the other
         profile="/nix/var/nix/profiles/system"
@@ -61,7 +60,7 @@ else
     fi
 fi
 if (( $# < 1 )); then
-    printf "Keeping default: $keepGensDef generations OR $keepDaysDef days, whichever is more\n"
+    printf "Keeping default: %s generations OR %s days, whichever is more\n" "$keepGensDef" "$keepDaysDef"
 elif [[ $# -le 2 ]]; then
     printf "\nError: Not enough arguments.\n\n" >&2
     usage
@@ -71,9 +70,9 @@ elif (( $# > 4)); then
     usage
     exit 2
 else
-    if [ $1 -lt 1 ]; then
+    if [ "$1" -lt 1 ]; then
         printf "using Gen numbers less than 1 not recommended. Setting to min=1\n"
-        read -p "is that ok? (y/n): " asnwer
+        read -rp "is that ok? (y/n): " asnwer
         #printf "$asnwer"
         case "$asnwer" in
         [yY1] )
@@ -89,9 +88,9 @@ else
             ;;
         esac
     fi
-    if [ $2 -lt 0 ]; then
+    if [ "$2" -lt 0 ]; then
         printf "using negative days number not recommended. Setting to min=0\n"
-        read -p "is that ok? (y/n): " asnwer
+        read -rp "is that ok? (y/n): " asnwer
 
         case "$asnwer" in
         [yY1] )
@@ -112,7 +111,7 @@ else
     (( keepDays < 0 )) && keepDays=0
     if [[ $EUID -ne 0 ]]; then
         if [[ $3 == "user" ]] || [[ $3 == "default" ]]; then
-            profile=$(readlink /home/$USER/.nix-profile)
+            profile=$(readlink "$HOME/.nix-profile")
         elif [[ $3 == "home-manager" ]]; then
             # home-manager defaults to $XDG_STATE_HOME; otherwise, use
             # `home-manager generations` and `nix-store --query --roots
@@ -137,10 +136,10 @@ else
             exit 3
         fi
     fi
-    printf "OK! \t Keep Gens = $keepGens \t Keep Days = $keepDays\n\n"
+    printf "OK! \t Keep Gens = %s \t Keep Days = %s\n\n" "$keepGens" "$keepDays"
 fi
 
-printf "Operating on profile: \t $profile\n\n"
+printf "Operating on profile: \t %s\n\n" "$profile"
 
 ## Runs at the end, to decide whether to delete profiles that match chosen parameters.
 choose () {
@@ -148,12 +147,12 @@ choose () {
     local prompt="$2"
     local answer
 
-    read -p "$prompt" answer
+    read -rp "$prompt" answer
     [ -z "$answer" ] && answer="$default"
 
     case "$answer" in
         [yY1] ) #printf "answered yes!\n"
-             nix-env --delete-generations -p $profile ${!gens[@]}
+             nix-env --delete-generations -p "$profile" "${!gens[@]}"
             exit 0
             ;;
         [nN0] ) printf "Ok doing nothing exiting..\n"
@@ -167,24 +166,30 @@ choose () {
 
 # printf "profile = $profile\n\n"
 ## Query nix-env for generations list
-IFS=$'\n' nixGens=( $(nix-env --list-generations -p $profile | sed 's:^\s*::; s:\s*$::' | tr '\t' ' ' | tr -s ' ') )
+mapfile -t nixGens < <(nix-env --list-generations -p "$profile" | sed 's:^\s*::; s:\s*$::' | tr '\t' ' ' | tr -s ' ')
+
+if [ ${#nixGens[@]} -eq 0 ]; then
+    printf "No generations found for profile: %s\n" "$profile"
+    exit 0
+fi
+
 timeNow=$(date +%s)
 
 ## Get info on oldest generation
 IFS=' ' read -r -a oldestGenArr <<< "${nixGens[0]}"
 oldestGen=${oldestGenArr[0]}
 oldestDate=${oldestGenArr[1]}
-printf "%-30s %s\n" "oldest generation:" $oldestGen
+printf "%-30s %s\n" "oldest generation:" "$oldestGen"
 #oldestDate=${nixGens[0]:3:19}
-printf "%-30s %s\n" "oldest generation created:" $oldestDate
+printf "%-30s %s\n" "oldest generation created:" "$oldestDate"
 oldestTime=$(date -d "$oldestDate" +%s)
 oldestElapsedSecs=$((timeNow-oldestTime))
 oldestElapsedMins=$((oldestElapsedSecs/60))
 oldestElapsedHours=$((oldestElapsedMins/60))
 oldestElapsedDays=$((oldestElapsedHours/24))
-printf "%-30s %s\n" "minutes before now:" $oldestElapsedMins
-printf "%-30s %s\n" "hours before now:" $oldestElapsedHours
-printf "%-30s %s\n\n" "days before now:" $oldestElapsedDays
+printf "%-30s %s\n" "minutes before now:" "$oldestElapsedMins"
+printf "%-30s %s\n" "hours before now:" "$oldestElapsedHours"
+printf "%-30s %s\n\n" "days before now:" "$oldestElapsedDays"
 
 ## Get info on current generation
 for i in "${nixGens[@]}"; do
@@ -193,17 +198,17 @@ for i in "${nixGens[@]}"; do
     genDate=${iGenArr[1]}
     if [[ "$i" =~ current ]]; then
         currentGen=$genNumber
-        printf "%-30s %s\n" "current generation:" $currentGen
+        printf "%-30s %s\n" "current generation:" "$currentGen"
         currentDate=$genDate
-        printf "%-30s %s\n" "current generation created:" $currentDate
+        printf "%-30s %s\n" "current generation created:" "$currentDate"
         currentTime=$(date -d "$currentDate" +%s)
         currentElapsedSecs=$((timeNow-currentTime))
         currentElapsedMins=$((currentElapsedSecs/60))
         currentElapsedHours=$((currentElapsedMins/60))
         currentElapsedDays=$((currentElapsedHours/24))
-        printf "%-30s %s\n" "minutes before now:" $currentElapsedMins
-        printf "%-30s %s\n" "hours before now:" $currentElapsedHours
-        printf "%-30s %s\n\n" "days before now:" $currentElapsedDays
+        printf "%-30s %s\n" "minutes before now:" "$currentElapsedMins"
+        printf "%-30s %s\n" "hours before now:" "$currentElapsedHours"
+        printf "%-30s %s\n\n" "days before now:" "$currentElapsedDays"
     fi
 done
 
@@ -213,11 +218,11 @@ elapsedDays=$((timeBetweenOldestAndCurrent/60/60/24))
 generationsDiff=$((currentGen-oldestGen))
 
 ## Figure out what we should do, based on generations and options
-if [[ elapsedDays -le keepDays ]]; then
-    printf "All generations are no more than $keepDays days older than current generation. \nOldest gen days difference from current gen: $elapsedDays \n\n\tNothing to do!\n"
+if [[ $elapsedDays -le $keepDays ]]; then
+    printf "All generations are no more than %s days older than current generation. \nOldest gen days difference from current gen: %s \n\n\tNothing to do!\n" "$keepDays" "$elapsedDays"
     exit 4;
-elif [[ generationsDiff -lt keepGens ]]; then
-    printf "Oldest generation ($oldestGen) is only $generationsDiff generations behind current ($currentGen). \n\n\t Nothing to do!\n"
+elif [[ $generationsDiff -lt $keepGens ]]; then
+    printf "Oldest generation (%s) is only %s generations behind current (%s). \n\n\t Nothing to do!\n" "$oldestGen" "$generationsDiff" "$currentGen"
     exit 5;
 else
     printf "\tSomething to do...\n"
@@ -235,8 +240,12 @@ else
         fi
     done
     printf "\nFound the following generation(s) to delete:\n"
+    if [ ${#gens[@]} -eq 0 ]; then
+        printf "None found that match the criteria.\n"
+        exit 0
+    fi
     for K in "${!gens[@]}"; do
-        printf "generation $K \t ${gens[$K]}\n"
+        printf "generation %s \t %s\n" "$K" "${gens[$K]}"
     done
     printf "\n"
     choose "y" "Do you want to delete these? [Y/n]: "
