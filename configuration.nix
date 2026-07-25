@@ -467,11 +467,19 @@
 
   services.mullvad-vpn.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      8010
+      57621
+    ];
+    allowedUDPPorts = [
+      5353
+      8010
+    ];
+
+    interfaces."podman+".allowedUDPPorts = [ 53 ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -481,11 +489,15 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
-  virtualisation.podman = {
-    enable = true;
-    dockerSocket.enable = true;
-    defaultNetwork.settings = {
-      dns_enabled = true;
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerSocket.enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings = {
+        dns_enabled = true;
+      };
     };
   };
 }
