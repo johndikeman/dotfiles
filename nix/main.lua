@@ -103,7 +103,6 @@ end)
 hl.bind(mod .. " + space", hl.dsp.exec_cmd("wofi --show drun"))
 hl.bind(mod .. " + p", hl.dsp.window.pseudo())
 hl.bind(mod .. " + SHIFT + f", hl.dsp.window.fullscreen({ mode = 0 }))
-hl.bind(mod .. " + SHIFT + o", hl.dsp.exec_cmd("firefox-history.sh"))
 
 -- Global copy-paste
 hl.bind(mod .. " + c", hl.dsp.exec_cmd("modcopypaste.sh copy kitty"))
