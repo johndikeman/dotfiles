@@ -33,6 +33,7 @@ return {
 					},
 				},
 				pyright = {},
+				denols = {},
 				rust_analyzer = {},
 				ts_ls = {},
 				svelte = {
