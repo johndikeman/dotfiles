@@ -40,6 +40,10 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
+
+          ssh-keyscan -H ${{ env.VPS_IP }} >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
           cat <<EOF > ~/.ssh/config
           Host vps
             HostName ${{ env.VPS_IP }}
