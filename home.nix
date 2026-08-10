@@ -67,6 +67,10 @@
       "nix-command"
       "flakes"
     ];
+    settings.trusted-users = [
+      "ubuntu"
+      "root"
+    ];
   };
 
   # Let Home Manager install and manage itself.
