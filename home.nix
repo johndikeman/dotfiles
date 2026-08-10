@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -23,6 +23,7 @@
     pkgs.lazygit
     pkgs.neovim
     pkgs._1password-cli
+    pkgs.deploy-rs
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -70,8 +71,4 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  services.dude-agent = {
-    enable = true;
-  };
 }
