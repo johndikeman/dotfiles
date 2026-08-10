@@ -50,4 +50,4 @@ jobs:
 
       - name: Deploy via deploy-rs
         run: |
-          nix run github:serokell/deploy-rs -- --hostname ${{ env.VPS_IP }} --ssh-user {{ env.VPS_USER }} .#vps
+          nix run github:serokell/deploy-rs -- --remote-build --hostname ${{ env.VPS_IP }} --ssh-user {{ env.VPS_USER }} .#vps
