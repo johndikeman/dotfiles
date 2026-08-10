@@ -45,7 +45,6 @@
 
       deploy.nodes.vps = {
         hostname = "vps";
-        ssh_user = builtins.getEnv "VPS_USER";
         profiles.ubuntu = {
           user = "ubuntu";
           path = deploy-rs.lib.${system}.activate.home-manager self.homeConfigurations."ubuntu";
