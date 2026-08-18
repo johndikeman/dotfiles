@@ -151,9 +151,6 @@
         filenamePattern = "%F_%H-%M";
         drawThickness = 1;
         copyPathAfterSave = true;
-
-        # For wayland
-        useGrimAdapter = true;
       };
     };
   };
