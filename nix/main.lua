@@ -85,8 +85,27 @@ hl.bind(mod .. " + SHIFT + f", hl.dsp.window.fullscreen({ mode = 0 }))
 hl.bind(mod .. " + k", hl.dsp.exec_cmd("kitty"))
 
 -- Global copy-paste
-hl.bind(mod .. " + c", hl.dsp.exec_cmd("modcopypaste.sh copy kitty"))
-hl.bind(mod .. " + v", hl.dsp.exec_cmd("modcopypaste.sh paste kitty"))
+hl.bind(mod .. " + c", function()
+	local mods = ""
+	if hl.get_active_window().class == "kitty" then
+		mods = "CTRL + SHIFT"
+	else
+		mods = "CTRL"
+	end
+	hl.dispatch(hl.dsp.send_key_state({ mods = mods, key = "c", state = "down" }))
+	hl.dispatch(hl.dsp.send_key_state({ mods = mods, key = "c", state = "up" }))
+end)
+
+hl.bind(mod .. " + v", function()
+	local mods = ""
+	if hl.get_active_window().class == "kitty" then
+		mods = "CTRL + SHIFT"
+	else
+		mods = "CTRL"
+	end
+	hl.dispatch(hl.dsp.send_key_state({ mods = mods, key = "v", state = "down" }))
+	hl.dispatch(hl.dsp.send_key_state({ mods = mods, key = "v", state = "up" }))
+end)
 
 -- MacOS-esque bindings
 local macos_binds = {
