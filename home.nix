@@ -63,14 +63,6 @@
     pkgs.discord
     pkgs.pavucontrol
     pkgs.lazygit
-    (pkgs.rivalcfg.overrideAttrs (old: {
-      src = pkgs.fetchFromGitHub {
-        owner = "orsonteodoro";
-        repo = "rivalcfg";
-        rev = "66f46ab96174311cf9322d492024b8c1a63f55af";
-        sha256 = "sha256-vt5X+2dBdW2F7owUfZSeEQJD0aSBlHFTHM/SxDmhGsA=";
-      };
-    }))
     pkgs.inkscape-with-extensions
     pkgs.tailscale
     pkgs.chromium
