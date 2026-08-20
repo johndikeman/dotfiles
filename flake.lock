@@ -106,6 +106,36 @@
         "type": "github"
       }
     },
+    "hyprcapture": {
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ],
+        "nixpkgs": [
+          "hyprcapture",
+          "hyprland",
+          "nixpkgs"
+        ],
+        "systems": [
+          "hyprcapture",
+          "hyprland",
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786942592,
+        "narHash": "sha256-Ua7Kfq1bKVJXMAM2NJtPYtabhUe7uj7+CKg+fHg/0pc=",
+        "owner": "gfhdhytghd",
+        "repo": "HyprCapture",
+        "rev": "b0747393c25cb936b5803aa217dfc6697ece4613",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gfhdhytghd",
+        "repo": "HyprCapture",
+        "type": "github"
+      }
+    },
     "hyprcursor": {
       "inputs": {
         "hyprlang": [
@@ -518,6 +548,7 @@
       "inputs": {
         "helium": "helium",
         "home-manager": "home-manager",
+        "hyprcapture": "hyprcapture",
         "hyprland": "hyprland",
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs_2",

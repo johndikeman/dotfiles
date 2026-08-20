@@ -24,6 +24,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     wallpapers.url = "github:johndikeman/wallpapers";
+    hyprcapture = {
+      url = "github:gfhdhytghd/HyprCapture";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
   outputs =
@@ -33,6 +37,7 @@
       home-manager,
       rose-pine-hyprcursor,
       helium,
+      hyprcapture,
       ...
     }@inputs:
     {
