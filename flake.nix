@@ -8,6 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    dude.url = "git+ssh://git@github.com/johndikeman/dude.git?ref=main";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,6 +21,7 @@
       nixpkgs,
       home-manager,
       deploy-rs,
+      dude,
       ...
     }:
     let
@@ -37,6 +39,7 @@
         # the path to your home.nix.
         modules = [
           ./home.nix
+          dude.homeManagerModules.dude-agent
         ];
 
         # Optionally use extraSpecialArgs
