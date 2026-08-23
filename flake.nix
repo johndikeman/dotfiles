@@ -8,7 +8,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dude.url = "git+ssh://git@github.com/johndikeman/dude.git?ref=main";
+    dude.url = "github:johndikeman/dude";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
