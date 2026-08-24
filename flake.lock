@@ -29,15 +29,16 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1787609700,
-        "narHash": "sha256-eDw9Dwc4qZPcO073Mz+6NdUctB0DbqVv/mL0bYm5LZo=",
+        "lastModified": 1787614765,
+        "narHash": "sha256-e4/sV+ElK/GgC1fyzhV5o/t4Pp7bOHmVGB3X1iqJyaQ=",
         "owner": "johndikeman",
         "repo": "dude",
-        "rev": "b3425a580e271664591b9d852584e74238c6e89c",
+        "rev": "d0f1bb8e54b5ffd47e2f637c7a7f0d7cc0dd674c",
         "type": "github"
       },
       "original": {
         "owner": "johndikeman",
+        "ref": "feature/provide-git-config-in-module",
         "repo": "dude",
         "type": "github"
       }

@@ -8,7 +8,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dude.url = "github:johndikeman/dude";
+    # TODO: switch back to github:johndikeman/dude after PR #52 merges.
+    dude.url = "github:johndikeman/dude/feature/provide-git-config-in-module";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
