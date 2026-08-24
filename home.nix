@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, gitUserName ? "dudeagent", gitUserEmail ? "dude@johnf.art", ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -75,6 +75,12 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.git = {
+    enable = true;
+    userName = gitUserName;
+    userEmail = gitUserEmail;
+  };
 
   services.dude-agent = {
     enable = true;
