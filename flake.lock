@@ -29,11 +29,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1787614947,
-        "narHash": "sha256-e4/sV+ElK/GgC1fyzhV5o/t4Pp7bOHmVGB3X1iqJyaQ=",
+        "lastModified": 1787616969,
+        "narHash": "sha256-9ZWofR3aPWN/HwdCNOLGvbS66pdkdaDus1m7FhoF3R8=",
         "owner": "johndikeman",
         "repo": "dude",
-        "rev": "4441a9fedd7122be5af756c2b97c4fe6e0e41c1c",
+        "rev": "2c7b4ce075ca5451b476a3249450a1f83c682c70",
         "type": "github"
       },
       "original": {
