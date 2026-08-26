@@ -79,4 +79,12 @@
   services.dude-agent = {
     enable = true;
   };
+
+  # autonomous prediction markets agent (separate flake, non-colliding units)
+  services.prediction-markets = {
+    enable = true;
+    interval = "*:0/30";
+    stateDir = "/home/ubuntu/.local/state/dude-prediction-markets";
+    environmentFile = "/home/ubuntu/.config/dude-prediction-markets/pm.env";
+  };
 }
