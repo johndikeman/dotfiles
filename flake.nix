@@ -9,6 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dude.url = "github:johndikeman/dude";
+    dude-prediction-markets.url = "github:johndikeman/dude-prediction-markets";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +23,7 @@
       home-manager,
       deploy-rs,
       dude,
+      dude-prediction-markets,
       ...
     }:
     let
@@ -40,6 +42,7 @@
         modules = [
           ./home.nix
           dude.homeManagerModules.dude-agent
+          dude-prediction-markets.homeManagerModules.prediction-markets
         ];
 
         # Optionally use extraSpecialArgs
