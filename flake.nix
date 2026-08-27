@@ -11,7 +11,7 @@
     dude.url = "github:johndikeman/dude";
     dude-prediction-markets.url = "github:johndikeman/dude-prediction-markets";
     deploy-rs = {
-      url = "github:serokell/deploy-rs";
+      url = "github:johndikeman/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
