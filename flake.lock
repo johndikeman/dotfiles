@@ -9,15 +9,15 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1786361680,
-        "narHash": "sha256-IxaZkb9rCGEZ+yGndxKXONeIEcKMzoFUsvLTB5G/caw=",
-        "owner": "serokell",
+        "lastModified": 1787850212,
+        "narHash": "sha256-upv8PMAqAU3zX9RP7f80x4H9gU8MR41uwTG77rzqulY=",
+        "owner": "johndikeman",
         "repo": "deploy-rs",
-        "rev": "16901271e5b30b591e56f7a84f25f186fb20f3e1",
+        "rev": "5d691a401b0a659ef3568aa039298ea0b79a61e7",
         "type": "github"
       },
       "original": {
-        "owner": "serokell",
+        "owner": "johndikeman",
         "repo": "deploy-rs",
         "type": "github"
       }
@@ -29,11 +29,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1787849921,
-        "narHash": "sha256-UVy1flX/LXPQEQD58k2c+frI2+RkL+H7BS0u1dT+sys=",
+        "lastModified": 1787864873,
+        "narHash": "sha256-jf6djDgTwDeT8hRoFG/MkEPOdQCQfXTTjs20pIVmKvE=",
         "owner": "johndikeman",
         "repo": "dude",
-        "rev": "cef2431b4a95ef59a99b3f3ce7b64128804043e5",
+        "rev": "8bed0afccf6916a9c51b8ef283ea8753afa14f41",
         "type": "github"
       },
       "original": {
