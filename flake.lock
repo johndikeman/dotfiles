@@ -627,13 +627,13 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1787947413,
-        "narHash": "sha256-M4Mt+jL+20YtmZU2AHBklLvO9XxfGHf/26WSSDvoRi0=",
-        "path": "/home/john/experiments",
+        "lastModified": 1787959562,
+        "narHash": "sha256-pASC7T27mGzCTJL/cMqrUXIupT2X94K2C8EeLA5c3hg=",
+        "path": "/home/john/mcserver",
         "type": "path"
       },
       "original": {
-        "path": "/home/john/experiments",
+        "path": "/home/john/mcserver",
         "type": "path"
       }
     },

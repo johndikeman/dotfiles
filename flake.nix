@@ -32,7 +32,7 @@
     };
     wallpapers.url = "github:johndikeman/wallpapers";
     # Local flake containing the mcserver NixOS module (Minecraft server)
-    mcserver.url = "path:/home/john/experiments";
+    mcserver.url = "path:/home/john/mcserver";
   };
 
   outputs =
@@ -61,7 +61,7 @@
           {
             imports = [ mcserver.nixosModules.mcserver ];
             services.mcserver.enable = true;
-            services.mcserver.dataDir = "/home/john/experiments/serverfiles";
+            services.mcserver.dataDir = "/home/john/mcserver/serverfiles";
           }
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
