@@ -627,8 +627,8 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1787959562,
-        "narHash": "sha256-pASC7T27mGzCTJL/cMqrUXIupT2X94K2C8EeLA5c3hg=",
+        "lastModified": 1787960039,
+        "narHash": "sha256-MU1CObQO8zmXIQb4zFIuow96qjXD0aUqkw35swY+FOs=",
         "path": "/home/john/mcserver",
         "type": "path"
       },
