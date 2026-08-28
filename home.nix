@@ -83,7 +83,7 @@
   # autonomous prediction markets agent (separate flake, non-colliding units)
   services.prediction-markets = {
     enable = true;
-    interval = "*:0/30";
+    interval = "*-*-*:*:00/12:00:00";
     stateDir = "/home/ubuntu/.local/state/dude-prediction-markets";
     environmentFile = "/home/ubuntu/.config/dude-prediction-markets/pm.env";
   };
