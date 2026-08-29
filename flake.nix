@@ -25,7 +25,6 @@
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
     nix-colors.url = "github:misterio77/nix-colors";
-    llama-gemma.url = "git+ssh://git@github.com/johndikeman/experiments.git?ref=llama-gemma";
     helium = {
       url = "github:amaanq/helium-flake";
       inputs.nixpkgs.follows = "nixpkgs";
