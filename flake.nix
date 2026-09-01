@@ -30,8 +30,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     wallpapers.url = "github:johndikeman/wallpapers";
-    # Local flake containing the mcserver NixOS module (Minecraft server)
-    mcserver.url = "path:/home/john/mcserver";
   };
 
   outputs =
@@ -42,7 +40,6 @@
       lanzaboote,
       rose-pine-hyprcursor,
       helium,
-      mcserver,
       ...
     }@inputs:
     {
@@ -56,14 +53,6 @@
         };
         modules = [
           lanzaboote.nixosModules.lanzaboote
-          # Modded Minecraft server (All the Mods 10: Aeronautics)
-          {
-            imports = [ mcserver.nixosModules.mcserver ];
-            services.mcserver.enable = true;
-            services.mcserver.dataDir = "/home/john/mcserver/serverfiles";
-            services.mcserver.serverPackUrl = "https://github.com/johndikeman/mcserver/releases/download/v1/server.zip";
-            services.mcserver.serverPackVersion = "v1";
-          }
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
           ./configuration.nix
