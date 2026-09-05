@@ -33,7 +33,7 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
-    pkgs.signal-desktop
+    pkgs.jq
     pkgs.gh
     pkgs.nodejs_22
     pkgs.git
