@@ -78,9 +78,25 @@
 
   services.dude-agent = {
     enable = true;
+
+    # event-driven wakeups: one hourly timer checks all wait functions
+    # (ai-tasks.md watcher etc.) and invokes the agent when one fires
+    waitTimer.enable = true;
+    waitTimer.interval = "hourly";
+
+    # special-purpose agents on their own schedules. each runs
+    # dude-agent --once --purpose <name>; purpose prompts + skills live
+    # in the dude repo (src/purposes/, .pi/skills/)
+    purposes.prediction-markets = {
+      # deterministic runner cycle is 00/12:00 (systemd timer in the PM
+      # flake); the LLM pass runs 30 min later so fresh reports exist
+      interval = "*-*-* 00/12:30:00";
+      environmentFile = "/home/ubuntu/.config/dude-prediction-markets/pm.env";
+    };
   };
 
-  # autonomous prediction markets agent (separate flake, non-colliding units)
+  # deterministic prediction-markets runner: data collection + reports
+  # (the LLM/agent half is now the dude-agent prediction-markets purpose)
   services.prediction-markets = {
     enable = true;
     interval = "*-*-* 00/12:00:00";
