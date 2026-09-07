@@ -8,7 +8,7 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/hyprland?ref=v0.56.2";
+    hyprland.url = "github:hyprwm/hyprland?ref=v0.56.0";
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,7 +21,7 @@
     };
     wallpapers.url = "github:johndikeman/wallpapers";
     hyprcapture = {
-      url = "github:gfhdhytghd/HyprCapture?ref=v0.2.8-0.56.2";
+      url = "github:gfhdhytghd/HyprCapture";
       inputs.hyprland.follows = "hyprland";
     };
   };

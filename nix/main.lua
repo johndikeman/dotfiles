@@ -177,10 +177,10 @@ hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- screenshot?
 
-hl.bind("CTRL + SHIFT + 3", function()
+hl.bind("SUPER + SHIFT + 3", function()
 	hl.plugin.hyprcapture.open("fullscreen")
 end)
 
-hl.bind("CTRL + SHIFT + 4", function()
+hl.bind("SUPER + SHIFT + 4", function()
 	hl.plugin.hyprcapture.open("region")
 end)
