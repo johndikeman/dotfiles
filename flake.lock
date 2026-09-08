@@ -48,11 +48,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1788787052,
-        "narHash": "sha256-8mdf2OFnm5A375sGZtCi+DRF2ihJxxtj6/LvGt7jHJs=",
+        "lastModified": 1788872990,
+        "narHash": "sha256-U1XOMBbUIb0JB5PRhiF9hH1Z6rZkC4nQLHGSt3AzAM0=",
         "owner": "johndikeman",
         "repo": "dude-prediction-markets",
-        "rev": "55cb7bc84df5ef20e170bd461d6c8e4be456761d",
+        "rev": "b8ebc0ea43c1b627fb79c4bc5ef4c8f768ae2fa0",
         "type": "github"
       },
       "original": {
