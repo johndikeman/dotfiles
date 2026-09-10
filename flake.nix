@@ -21,7 +21,7 @@
     };
     wallpapers.url = "github:johndikeman/wallpapers";
     godot = {
-      url = "github:florianvazelle/godot-overlay";
+      url = "github:johndikeman/godot-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

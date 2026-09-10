@@ -92,15 +92,15 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1787127696,
-        "narHash": "sha256-HrZGVyIVeHDjPdzNpLQ9rhtwzx8U92RTyZHKD4g84ts=",
-        "owner": "florianvazelle",
+        "lastModified": 1789076719,
+        "narHash": "sha256-liSaRkQXiDpPjTkUjaiscZ2L1huG6Atk9US7dBZktYY=",
+        "owner": "johndikeman",
         "repo": "godot-overlay",
-        "rev": "991cbdad7bd3236102a4ab2b0204adf571e6a7d0",
+        "rev": "c83c22df6241426b2a055a0dc45831203bf7dc37",
         "type": "github"
       },
       "original": {
-        "owner": "florianvazelle",
+        "owner": "johndikeman",
         "repo": "godot-overlay",
         "type": "github"
       }
@@ -143,36 +143,6 @@
         "owner": "nix-community",
         "ref": "master",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "hyprcapture": {
-      "inputs": {
-        "hyprland": [
-          "hyprland"
-        ],
-        "nixpkgs": [
-          "hyprcapture",
-          "hyprland",
-          "nixpkgs"
-        ],
-        "systems": [
-          "hyprcapture",
-          "hyprland",
-          "systems"
-        ]
-      },
-      "locked": {
-        "lastModified": 1788721989,
-        "narHash": "sha256-7OzlL6K2eqhMpOM73LO84O0JC/gLtQmDSs6i3mbYZEA=",
-        "owner": "gfhdhytghd",
-        "repo": "HyprCapture",
-        "rev": "fc3571eb6bfac9f8de0b95b82bad87e1a7d12228",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gfhdhytghd",
-        "repo": "HyprCapture",
         "type": "github"
       }
     },
@@ -589,7 +559,6 @@
         "godot": "godot",
         "helium": "helium",
         "home-manager": "home-manager",
-        "hyprcapture": "hyprcapture",
         "hyprland": "hyprland",
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs_2",
