@@ -9,6 +9,7 @@
   rose-pine-hyprcursor,
   helium,
   xdg-desktop-portal-hyprland,
+  godot,
   inputs,
   ...
 }:
@@ -372,6 +373,7 @@
     helium
     pkgs.xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
+    godot
   ];
   hardware.facetimehd.enable = true;
   # Font configuration

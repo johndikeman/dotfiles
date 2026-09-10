@@ -24,6 +24,10 @@
       url = "github:gfhdhytghd/HyprCapture";
       inputs.hyprland.follows = "hyprland";
     };
+    godot = {
+      url = "github:florianvazelle/godot-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -34,6 +38,7 @@
       rose-pine-hyprcursor,
       helium,
       hyprcapture,
+      godot,
       ...
     }@inputs:
     {
@@ -44,6 +49,7 @@
           rose-pine-hyprcursor = rose-pine-hyprcursor.packages.${system}.default;
           helium = inputs.helium.packages.${system}.default;
           xdg-desktop-portal-hyprland = inputs.hyprland.inputs.xdph;
+          godot = inputs.godot.packages.${system}.default;
         };
         modules = [
           # Import the previous configuration.nix we used,
