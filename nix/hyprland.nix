@@ -88,7 +88,7 @@
     configType = "lua";
     settings = { };
     plugins = [
-      inputs.hyprcapture.packages.${pkgs.stdenv.hostPlatform.system}.hyprcapture
+      # inputs.hyprcapture.packages.${pkgs.stdenv.hostPlatform.system}.hyprcapture
     ];
 
     extraConfig = builtins.readFile (

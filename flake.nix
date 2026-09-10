@@ -20,10 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     wallpapers.url = "github:johndikeman/wallpapers";
-    hyprcapture = {
-      url = "github:gfhdhytghd/HyprCapture";
-      inputs.hyprland.follows = "hyprland";
-    };
     godot = {
       url = "github:florianvazelle/godot-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,7 +33,6 @@
       home-manager,
       rose-pine-hyprcursor,
       helium,
-      hyprcapture,
       godot,
       ...
     }@inputs:
