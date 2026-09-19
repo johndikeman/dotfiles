@@ -59,6 +59,10 @@
   #
   home.sessionVariables = {
     EDITOR = "nvim";
+    # john is in austin; pin TZ so all agent-reported times are central time.
+    # the system timezone is also set to America/Chicago (timedatectl on the vps,
+    # persists outside nix since this is home-manager-on-ubuntu, not nixos).
+    TZ = "America/Chicago";
   };
 
   nix = {
