@@ -83,10 +83,16 @@
   services.dude-agent = {
     enable = true;
 
-    # event-driven wakeups: one hourly timer checks all wait functions
-    # (ai-tasks.md watcher etc.) and invokes the agent when one fires
+    # the fixed-schedule main agent timer is superseded by the event-driven
+    # wait system (john: the ai-tasks wait function was meant to replace it
+    # entirely). explicit for clarity; timer.enable defaults false anyway.
+    timer.enable = false;
+
+    # event-driven wakeups: every 15 minutes the wait runner checks all wait
+    # functions (ai-tasks.md watcher etc.) and invokes the agent when one
+    # fires. overlapping ticks are locked/skipped while an agent runs.
     waitTimer.enable = true;
-    waitTimer.interval = "hourly";
+    waitTimer.interval = "*:0/15";
 
     # special-purpose agents on their own schedules. each runs
     # dude-agent --once --purpose <name>; purpose prompts + skills live
