@@ -103,6 +103,19 @@
       interval = "*-*-* 00/12:30:00";
       environmentFile = "/home/ubuntu/.config/dude-prediction-markets/pm.env";
     };
+
+    # weekly meal planner: sunday 10:00 cdt — reads the recipes vault,
+    # pantry state and discord feedback, writes the plan + shopping list
+    # to the main vault + discord, and front-loads prep via calendar
+    purposes.meal-planner = {
+      # Sun *-*-* is sunday only; Persistent=true catches missed runs
+      interval = "Sun *-*-* 10:00:00";
+    };
+
+    # sync john's second obsidian vault (recipes) alongside main
+    obsidianSync.extraVaults = [
+      { name = "recipes"; path = "/home/ubuntu/recipes"; }
+    ];
   };
 
   # deterministic prediction-markets runner: data collection + reports
