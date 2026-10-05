@@ -74,6 +74,7 @@
     pkgs.yt-dlp
     pkgs.fzf
     pkgs.nemo-with-extensions
+    pkgs.btop
     (pkgs.writeShellScriptBin "yt-subs" (builtins.readFile ./scripts/yt-view.sh))
     (pkgs.writeShellApplication {
       name = "trim-generations.sh";
