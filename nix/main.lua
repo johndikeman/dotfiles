@@ -66,6 +66,29 @@ hl.workspace_rule({ workspace = 2, monitor = "HDMI-A-1" })
 hl.workspace_rule({ workspace = 3, monitor = "HDMI-A-2" })
 hl.workspace_rule({ workspace = 4, monitor = "HDMI-A-2" })
 
+-- Discord opens on the vertical monitor (workspace 3)
+hl.window_rule({
+	name = "discord-on-vertical",
+	match = { class = "[Dd]iscord" },
+	workspace = 3,
+})
+
+-- Steam and games open on main monitor (workspace 1)
+local game_classes = {
+	"^steam",
+	"^Deadlock$",
+	"^hoi4$",
+	"^victoria3$",
+	"[Ss]ongs.of.[Ss]yx",
+}
+for i, cls in ipairs(game_classes) do
+	hl.window_rule({
+		name = "game-on-main-" .. i,
+		match = { class = cls },
+		workspace = 1,
+	})
+end
+
 -- Animations
 hl.curve("myBezier", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1.05 } } })
 hl.animation({ leaf = "windows", enabled = true, speed = 7, bezier = "myBezier" })
