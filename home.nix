@@ -125,8 +125,12 @@
 # - docker + compose plugin are apt-installed (docker-ce, imperative — same
 #   precedent as tailscale); nix just owns the config + service that brings
 #   the stack up.
-# - secrets live in ~/langfuse/.env (generated once, unmanaged): compose is run
-#   with WorkingDirectory=~/langfuse so it picks that .env up automatically.
+# - secrets live in ~/langfuse/.env (generated once, unmanaged): compose is
+#   pointed at it explicitly with --env-file. (note: passing -f an absolute
+#   path makes the compose *file's* dir the project dir for .env lookup, so
+#   relying on WorkingDirectory is not enough — without this the stack silently
+#   boots with the compose defaults and web can't auth to the existing postgres
+#   volume.)
 #   If the file is missing the service fails fast with a clear message instead
 #   of starting a stack with default/insecure creds.
 # - survives reboots via a user service (lingering is already enabled for the
@@ -146,10 +150,10 @@ systemd.user.services.langfuse = {
       "${pkgs.bash}/bin/bash -eu -c 'test -f %h/langfuse/.env || { echo \"langfuse: %h/langfuse/.env missing — restore secrets before starting\"; exit 1; }'"
     ];
     ExecStart = [
-      "${pkgs.bash}/bin/bash -eu -c 'cd %h/langfuse && /usr/bin/docker compose -f %h/.config/langfuse/compose.yaml up -d'"
+      "${pkgs.bash}/bin/bash -eu -c 'cd %h/langfuse && /usr/bin/docker compose --env-file %h/langfuse/.env -f %h/.config/langfuse/compose.yaml up -d'"
     ];
     ExecStop = [
-      "${pkgs.bash}/bin/bash -eu -c 'cd %h/langfuse && /usr/bin/docker compose -f %h/.config/langfuse/compose.yaml down --remove-orphans'"
+      "${pkgs.bash}/bin/bash -eu -c 'cd %h/langfuse && /usr/bin/docker compose --env-file %h/langfuse/.env -f %h/.config/langfuse/compose.yaml down --remove-orphans'"
     ];
     # docker + compose plugin come from the apt-installed docker-ce
     Environment = [ "PATH=/usr/bin:/bin" ];
