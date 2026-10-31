@@ -118,7 +118,48 @@
     ];
   };
 
-  # deterministic prediction-markets runner: data collection + reports
+# langfuse (llm session tracing/annotation) declaratively managed:
+# - the official v4 docker compose stack file is vendored at ./langfuse/compose.yaml
+#   and installed as ~/.config/langfuse/compose.yaml (NOT ~/langfuse/, which is
+#   the unmanaged docker project dir with volumes/state — avoid clobbering it).
+# - docker + compose plugin are apt-installed (docker-ce, imperative — same
+#   precedent as tailscale); nix just owns the config + service that brings
+#   the stack up.
+# - secrets live in ~/langfuse/.env (generated once, unmanaged): compose is run
+#   with WorkingDirectory=~/langfuse so it picks that .env up automatically.
+#   If the file is missing the service fails fast with a clear message instead
+#   of starting a stack with default/insecure creds.
+# - survives reboots via a user service (lingering is already enabled for the
+#   dude services, so user units run without an active login session).
+home.file.".config/langfuse/compose.yaml".source = ./langfuse/compose.yaml;
+
+systemd.user.services.langfuse = {
+  Unit = {
+    Description = "Langfuse tracing stack (docker compose)";
+    After = [ "network-online.target" ];
+  };
+  Service = {
+    Type = "oneshot";
+    RemainAfterExit = true;
+    # fail fast if secrets are gone; don't boot the default-credential stack
+    ExecStartPre = [
+      "${pkgs.bash}/bin/bash -eu -c 'test -f %h/langfuse/.env || { echo \"langfuse: %h/langfuse/.env missing — restore secrets before starting\"; exit 1; }'"
+    ];
+    ExecStart = [
+      "${pkgs.bash}/bin/bash -eu -c 'cd %h/langfuse && /usr/bin/docker compose -f %h/.config/langfuse/compose.yaml up -d'"
+    ];
+    ExecStop = [
+      "${pkgs.bash}/bin/bash -eu -c 'cd %h/langfuse && /usr/bin/docker compose -f %h/.config/langfuse/compose.yaml down --remove-orphans'"
+    ];
+    # docker + compose plugin come from the apt-installed docker-ce
+    Environment = [ "PATH=/usr/bin:/bin" ];
+  };
+  Install = {
+    WantedBy = [ "default.target" ];
+  };
+};
+
+# deterministic prediction-markets runner: data collection + reports
   # (the LLM/agent half is now the dude-agent prediction-markets purpose)
   services.prediction-markets = {
     enable = true;
