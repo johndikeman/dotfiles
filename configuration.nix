@@ -473,9 +473,14 @@
       8010
       57621
       # OffGridUSB swarm + local llm (task-swarm-web-ui):
-      # range covers swarm node / rpc / user-chosen ports (50025, 50052-50055...),
-      # 8080 is llama-server for clustered inference
-      "50000:50300"
+      # nixpkgs here rejects string port ranges, so explicit ports:
+      # 50025 = swarm node port as configured on this host's UI,
+      # 50052/50053 = swarm node defaults, 50055 = ggml rpc-server,
+      # 8080 = llama-server for clustered inference
+      50025
+      50052
+      50053
+      50055
       8080
     ];
     allowedUDPPorts = [
