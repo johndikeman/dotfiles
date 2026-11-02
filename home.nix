@@ -34,6 +34,8 @@
     # # "Hello, world!" when run.
     # pkgs.hello
     pkgs.btop
+    pkgs.lsof
+    pkgs.exfatprogs
     pkgs.tree
     pkgs.zip
     pkgs.prismlauncher
