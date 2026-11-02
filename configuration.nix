@@ -471,10 +471,17 @@
     allowedTCPPorts = [
       8010
       57621
+      # OffGridUSB swarm + local llm (task-swarm-web-ui):
+      # range covers swarm node / rpc / user-chosen ports (50025, 50052-50055...),
+      # 8080 is llama-server for clustered inference
+      "50000:50300"
+      8080
     ];
     allowedUDPPorts = [
       5353
       8010
+      # swarm LAN discovery announces
+      50051
     ];
 
     interfaces."podman+".allowedUDPPorts = [ 53 ];
