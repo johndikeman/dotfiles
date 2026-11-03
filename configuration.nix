@@ -491,6 +491,36 @@
     ];
 
     interfaces."podman+".allowedUDPPorts = [ 53 ];
+
+    # multi-homed host (wifi wlo1 + usb-ethernet enp0s20f0u3u4u5 share the
+    # same subnet): the strict rpfilter mangle chain silently drops inbound
+    # LAN packets whenever the FIB's best reverse path resolves to the
+    # other interface — which bit the OffGridUSB swarm (2026-11-02).
+    checkReversePathFilter = false;
+  };
+
+  # the usb-ethernet NIC's NetworkManager connection marks its DHCP address
+  # noprefixroute and does not install the /24 prefix route, so reverse-path
+  # and reply routing for LAN peers resolve to wifi. guard re-asserts it.
+  systemd.services.enp-route-guard = {
+    description = "re-assert usb-ethernet NIC subnet route";
+    serviceConfig.Type = "oneshot";
+    path = [ pkgs.iproute2 ];
+    script = ''
+      line="$(ip -4 -o addr show dev enp0s20f0u3u4u5 scope global 2>/dev/null | head -n1)"
+      [ -n "$line" ] || exit 0
+      addr="$(echo "$line" | awk '{split($4,a,"/"); print a[1]}')"
+      prefix="$(echo "$line" | awk '{print $4}')"
+      ip route replace "$prefix" dev enp0s20f0u3u4u5 src "$addr" metric 50
+    '';
+  };
+  systemd.timers.enp-route-guard = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "30s";
+      OnUnitActiveSec = "60s";
+      Unit = "enp-route-guard.service";
+    };
   };
 
   # This value determines the NixOS release from which the default
