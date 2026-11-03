@@ -482,6 +482,7 @@
       50053
       50055
       8080
+      8000  # OffGridUSB web app default port (discovery membership announces)
     ];
     allowedUDPPorts = [
       5353
