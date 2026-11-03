@@ -505,7 +505,7 @@
   systemd.services.enp-route-guard = {
     description = "re-assert usb-ethernet NIC subnet route";
     serviceConfig.Type = "oneshot";
-    path = [ pkgs.iproute2 ];
+    path = [ pkgs.iproute2 pkgs.gawk ];
     script = ''
       line="$(ip -4 -o addr show dev enp0s20f0u3u4u5 scope global 2>/dev/null | head -n1)"
       [ -n "$line" ] || exit 0
