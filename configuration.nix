@@ -511,6 +511,11 @@
       [ -n "$line" ] || exit 0
       addr="$(echo "$line" | awk '{split($4,a,"/"); print a[1]}')"
       prefix="$(echo "$line" | awk '{print $4}')"
+      echo "enp-route-guard: addr=[$addr] prefix=[$prefix]" 2>&1
+      if ! echo "$prefix" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'; then
+        echo "enp-route-guard: invalid prefix, skipping" 2>&1
+        exit 0
+      fi
       ip route replace "$prefix" dev enp0s20f0u3u4u5 src "$addr" metric 50
     '';
   };
