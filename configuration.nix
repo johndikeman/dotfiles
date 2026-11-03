@@ -509,14 +509,21 @@
     script = ''
       line="$(ip -4 -o addr show dev enp0s20f0u3u4u5 scope global 2>/dev/null | head -n1)"
       [ -n "$line" ] || exit 0
-      addr="$(echo "$line" | awk '{split($4,a,"/"); print a[1]}')"
       prefix="$(echo "$line" | awk '{print $4}')"
-      echo "enp-route-guard: addr=[$addr] prefix=[$prefix]" 2>&1
       if ! echo "$prefix" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'; then
-        echo "enp-route-guard: invalid prefix, skipping" 2>&1
+        echo "enp-route-guard: invalid prefix [$prefix], skipping" 2>&1
         exit 0
       fi
-      ip route replace "$prefix" dev enp0s20f0u3u4u5 src "$addr" metric 50
+      # ip route rejects prefixes with host bits set ("Invalid prefix for given
+      # prefix length"), so mask the interface address down to the network addr:
+      addr="${prefix%/*}"; plen="${prefix#*/}"
+      IFS=. read -r o1 o2 o3 o4 <<< "$addr"
+      ipint=$(( (o1<<24) | (o2<<16) | (o3<<8) | o4 ))
+      mask=$(( (0xffffffff << (32 - plen)) & 0xffffffff ))
+      netint=$(( ipint & mask ))
+      net="$(( (netint>>24)&255 )).$(( (netint>>16)&255 )).$(( (netint>>8)&255 )).$(( netint&255 ))"
+      echo "enp-route-guard: adding $net/$plen dev enp0s20f0u3u4u5 src $addr metric 50" 2>&1
+      ip route replace "$net/$plen" dev enp0s20f0u3u4u5 src "$addr" metric 50
     '';
   };
   systemd.timers.enp-route-guard = {
