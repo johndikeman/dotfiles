@@ -496,7 +496,7 @@
     # same subnet): the strict rpfilter mangle chain silently drops inbound
     # LAN packets whenever the FIB's best reverse path resolves to the
     # other interface — which bit the OffGridUSB swarm (2026-11-02).
-    checkReversePathFilter = false;
+    checkReversePath = false;
   };
 
   # the usb-ethernet NIC's NetworkManager connection marks its DHCP address
