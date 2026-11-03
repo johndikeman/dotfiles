@@ -516,7 +516,7 @@
       fi
       # ip route rejects prefixes with host bits set ("Invalid prefix for given
       # prefix length"), so mask the interface address down to the network addr:
-      addr="${prefix%/*}"; plen="${prefix#*/}"
+      addr="''${prefix%/*}"; plen="''${prefix#*/}"
       IFS=. read -r o1 o2 o3 o4 <<< "$addr"
       ipint=$(( (o1<<24) | (o2<<16) | (o3<<8) | o4 ))
       mask=$(( (0xffffffff << (32 - plen)) & 0xffffffff ))
