@@ -195,46 +195,16 @@
     enable = true;
     settings = {
       default_session = {
-        command = "dbus-run-session start-hyprland -- -c /etc/greetd/hyprland.conf";
+        command = "dbus-run-session start-hyprland -- -c /etc/greetd/hyprland.lua";
         user = "greeter";
       };
     };
   };
 
-  # Create the Hyprland config file for the greeter
-  environment.etc."greetd/hyprland.conf".text = ''
-    # Launch regreet and exit Hyprland when it's done
-    exec-once = ${pkgs.regreet}/bin/regreet; hyprctl dispatch exit
-
-    # Disable Hyprland branding and splash
-    misc {
-      disable_hyprland_logo = true
-      disable_splash_rendering = true
-    }
-
-    monitor = HDMI-A-1,3840x2160,0x0,1.5
-
-    # Optional: Set some basic input settings
-    input {
-      kb_layout = us
-      follow_mouse = 1
-      touchpad {
-        natural_scroll = false
-      }
-    }
-
-    # Optional: Basic window rules for regreet
-    general {
-      gaps_in = 0
-      gaps_out = 0
-      border_size = 0
-    }
-
-    # Optional: Disable animations for faster startup
-    animations {
-      enabled = false
-    }
-  '';
+  # Create the Hyprland (Lua) config file for the greeter
+  environment.etc."greetd/hyprland.lua".source = pkgs.replaceVars ./nix/greetd.lua {
+    regreet = "${pkgs.regreet}/bin/regreet";
+  };
 
   environment.etc."1password/custom_allowed_browsers" = {
     text = ''
