@@ -65,7 +65,6 @@
     pkgs.pavucontrol
     pkgs.lazygit
     pkgs.inkscape-with-extensions
-    pkgs.tailscale
     pkgs.chromium
     pkgs.update-nix-fetchgit
     pkgs.dua

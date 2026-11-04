@@ -418,6 +418,7 @@
   # services.openssh.enable = true;
 
   services.mullvad-vpn.enable = true;
+  services.tailscale.enable = true;
 
   networking.firewall = {
     enable = true;
