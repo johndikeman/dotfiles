@@ -118,6 +118,16 @@
     ];
   };
 
+  # dude2: dispatcher-centric multi-agent runtime, separate branch of the
+  # dude repo (imported as a sibling flake input). runs alongside dude1
+  # without touching its state — separate config dir (~/.config/dude2),
+  # workspace, discord bot token (op://AI/dude 2 discord token/password),
+  # and unit names (dude2-dispatch + dude2-wait timer). all state paths
+  # are env-configurable via the module; see dude2 branch flake.nix.
+  services.dude2-agent = {
+    enable = true;
+  };
+
 # langfuse (llm session tracing/annotation) declaratively managed:
 # - the official v4 docker compose stack file is vendored at ./langfuse/compose.yaml
 #   and installed as ~/.config/langfuse/compose.yaml (NOT ~/langfuse/, which is
