@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dude.url = "github:johndikeman/dude";
+    # dude2 coexists with dude1 (v1) on the same machine: separate branch, separate
+    # config dir/state/token, distinct unit names. see dude2 branch flake.nix for
+    # the module (services.dude2-agent). merge dude2 branch → dude2 branch input is
+    # removed once dude2's flake.nix becomes the main flake.
+    dude2.url = "github:johndikeman/dude/dude2";
     dude-prediction-markets.url = "github:johndikeman/dude-prediction-markets";
     deploy-rs = {
       url = "github:johndikeman/deploy-rs";
@@ -24,6 +29,7 @@
       deploy-rs,
       dude,
       dude-prediction-markets,
+      dude2,
       ...
     }:
     let
@@ -43,6 +49,7 @@
           ./home.nix
           dude.homeManagerModules.dude-agent
           dude-prediction-markets.homeManagerModules.prediction-markets
+          dude2.homeManagerModules.dude2-agent
         ];
 
         # Optionally use extraSpecialArgs
