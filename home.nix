@@ -94,16 +94,6 @@
     waitTimer.enable = true;
     waitTimer.interval = "*:0/15";
 
-    # special-purpose agents on their own schedules. each runs
-    # dude-agent --once --purpose <name>; purpose prompts + skills live
-    # in the dude repo (src/purposes/, .pi/skills/)
-    purposes.prediction-markets = {
-      # deterministic runner cycle is 00/12:00 (systemd timer in the PM
-      # flake); the LLM pass runs 30 min later so fresh reports exist
-      interval = "*-*-* 00/12:30:00";
-      environmentFile = "/home/ubuntu/.config/dude-prediction-markets/pm.env";
-    };
-
     # weekly meal planner: sunday 10:00 cdt — reads the recipes vault,
     # pantry state and discord feedback, writes the plan + shopping list
     # to the main vault + discord, and front-loads prep via calendar
@@ -129,14 +119,5 @@
   # are env-configurable via the module; see dude2 branch flake.nix.
   services.dude2-agent = {
     enable = true;
-  };
-
-  # deterministic prediction-markets runner: data collection + reports
-  # (the LLM/agent half is now the dude-agent prediction-markets purpose)
-  services.prediction-markets = {
-    enable = true;
-    interval = "*-*-* 00/12:00:00";
-    stateDir = "/home/ubuntu/.local/state/dude-prediction-markets";
-    environmentFile = "/home/ubuntu/.config/dude-prediction-markets/pm.env";
   };
 }
