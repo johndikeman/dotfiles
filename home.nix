@@ -119,5 +119,10 @@
   # are env-configurable via the module; see dude2 branch flake.nix.
   services.dude2-agent = {
     enable = true;
+    # dude2-wait is still the unwired placeholder in the module (ExecStart
+    # runs `dude-agent --help` with no env) and fails every timer tick
+    # (first seen 2026-11-14). disable until the wait bridge is properly
+    # designed — the dispatcher handles discord triggers itself.
+    waitTimer.enable = false;
   };
 }
