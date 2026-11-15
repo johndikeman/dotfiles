@@ -42,37 +42,18 @@
         "type": "github"
       }
     },
-    "dude-prediction-markets": {
+    "dude2": {
       "inputs": {
         "flake-utils": "flake-utils_2",
+        "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1790142354,
-        "narHash": "sha256-k12nUrBscpjR3BRpH4FedHkEgYcHpkqN4mEGMUQIM2U=",
-        "owner": "johndikeman",
-        "repo": "dude-prediction-markets",
-        "rev": "73fc253e49611e9cd8810d3966f7cd0d452d76f0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "johndikeman",
-        "repo": "dude-prediction-markets",
-        "type": "github"
-      }
-    },
-    "dude2": {
-      "inputs": {
-        "flake-utils": "flake-utils_3",
-        "home-manager": "home-manager_2",
-        "nixpkgs": "nixpkgs_3"
-      },
-      "locked": {
-        "lastModified": 1794586004,
-        "narHash": "sha256-zphiCQ+z5luzsay3K25ylsW+mOgNuQSYIFCliEWiyFI=",
+        "lastModified": 1794594971,
+        "narHash": "sha256-NzYfv12vfQGByD9eKrdGNlvVr0tR+2fK6UcSMVk23+M=",
         "owner": "johndikeman",
         "repo": "dude",
-        "rev": "28d1f9b86afbba9efc1de5e8c687cc1cf829d44a",
+        "rev": "a521ca984f06dd12fec1c45fca29c2587e9d244f",
         "type": "github"
       },
       "original": {
@@ -119,24 +100,6 @@
     "flake-utils_2": {
       "inputs": {
         "systems": "systems_3"
-      },
-      "locked": {
-        "lastModified": 1731533236,
-        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_3": {
-      "inputs": {
-        "systems": "systems_4"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -250,22 +213,6 @@
       "locked": {
         "lastModified": 1787498568,
         "narHash": "sha256-9i/VTdusq/+NM/tz+J1Re+ojkMB8MBf0QshnYfzHz30=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "56c02bc00adcf003215cc4bd996d6efaf4cff188",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_4": {
-      "locked": {
-        "lastModified": 1787498568,
-        "narHash": "sha256-9i/VTdusq/+NM/tz+J1Re+ojkMB8MBf0QshnYfzHz30=",
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "56c02bc00adcf003215cc4bd996d6efaf4cff188",
@@ -282,10 +229,9 @@
       "inputs": {
         "deploy-rs": "deploy-rs",
         "dude": "dude",
-        "dude-prediction-markets": "dude-prediction-markets",
         "dude2": "dude2",
         "home-manager": "home-manager_3",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "systems": {
@@ -319,21 +265,6 @@
       }
     },
     "systems_3": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
-    "systems_4": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
